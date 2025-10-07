@@ -34,7 +34,7 @@ EmberStatus radio_send_packet(packet_void_t *pck){
   return status;
 }
 
-void led_blink(uint8_t led, uint8_t blinks, uint8_t speed){
+void led_blink(uint8_t led, uint8_t blinks, uint16_t speed){
   led_target = led;
   blink_target = blinks;
 
@@ -100,7 +100,7 @@ void radio_handler(void){
           pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
           application.Status_Operation = OPERATION_MODE;
 
-          led_blink(VERMELHO, 2, MED_SPEED_BLINK);
+          led_blink(VERMELHO, 1, MED_SPEED_BLINK);
 
           emberEventControlSetActive(*report_control);
       }
@@ -108,7 +108,7 @@ void radio_handler(void){
           TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
           emberEventControlSetInactive(*timeout_control);
 
-          led_blink(VERMELHO, 3, MED_SPEED_BLINK);
+          led_blink(VERMELHO, 2, MED_SPEED_BLINK);
 
           emberEventControlSetActive(*report_control);
       }

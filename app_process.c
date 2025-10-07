@@ -87,6 +87,8 @@ extern uint8_t led_target;
 uint32_t press_start_time = 0;
 bool button_is_pressed = false;
 
+bool joined = false;
+
 extern tx_power;
 // -----------------------------------------------------------------------------
 //                                Static Variables
@@ -116,8 +118,12 @@ void sl_button_on_change(const sl_button_t *handle){
           leave();
           emberResetNetworkState();
       }else if((current_time - press_start_time) < 50000){
-          join_sleepy(0);
-
+          if(!joined){
+              join_sleepy(0);
+              sl_led_turn_on(&sl_led_led_vermelho);
+          }else{
+              led_blink(VERMELHO, 2, MED_SPEED_BLINK);
+          }
       }
   }
 }
@@ -228,22 +234,27 @@ void emberAfStackStatusCallback(EmberStatus status)
 {
   switch (status) {
       case EMBER_NETWORK_UP:
+        joined = true;
         // Schedule start of periodic sensor reporting to the Sink
-        led_blink(VERMELHO, 5, MED_SPEED_BLINK);
+        led_blink(VERMELHO, 2, MED_SPEED_BLINK);
 //        pydInit(application.IVP.pydConf.sPYDType.thresholdVal); //INICIA O PIR
         emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
         break;
       case EMBER_NETWORK_DOWN:
-        led_blink(VERMELHO, 10, FAST_SPEED_BLINK);
+        joined = false;
+        led_blink(VERMELHO, 5, FAST_SPEED_BLINK);
 //        app_log_info("Network down\n");
         break;
       case EMBER_JOIN_SCAN_FAILED:
+        led_blink(VERMELHO, 2, SLOW_SPEED_BLINK);
 //        app_log_error("Scanning during join failed\n");
         break;
       case EMBER_JOIN_DENIED:
+        led_blink(VERMELHO, 2, SLOW_SPEED_BLINK);
 //        app_log_error("Joining to the network rejected!\n");
         break;
       case EMBER_JOIN_TIMEOUT:
+        led_blink(VERMELHO, 2, SLOW_SPEED_BLINK);
 //        app_log_info("Join process timed out!\n");
         break;
       default:

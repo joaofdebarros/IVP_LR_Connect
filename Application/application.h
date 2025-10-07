@@ -120,7 +120,7 @@ void motionDetected_handler(void);
 void PeriodInstalation_handler(void);
 void TimeoutAck_handler(void);
 void TurnPIROff(Energy_Mode_t energy_mode);
-void led_blink(uint8_t led, uint8_t blinks, uint8_t speed);
+void led_blink(uint8_t led, uint8_t blinks, uint16_t speed);
 void led_handler(sl_sleeptimer_timer_handle_t *handle, void *data);
 
 #endif /* APPLICATION_APPLICATION_H_ */
