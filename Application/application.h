@@ -1,0 +1,126 @@
+/*
+ * application.h
+ *
+ *  Created on: 12 de ago. de 2024
+ *      Author: diego.marinho
+ */
+
+#ifndef APPLICATION_APPLICATION_H_
+#define APPLICATION_APPLICATION_H_
+
+#include "API/packet/packet.h"
+#include "API/packet/pckDataStructure.h"
+#include "API/pyd/pyd.h"
+#include "app_log.h"
+#include "privAPI/Radio.h"
+#include "API/battery/battery.h"
+#include "sl_simple_led_instances.h"
+
+#define SLOW_SPEED_BLINK  1000
+#define MED_SPEED_BLINK   200
+#define FAST_SPEED_BLINK  100
+
+typedef enum{
+  SENSOR_IDLE = 0,
+  SENSOR_CONFIGURANDO,
+  SENSOR_CONFIGURADO
+}Status_Sensor_t;
+
+typedef enum{
+  WAIT_REGISTRATION = 0,
+  PERIOD_INSTALATION,
+  OPERATION_MODE
+}Status_Operation_t;
+
+typedef enum{
+  CONTINUOUS = 0,
+  ECONOMIC,
+  UECONOMIC
+}Energy_Mode_t;
+
+typedef enum{
+  CONTROL = 0,
+  MOTION_DETECT,
+  OPEN_CLOSE_DETECT,
+  GATE
+}Type;
+
+typedef enum{
+  ARMED = 0,
+  DISARMED
+}Status_Central_t;
+
+typedef enum{
+  LONG_RANGE = 0,
+  MID_RANGE
+}Range_t;
+
+typedef enum{
+  VERMELHO = 0,
+  VERDE,
+  AZUL
+}LED_t;
+
+typedef union
+{
+    uint8_t Statusbyte;
+
+    struct
+    {
+        uint8_t operation             :2;
+        uint8_t statusCentral         :1;
+        uint8_t energy_mode           :2;
+        uint8_t led_enabled           :1;
+        uint8_t reserved              :2;
+    } Status;
+
+}
+SensorStatus_t;
+
+typedef union
+{
+    uint8_t Registerbyte;
+
+    struct
+    {
+        uint8_t Type                  :5;
+        uint8_t range                 :2;
+        uint8_t reserved              :1;
+    } Status;
+
+}
+Register_Sensor_t;
+
+typedef struct{
+  packet_void_t Packet;
+  SensorCmd_e LastCMD;
+}application_radio_t;
+
+typedef struct{
+  uPYDType pydConf;
+  SensorStatus_t SensorStatus;
+}application_IVP_t;
+
+typedef struct{
+  application_radio_t radio;
+  application_IVP_t IVP;
+  Status_Operation_t Status_Operation;
+  Status_Central_t Status_Central;
+}application_t;
+
+extern application_t application;
+
+/*
+ * Prototypes
+ */
+EmberStatus radio_send_packet(packet_void_t *pck);
+void radio_handler(void);
+void timeout_handler(void);
+void motionDetected_handler(void);
+void PeriodInstalation_handler(void);
+void TimeoutAck_handler(void);
+void TurnPIROff(Energy_Mode_t energy_mode);
+void led_blink(uint8_t led, uint8_t blinks, uint8_t speed);
+void led_handler(sl_sleeptimer_timer_handle_t *handle, void *data);
+
+#endif /* APPLICATION_APPLICATION_H_ */
