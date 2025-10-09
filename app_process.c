@@ -217,7 +217,8 @@ void emberAfMessageSentCallback(EmberStatus status,
   if(message->payload[0] == REGISTRATION && application.Status_Operation == WAIT_REGISTRATION){
         //sensor cadastrado
         application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
-        TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+//        TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+        pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
         application.Status_Operation = OPERATION_MODE;
         application.Status_Central = DISARMED;
     }
