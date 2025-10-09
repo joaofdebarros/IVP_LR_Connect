@@ -215,9 +215,6 @@ autogen/sl_event_handler.o: ../autogen/sl_event_handler.c \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_gpio.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_assert.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_bus.h \
- ../autogen/sl_i2cspm_instances.h \
- c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\driver\i2cspm\inc\sl_i2cspm.h \
- c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_i2c.h \
  ../autogen/sl_iostream_init_eusart_instances.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\iostream\inc\sl_iostream_stdlib_config.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\security\sl_component\sl_mbedtls_support\inc\sl_mbedtls.h \
@@ -456,9 +453,6 @@ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emdrv\gpioint
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_gpio.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_assert.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_bus.h:
-../autogen/sl_i2cspm_instances.h:
-c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\driver\i2cspm\inc\sl_i2cspm.h:
-c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_i2c.h:
 ../autogen/sl_iostream_init_eusart_instances.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\iostream\inc\sl_iostream_stdlib_config.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\security\sl_component\sl_mbedtls_support\inc\sl_mbedtls.h:

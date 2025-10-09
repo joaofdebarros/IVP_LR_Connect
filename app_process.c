@@ -71,6 +71,8 @@ EmberEventControl *motionDetected_control;
 EmberEventControl *timeout_control;
 EmberEventControl *TimeoutAck_control;
 
+extern tx_power;
+
 /// report timing period
 uint16_t sensor_report_period_ms =  (1 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
@@ -100,6 +102,18 @@ static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
 //                          Public Function Definitions
 // -----------------------------------------------------------------------------
 void sl_button_on_change(const sl_button_t *handle){
+//  static bool state = false;
+//
+//  if(!state){
+//      state = !state;
+//      join_sleepy(0);
+//      sl_led_turn_on(&sl_led_led_vermelho);
+//  }else{
+//      state = !state;
+//      leave();
+//      emberResetNetworkState();
+//  }
+
 
   if (sl_button_get_state(handle) == SL_SIMPLE_BUTTON_RELEASED) {
      if(&sl_button_btn0 == handle){
@@ -114,18 +128,34 @@ void sl_button_on_change(const sl_button_t *handle){
       if((current_time - press_start_time) > 100000){
           hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
           emberEventControlSetInactive(*timeout_control);
-          application.Status_Operation = WAIT_REGISTRATION;
+
+          reset_parameters();
           leave();
           emberResetNetworkState();
       }else if((current_time - press_start_time) < 50000){
-          if(!joined){
+          if(application.Status_Operation == WAIT_REGISTRATION){
               join_sleepy(0);
+              pydInit(application.IVP.pydConf.sPYDType.thresholdVal); //ATIVANDO SEMPRE O PIR SOMENTE PARA TESTE DO DIEGO
               sl_led_turn_on(&sl_led_led_vermelho);
-          }else{
+          }else if(application.Status_Operation == OPERATION_MODE){
               led_blink(VERMELHO, 2, MED_SPEED_BLINK);
           }
       }
   }
+}
+
+void reset_parameters(){
+  memory_erase(STATUSBYTE_MEMORY_KEY);
+  memory_erase(SENSIBILITY_MEMORY_KEY);
+  memory_erase(TXPOWER_MEMORY_KEY);
+  memory_erase(STATUSOP_MEMORY_KEY);
+  memory_erase(STATUSCENTRAL_MEMORY_KEY);
+
+  application.IVP.pydConf.sPYDType.thresholdVal = 120;
+  application.IVP.SensorStatus.Status.led_enabled = 1;
+  tx_power = 0;
+  application.Status_Operation = WAIT_REGISTRATION;
+  application.Status_Central = ARMED;
 }
 
 /**************************************************************************//**
@@ -174,6 +204,10 @@ void report_handler(void)
        sendRadio.data[4] = tx_power;
 
        break;
+     case BOOT:
+       application.Status_Operation = OPERATION_MODE;
+       TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+       break;
      default:
        break;
    }
@@ -181,9 +215,6 @@ void report_handler(void)
    radio_send_packet(&sendRadio);
    emberEventControlSetDelayMS(*TimeoutAck_control,500);
    battery.VBAT = calculateVdd();
-
-
-   enable_sleep = !enable_sleep;
 
    emberEventControlSetInactive(*report_control);
 }
@@ -215,11 +246,15 @@ void emberAfMessageSentCallback(EmberStatus status,
                                 EmberOutgoingMessage *message)
 {
   if(message->payload[0] == REGISTRATION && application.Status_Operation == WAIT_REGISTRATION){
-        //sensor cadastrado
-        application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
+        //Estado inicial do sensor apos cadastro
         TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
         application.Status_Operation = OPERATION_MODE;
         application.Status_Central = DISARMED;
+        application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
+
+        memory_write(STATUSOP_MEMORY_KEY, &application.Status_Operation, sizeof(application.Status_Operation));
+        memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
+        memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
     }
 
     if(application.radio.LastCMD == message->payload[0]){
@@ -237,29 +272,34 @@ void emberAfStackStatusCallback(EmberStatus status)
         joined = true;
         // Schedule start of periodic sensor reporting to the Sink
         led_blink(VERMELHO, 2, MED_SPEED_BLINK);
-//        pydInit(application.IVP.pydConf.sPYDType.thresholdVal); //INICIA O PIR
-        emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
+        enable_sleep = true;
+        if(application.Status_Operation == WAIT_REGISTRATION){
+            emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
+        }
+
+        if(application.Status_Operation == OPERATION_MODE){
+            if(application.Status_Central == DISARMED){
+                //desligar o pir
+                application.Status_Operation = BOOT;
+                emberEventControlSetDelayMS(*report_control, 500);
+            }
+        }
         break;
       case EMBER_NETWORK_DOWN:
         joined = false;
         led_blink(VERMELHO, 5, FAST_SPEED_BLINK);
-//        app_log_info("Network down\n");
         break;
       case EMBER_JOIN_SCAN_FAILED:
         led_blink(VERMELHO, 2, SLOW_SPEED_BLINK);
-//        app_log_error("Scanning during join failed\n");
         break;
       case EMBER_JOIN_DENIED:
         led_blink(VERMELHO, 2, SLOW_SPEED_BLINK);
-//        app_log_error("Joining to the network rejected!\n");
         break;
       case EMBER_JOIN_TIMEOUT:
         led_blink(VERMELHO, 2, SLOW_SPEED_BLINK);
-//        app_log_info("Join process timed out!\n");
         break;
       default:
         led_blink(VERMELHO, 2, SLOW_SPEED_BLINK);
-//        app_log_info("Stack status: 0x%02X\n", status);
         break;
     }
 }

@@ -212,7 +212,10 @@ Application/application.o: ../Application/application.c \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_system.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_system_generic.h \
- c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_chip.h
+ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_chip.h \
+ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/memory/memory.h \
+ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/hNetwork.h \
+ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/sl_sensor_sink_config.h
 ../Application/application.h:
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/packet/packet.h:
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/packet/pckDataStructure.h:
@@ -427,3 +430,6 @@ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_system.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_system_generic.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_chip.h:
+C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/memory/memory.h:
+C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/hNetwork.h:
+C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/sl_sensor_sink_config.h:

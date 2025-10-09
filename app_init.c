@@ -43,6 +43,9 @@
 #include "mbedtls/build_info.h"
 #include "Application/application.h"
 #include "sl_power_manager.h"
+#include "API/memory/memory.h"
+#include "poll.h"
+
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
@@ -55,6 +58,8 @@ static void app_pm_callback(sl_power_manager_em_t from, sl_power_manager_em_t to
 static sl_power_manager_em_transition_event_handle_t pm_handle;
 static sl_power_manager_em_transition_event_info_t pm_event_info =
 { SL_POWER_MANAGER_EVENT_TRANSITION_ENTERING_EM2, app_pm_callback };
+
+
 // -----------------------------------------------------------------------------
 //                                Global Variables
 // -----------------------------------------------------------------------------
@@ -66,6 +71,8 @@ extern EmberEventControl *motionDetected_control;
 extern EmberEventControl *timeout_control;
 extern EmberEventControl *PeriodInstalation_control;
 extern EmberEventControl *TimeoutAck_control;
+
+extern uint8_t tx_power;
 // -----------------------------------------------------------------------------
 //                                Static Variables
 // -----------------------------------------------------------------------------
@@ -83,8 +90,18 @@ void emberAfInitCallback(void)
 
   emberAfPluginPollEnableShortPolling(true);
 
-  application.IVP.pydConf.sPYDType.thresholdVal = 100;
-  application.IVP.SensorStatus.Status.led_enabled = true;
+  application.IVP.pydConf.sPYDType.thresholdVal = 120;
+  application.IVP.SensorStatus.Status.led_enabled = 1;
+  application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
+  tx_power = 0;
+  application.Status_Operation = WAIT_REGISTRATION;
+  application.Status_Central = ARMED;
+
+  memory_read(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte);
+  memory_read(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal);
+  memory_read(TXPOWER_MEMORY_KEY, &tx_power);
+  memory_read(STATUSOP_MEMORY_KEY, &application.Status_Operation);
+  memory_read(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central);
 
   // Ensure that psa is initialized correctly
   psa_crypto_init();
@@ -169,3 +186,5 @@ static void app_pm_callback(sl_power_manager_em_t from, sl_power_manager_em_t to
     }
   }
 }
+
+

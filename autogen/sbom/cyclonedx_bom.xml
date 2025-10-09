@@ -10,7 +10,7 @@ referenced in this SBOM.)
 -->
 <bom xmlns="http://cyclonedx.org/schema/bom/1.6" version="1">
   <metadata>
-    <timestamp>2025-10-07T14:24:29Z</timestamp>
+    <timestamp>2025-10-08T19:19:14Z</timestamp>
     <authors>
       <author>
         <name>Silicon Laboratories, Inc.</name>
@@ -205,8 +205,18 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:i2cspm" type="library">
-          <name>I2CSPM</name>
+        <component bom-ref="simplicity_sdk:2025.6.2:emlib_iadc" type="library">
+          <name>IADC</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:gpiointerrupt" type="library">
+          <name>GPIOINT</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>
@@ -304,8 +314,8 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:si70xx_driver" type="library">
-          <name>Si70xx - Temperature/Humidity Sensor</name>
+        <component bom-ref="simplicity_sdk:2025.6.2:simple_button" type="library">
+          <name>Simple Button</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>
@@ -314,8 +324,8 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:simple_button" type="library">
-          <name>Simple Button</name>
+        <component bom-ref="simplicity_sdk:2025.6.2:simple_led" type="library">
+          <name>Simple LED</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>
@@ -364,6 +374,16 @@ referenced in this SBOM.)
             <expression>MSLA</expression>
           </licenses>
         </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:ustimer" type="library">
+          <name>USTIMER</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
         <component bom-ref="simplicity_sdk:2025.6.2:dmadrv_core" type="library">
           <name>DMADRV Core</name>
           <version>2025.6.2</version>
@@ -396,6 +416,16 @@ referenced in this SBOM.)
         </component>
         <component bom-ref="simplicity_sdk:2025.6.2:radio_config_simple_connect_singlephy_device_family_fgm23" type="library">
           <name>Custom Radio Configuration for simple connect singlephy application</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:led" type="library">
+          <name>Generic LED API</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>
@@ -862,16 +892,6 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:emlib_i2c" type="library">
-          <name>I2C</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
         <component bom-ref="simplicity_sdk:2025.6.2:rail_util_pti" type="library">
           <name>RAIL Utility, PTI</name>
           <version>2025.6.2</version>
@@ -1198,6 +1218,16 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:simple_led_core" type="library">
+          <name>Simple LED Core</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
         <component bom-ref="simplicity_sdk:2025.6.2:device_init_core" type="library">
           <name>Core</name>
           <version>2025.6.2</version>
@@ -1239,16 +1269,6 @@ referenced in this SBOM.)
         </component>
         <component bom-ref="simplicity_sdk:2025.6.2:power_manager_core" type="library">
           <name>Power Manager: Core</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:i2cspm_core" type="library">
-          <name>I2CSPM Core</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>
@@ -1953,66 +1973,6 @@ referenced in this SBOM.)
         </component>
         <component bom-ref="simplicity_sdk:2025.6.2:gpio" type="library">
           <name>GPIO Driver</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:simple_led" type="library">
-          <name>Simple LED</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:led" type="library">
-          <name>Generic LED API</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:simple_led_core" type="library">
-          <name>Simple LED Core</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:ustimer" type="library">
-          <name>USTIMER</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:gpiointerrupt" type="library">
-          <name>GPIOINT</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:emlib_iadc" type="library">
-          <name>IADC</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>

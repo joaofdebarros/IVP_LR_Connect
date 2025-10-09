@@ -68,7 +68,7 @@ uint32_t hTimer_getValue(hTimer_t handle);
 
 void hTimer_Delete(hTimer_t handle);
 
-void hTimer_udelay(uint32_t delay);
+void hTimer_udelay(float delay);
 
 
 #endif

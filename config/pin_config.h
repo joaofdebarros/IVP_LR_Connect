@@ -85,22 +85,6 @@
 // [USART0]$
 
 // $[I2C1]
-// I2C1 SCL on PC05
-#ifndef I2C1_SCL_PORT                           
-#define I2C1_SCL_PORT                            SL_GPIO_PORT_C
-#endif
-#ifndef I2C1_SCL_PIN                            
-#define I2C1_SCL_PIN                             5
-#endif
-
-// I2C1 SDA on PC07
-#ifndef I2C1_SDA_PORT                           
-#define I2C1_SDA_PORT                            SL_GPIO_PORT_C
-#endif
-#ifndef I2C1_SDA_PIN                            
-#define I2C1_SDA_PIN                             7
-#endif
-
 // [I2C1]$
 
 // $[EUSART1]

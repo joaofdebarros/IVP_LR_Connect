@@ -50,8 +50,6 @@ component:
 - {id: device_init}
 - {id: emlib_iadc}
 - {id: gpiointerrupt}
-- instance: [sensor]
-  id: i2cspm
 - {id: iostream_recommended_stream}
 - {id: iostream_retarget_stdio}
 - {id: mpu}
@@ -59,10 +57,9 @@ component:
 - {id: psa_its}
 - {id: radio_config_simple_connect_singlephy}
 - {id: restrictions_profile_connect_ofdm}
-- {id: si70xx_driver}
 - instance: [btn0]
   id: simple_button
-- instance: [LED_AZUL, LED_VERDE, LED_VERMELHO]
+- instance: [LED_VERMELHO]
   id: simple_led
 - {id: sl_main}
 - {id: sl_rail_util_pti}

@@ -15,6 +15,8 @@
 #include "privAPI/Radio.h"
 #include "API/battery/battery.h"
 #include "sl_simple_led_instances.h"
+#include "API/memory/memory.h"
+#include "API/hNetwork.h"
 
 #define SLOW_SPEED_BLINK  1000
 #define MED_SPEED_BLINK   200
@@ -29,7 +31,8 @@ typedef enum{
 typedef enum{
   WAIT_REGISTRATION = 0,
   PERIOD_INSTALATION,
-  OPERATION_MODE
+  OPERATION_MODE,
+  BOOT
 }Status_Operation_t;
 
 typedef enum{

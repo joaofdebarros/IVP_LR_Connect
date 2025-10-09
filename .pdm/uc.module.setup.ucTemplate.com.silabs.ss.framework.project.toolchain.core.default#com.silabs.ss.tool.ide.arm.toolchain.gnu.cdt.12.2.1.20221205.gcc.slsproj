@@ -15,8 +15,6 @@
     <file name="app_framework_event_table.c" builtin="true" generated="true"/>
     <file name="sl_event_handler.h" builtin="true" generated="true"/>
     <file name="sl_event_handler.c" builtin="true" generated="true"/>
-    <file name="sl_i2cspm_init.c" builtin="true" generated="true"/>
-    <file name="sl_i2cspm_instances.h" builtin="true" generated="true"/>
     <file name="sl_iostream_handles.h" builtin="true" generated="true"/>
     <file name="sl_iostream_handles.c" builtin="true" generated="true"/>
     <file name="sl_iostream_init_instances.h" builtin="true" generated="true"/>

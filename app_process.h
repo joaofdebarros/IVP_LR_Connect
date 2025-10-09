@@ -60,4 +60,5 @@ extern bool enable_sleep;
 void report_handler(void);
 int start_timer(void);
 void led_handler(sl_sleeptimer_timer_handle_t *handle, void *data);
+void reset_parameters();
 #endif  // APP_PROCESS_H

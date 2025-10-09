@@ -16,12 +16,13 @@
     <file name="parent-support-config.h" generated="true" linked="false"/>
     <file name="poll-config.h" generated="true" linked="false"/>
     <file name="stack-common-config.h" generated="true" linked="false"/>
-    <file name="sl_i2cspm_sensor_config.h" generated="true" linked="false"/>
     <file name="sl_simple_button_btn0_config.h" generated="true" linked="false"/>
+    <file name="sl_simple_led_LED_VERMELHO_config.h" generated="true" linked="false"/>
     <file name="sl_sensor_sink_config.h" generated="true" linked="false"/>
     <file name="sl_token_manager_config.h" generated="true" linked="false"/>
     <file name="sl_custom_token_header.h" generated="true" linked="false"/>
     <file name="sl_custom_manufacturing_token_header.h" generated="true" linked="false"/>
+    <file name="ustimer_config.h" generated="true" linked="false"/>
     <file name="sl_power_manager_config.h" generated="true" linked="false"/>
     <file name="nvm3_default_config.h" generated="true" linked="false"/>
     <file name="psa_crypto_config.h" generated="true" linked="false"/>
@@ -43,10 +44,6 @@
     <file name="sl_sleeptimer_config.h" generated="true" linked="false"/>
     <file name="sl_mbedtls_config.h" generated="true" linked="false"/>
     <file name="sl_mbedtls_device_config.h" generated="true" linked="false"/>
-    <file name="sl_simple_led_LED_AZUL_config.h" generated="true" linked="false"/>
-    <file name="sl_simple_led_LED_VERDE_config.h" generated="true" linked="false"/>
-    <file name="sl_simple_led_LED_VERMELHO_config.h" generated="true" linked="false"/>
-    <file name="ustimer_config.h" generated="true" linked="false"/>
   </folder>
   <includePath uri="studio:/project/config"/>
   <includePath uri="studio:/project/config/rail"/>

@@ -97,8 +97,9 @@ void hTimer_Stop(TIMER_TypeDef *TIM){
 //  hTimer_Callback(0);
 //}
 
-void hTimer_udelay(uint32_t delay){
-  USTIMER_Delay(delay);
+void hTimer_udelay(float delay){
+//  USTIMER_Delay(delay);
+  sl_sleeptimer_delay_millisecond(delay/1000);
 }
 
 #endif

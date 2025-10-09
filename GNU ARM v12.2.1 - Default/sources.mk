@@ -18,6 +18,7 @@ C_DEPS :=
 SUBDIRS := \
 API/battery \
 API \
+API/memory \
 API/packet \
 API/pyd \
 Application \
@@ -30,13 +31,11 @@ simplicity_sdk_2025.6.2/app/common/util/app_log \
 simplicity_sdk_2025.6.2/hardware/board/src \
 simplicity_sdk_2025.6.2/hardware/driver/configuration_over_swo/src \
 simplicity_sdk_2025.6.2/hardware/driver/mx25_flash_shutdown/src/sl_mx25_flash_shutdown_eusart \
-simplicity_sdk_2025.6.2/hardware/driver/si70xx/src \
 simplicity_sdk_2025.6.2/platform/Device/SiliconLabs/FGM23/Source \
 simplicity_sdk_2025.6.2/platform/common/src \
 simplicity_sdk_2025.6.2/platform/driver/button/src \
 simplicity_sdk_2025.6.2/platform/driver/debug/src \
 simplicity_sdk_2025.6.2/platform/driver/gpio/src \
-simplicity_sdk_2025.6.2/platform/driver/i2cspm/src \
 simplicity_sdk_2025.6.2/platform/driver/leddrv/src \
 simplicity_sdk_2025.6.2/platform/emdrv/dmadrv/src \
 simplicity_sdk_2025.6.2/platform/emdrv/gpiointerrupt/src \

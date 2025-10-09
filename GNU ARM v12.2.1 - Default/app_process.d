@@ -223,6 +223,8 @@ app_process.o: ../app_process.c \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/battery/battery.h \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/hplatform/hDriver/hADC.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h \
+ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/memory/memory.h \
+ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/hNetwork.h \
  ../API/battery/battery.h ../API/hNetwork.h
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\legacy_hal\inc\platform-header.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_core.h:
@@ -449,5 +451,7 @@ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/privAPI/Radio.
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/battery/battery.h:
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/hplatform/hDriver/hADC.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h:
+C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/memory/memory.h:
+C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/hNetwork.h:
 ../API/battery/battery.h:
 ../API/hNetwork.h:

@@ -19,7 +19,7 @@ sl_sleeptimer_timer_handle_t periodic_timer;
 uint8_t blink_count = 0;
 uint8_t blink_target = 0;
 uint8_t led_target;
-extern tx_power;
+extern uint8_t tx_power;
 
 EmberStatus radio_send_packet(packet_void_t *pck){
   uint8_t buffer_send[8];
@@ -62,10 +62,10 @@ void led_handler(sl_sleeptimer_timer_handle_t *handle, void *data){
 
       if(blink_count < (blink_target * 2)){
           blink_count++;
-          hGpio_ledToggle(&sl_led_led_verde, application.IVP.SensorStatus.Status.led_enabled);
+//          hGpio_ledToggle(&sl_led_led_verde, application.IVP.SensorStatus.Status.led_enabled);
       }else{
           blink_count = 0;
-          hGpio_ledTurnOff(&sl_led_led_verde, application.IVP.SensorStatus.Status.led_enabled);
+//          hGpio_ledTurnOff(&sl_led_led_verde, application.IVP.SensorStatus.Status.led_enabled);
           sl_sleeptimer_stop_timer(&periodic_timer);
       }
       break;
@@ -73,10 +73,10 @@ void led_handler(sl_sleeptimer_timer_handle_t *handle, void *data){
 
       if(blink_count < (blink_target * 2)){
           blink_count++;
-          hGpio_ledToggle(&sl_led_led_azul, application.IVP.SensorStatus.Status.led_enabled);
+//          hGpio_ledToggle(&sl_led_led_azul, application.IVP.SensorStatus.Status.led_enabled);
       }else{
           blink_count = 0;
-          hGpio_ledTurnOff(&sl_led_led_azul, application.IVP.SensorStatus.Status.led_enabled);
+//          hGpio_ledTurnOff(&sl_led_led_azul, application.IVP.SensorStatus.Status.led_enabled);
           sl_sleeptimer_stop_timer(&periodic_timer);
       }
       break;
@@ -96,9 +96,7 @@ void radio_handler(void){
       application.Status_Central = receive->data[0];
       application.radio.LastCMD = receive->cmd;
       if(application.Status_Central == ARMED){
-
           pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
-          application.Status_Operation = OPERATION_MODE;
 
           led_blink(VERMELHO, 1, MED_SPEED_BLINK);
 
@@ -112,6 +110,8 @@ void radio_handler(void){
 
           emberEventControlSetActive(*report_control);
       }
+
+      memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
 
       break;
     case SETUP_IVP:
@@ -145,7 +145,10 @@ void radio_handler(void){
 
       pydConfig(application.IVP.pydConf.pydRegisters);
 
-//      emberEventControlSetDelayMS(*timeout_control,2000);
+      memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
+      memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
+      memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
+
       emberEventControlSetActive(*report_control);
       break;
 
@@ -169,28 +172,33 @@ void timeout_handler(void)
 void motionDetected_handler(void){
   volatile SensorStatus_t SensorStatus;
 
-  hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
+  if(application.Status_Central == DISARMED && !application.IVP.SensorStatus.Status.energy_mode == CONTINUOUS){
+      emberEventControlSetInactive(*motionDetected_control); //Desativa o motionDetected_control até a próxima detecção
+      TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+  }else{
+      hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
 
-  SensorStatus.Status.operation = application.Status_Operation;
-  SensorStatus.Status.statusCentral = application.Status_Central;
+      SensorStatus.Status.operation = application.Status_Operation;
+      SensorStatus.Status.statusCentral = application.Status_Central;
 
-  sendRadio.cmd = MOTION_DETECTED;
-  sendRadio.len = 4;
+      sendRadio.cmd = MOTION_DETECTED;
+      sendRadio.len = 4;
 
+      sendRadio.data[0] = SensorStatus.Statusbyte;
+      sendRadio.data[1] = battery.VBAT >> 8;
+      sendRadio.data[2] = battery.VBAT;
 
-  sendRadio.data[0] = SensorStatus.Statusbyte;
-  sendRadio.data[1] = battery.VBAT >> 8;
-  sendRadio.data[2] = battery.VBAT;
+      application.radio.LastCMD = sendRadio.cmd;
+      radio_send_packet(&sendRadio);
+      emberEventControlSetDelayMS(*TimeoutAck_control,500); //Timeout que indica que não houve resposta
+      battery.VBAT = calculateVdd();
 
-  application.radio.LastCMD = sendRadio.cmd;
-  radio_send_packet(&sendRadio);
-  emberEventControlSetDelayMS(*TimeoutAck_control,500); //Timeout que indica que não houve resposta
-  battery.VBAT = calculateVdd();
+      hGpio_ledTurnOn(&sl_led_led_vermelho, application.IVP.SensorStatus.Status.led_enabled);
+      motionCounterTimer = MOTION_COUNTER_2S;
+      emberEventControlSetDelayMS(*timeout_control,2000); //Interrupção desativada e sem detecção por 2 segundos
+      emberEventControlSetInactive(*motionDetected_control); //Desativa o motionDetected_control até a próxima detecção
+  }
 
-  hGpio_ledTurnOn(&sl_led_led_vermelho, application.IVP.SensorStatus.Status.led_enabled);
-  motionCounterTimer = MOTION_COUNTER_2S;
-  emberEventControlSetDelayMS(*timeout_control,2000); //Interrupção desativada e sem detecção por 2 segundos
-  emberEventControlSetInactive(*motionDetected_control); //Desativa o motionDetected_control até a próxima detecção
 }
 
 void TimeoutAck_handler(void){

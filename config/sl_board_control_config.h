@@ -35,7 +35,7 @@
 
 // <q SL_BOARD_ENABLE_VCOM> Enable Virtual COM UART
 // <i> Default: 0
-#define SL_BOARD_ENABLE_VCOM                    1
+#define SL_BOARD_ENABLE_VCOM                    0
 
 // <q SL_BOARD_ENABLE_DISPLAY> Enable Display
 // <i> Default: 0
@@ -43,7 +43,7 @@
 
 // <q SL_BOARD_ENABLE_SENSOR_RHT> Enable Relative Humidity and Temperature sensor
 // <i> Default: 0
-#define SL_BOARD_ENABLE_SENSOR_RHT              1
+#define SL_BOARD_ENABLE_SENSOR_RHT              0
 
 // <q SL_BOARD_DISABLE_MEMORY_SPI> Disable SPI Flash
 // <i> Default: 1
@@ -55,32 +55,14 @@
 
 // <gpio> SL_BOARD_ENABLE_VCOM
 // $[GPIO_SL_BOARD_ENABLE_VCOM]
-#ifndef SL_BOARD_ENABLE_VCOM_PORT               
-#define SL_BOARD_ENABLE_VCOM_PORT                SL_GPIO_PORT_B
-#endif
-#ifndef SL_BOARD_ENABLE_VCOM_PIN                
-#define SL_BOARD_ENABLE_VCOM_PIN                 0
-#endif
 // [GPIO_SL_BOARD_ENABLE_VCOM]$
 
 // <gpio> SL_BOARD_ENABLE_DISPLAY
 // $[GPIO_SL_BOARD_ENABLE_DISPLAY]
-#ifndef SL_BOARD_ENABLE_DISPLAY_PORT            
-#define SL_BOARD_ENABLE_DISPLAY_PORT             SL_GPIO_PORT_C
-#endif
-#ifndef SL_BOARD_ENABLE_DISPLAY_PIN             
-#define SL_BOARD_ENABLE_DISPLAY_PIN              9
-#endif
 // [GPIO_SL_BOARD_ENABLE_DISPLAY]$
 
 // <gpio> SL_BOARD_ENABLE_SENSOR_RHT
 // $[GPIO_SL_BOARD_ENABLE_SENSOR_RHT]
-#ifndef SL_BOARD_ENABLE_SENSOR_RHT_PORT         
-#define SL_BOARD_ENABLE_SENSOR_RHT_PORT          SL_GPIO_PORT_D
-#endif
-#ifndef SL_BOARD_ENABLE_SENSOR_RHT_PIN          
-#define SL_BOARD_ENABLE_SENSOR_RHT_PIN           0
-#endif
 // [GPIO_SL_BOARD_ENABLE_SENSOR_RHT]$
 
 // <<< sl:end pin_tool >>>

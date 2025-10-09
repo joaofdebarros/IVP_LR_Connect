@@ -44,19 +44,23 @@
 #include "API/pyd/pyd.h"
 #include "poll.h"
 #include "hplatform/hDriver/hADC.h"
+#include "API/memory/memory.h"
+
+uint8_t tx_power = 0;
 
 static void gpioSetup(void);
 void CallbackGPIO(uint8_t interrupt_no);
 static void timerSetup(void);
-
-uint8_t tx_power = 0;
 
 int main(void)
 {
   // Initialize Silicon Labs device, system, service(s) and protocol stack(s).
   // Note that if the kernel is present, the start task will be started and software
   // component initialization will take place there.
+
   sl_main_init();
+
+  sl_mx25_flash_shutdown();
 
   gpioSetup();
   timerSetup();

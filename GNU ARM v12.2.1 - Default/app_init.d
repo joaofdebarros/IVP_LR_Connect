@@ -217,7 +217,11 @@ app_init.o: ../app_init.c \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/privAPI/Radio.h \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/battery/battery.h \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/hplatform/hDriver/hADC.h \
- c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h
+ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h \
+ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/memory/memory.h \
+ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/hNetwork.h \
+ ../API/memory/memory.h \
+ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\protocol\flex\poll\poll.h
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\autogen/sl_component_catalog.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\app\common\util\app_log\app_log.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\iostream\inc\sl_iostream.h:
@@ -438,3 +442,7 @@ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/privAPI/Radio.
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/battery/battery.h:
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/hplatform/hDriver/hADC.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h:
+C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/memory/memory.h:
+C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/hNetwork.h:
+../API/memory/memory.h:
+c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\protocol\flex\poll\poll.h:

@@ -115,14 +115,6 @@
             <file name="sl_gpio.h" uri="studio:/sdk/platform/driver/gpio/inc/sl_gpio.h"/>
           </folder>
         </folder>
-        <folder name="i2cspm">
-          <folder name="src">
-            <file name="sl_i2cspm.c" uri="studio:/sdk/platform/driver/i2cspm/src/sl_i2cspm.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="sl_i2cspm.h" uri="studio:/sdk/platform/driver/i2cspm/inc/sl_i2cspm.h"/>
-          </folder>
-        </folder>
         <folder name="leddrv">
           <folder name="src">
             <file name="sl_led.c" uri="studio:/sdk/platform/driver/leddrv/src/sl_led.c"/>
@@ -424,7 +416,6 @@
           <file name="em_emu.c" uri="studio:/sdk/platform/emlib/src/em_emu.c"/>
           <file name="em_eusart.c" uri="studio:/sdk/platform/emlib/src/em_eusart.c"/>
           <file name="em_gpio.c" uri="studio:/sdk/platform/emlib/src/em_gpio.c"/>
-          <file name="em_i2c.c" uri="studio:/sdk/platform/emlib/src/em_i2c.c"/>
           <file name="em_iadc.c" uri="studio:/sdk/platform/emlib/src/em_iadc.c"/>
           <file name="em_ldma.c" uri="studio:/sdk/platform/emlib/src/em_ldma.c"/>
           <file name="em_msc.c" uri="studio:/sdk/platform/emlib/src/em_msc.c"/>
@@ -451,7 +442,6 @@
           <file name="em_eusart.h" uri="studio:/sdk/platform/emlib/inc/em_eusart.h"/>
           <file name="em_eusart_compat.h" uri="studio:/sdk/platform/emlib/inc/em_eusart_compat.h"/>
           <file name="em_gpio.h" uri="studio:/sdk/platform/emlib/inc/em_gpio.h"/>
-          <file name="em_i2c.h" uri="studio:/sdk/platform/emlib/inc/em_i2c.h"/>
           <file name="em_iadc.h" uri="studio:/sdk/platform/emlib/inc/em_iadc.h"/>
           <file name="em_ldma.h" uri="studio:/sdk/platform/emlib/inc/em_ldma.h"/>
           <file name="em_msc.h" uri="studio:/sdk/platform/emlib/inc/em_msc.h"/>
@@ -732,14 +722,6 @@
             <folder name="sl_mx25_flash_shutdown_eusart">
               <file name="sl_mx25_flash_shutdown.h" uri="studio:/sdk/hardware/driver/mx25_flash_shutdown/inc/sl_mx25_flash_shutdown_eusart/sl_mx25_flash_shutdown.h"/>
             </folder>
-          </folder>
-        </folder>
-        <folder name="si70xx">
-          <folder name="src">
-            <file name="sl_si70xx.c" uri="studio:/sdk/hardware/driver/si70xx/src/sl_si70xx.c"/>
-          </folder>
-          <folder name="inc">
-            <file name="sl_si70xx.h" uri="studio:/sdk/hardware/driver/si70xx/inc/sl_si70xx.h"/>
           </folder>
         </folder>
       </folder>
@@ -1074,7 +1056,6 @@
   <includePath uri="studio:/sdk/platform/emdrv/gpiointerrupt/inc"/>
   <includePath uri="studio:/sdk/platform/peripheral/inc"/>
   <includePath uri="studio:/sdk/platform/service/hfxo_manager/inc"/>
-  <includePath uri="studio:/sdk/platform/driver/i2cspm/inc"/>
   <includePath uri="studio:/sdk/platform/service/interrupt_manager/inc"/>
   <includePath uri="studio:/sdk/platform/service/interrupt_manager/src"/>
   <includePath uri="studio:/sdk/platform/service/interrupt_manager/inc/arm"/>
@@ -1107,7 +1088,6 @@
   <includePath uri="studio:/sdk/platform/radio/rail_lib/plugin/rail_util_power_manager_init"/>
   <includePath uri="studio:/sdk/platform/radio/rail_lib/plugin/rail_util_pti"/>
   <includePath uri="studio:/sdk/platform/security/sl_component/se_manager/inc"/>
-  <includePath uri="studio:/sdk/hardware/driver/si70xx/inc"/>
   <includePath uri="studio:/sdk/util/silicon_labs/silabs_core"/>
   <includePath uri="studio:/sdk/platform/service/sl_main/inc"/>
   <includePath uri="studio:/sdk/platform/service/sl_main/src"/>

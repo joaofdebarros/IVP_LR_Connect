@@ -204,7 +204,8 @@ main.o: ../main.c \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/packet/pckDataStructure.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\protocol\flex\poll\poll.h \
  ../hplatform/hDriver/hADC.h \
- c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h
+ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h \
+ ../API/memory/memory.h
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\autogen/sl_component_catalog.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\sl_main\inc\sl_main_init.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\power_manager\inc\sl_power_manager.h:
@@ -413,3 +414,4 @@ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/packet/pck
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\protocol\flex\poll\poll.h:
 ../hplatform/hDriver/hADC.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h:
+../API/memory/memory.h:
