@@ -193,9 +193,19 @@ void report_handler(void)
        break;
      case BOOT:
        application.Status_Operation = OPERATION_MODE;
-       if(application.IVP.SensorStatus.Status.energy_mode != CONTINUOUS){
-           TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+       if(application.Status_Central == ARMED){
+           pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
        }
+
+       if(application.Status_Central == DISARMED){
+           if(application.IVP.SensorStatus.Status.energy_mode != CONTINUOUS){
+               TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+           }else{
+               //Caso seja modo contínuo, ligar o PIR
+               pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
+           }
+       }
+
 
        break;
      default:
@@ -268,11 +278,9 @@ void emberAfStackStatusCallback(EmberStatus status)
         }
 
         if(application.Status_Operation == OPERATION_MODE){
-            if(application.Status_Central == DISARMED){
-                //desligar o pir
-                application.Status_Operation = BOOT;
-                emberEventControlSetDelayMS(*report_control, 500);
-            }
+            //desligar o pir
+            application.Status_Operation = BOOT;
+            emberEventControlSetDelayMS(*report_control, 500);
         }
         break;
       case EMBER_NETWORK_DOWN:
