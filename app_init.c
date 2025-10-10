@@ -95,7 +95,7 @@ void emberAfInitCallback(void)
   application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
   tx_power = 0;
   application.Status_Operation = WAIT_REGISTRATION;
-  application.Status_Central = ARMED;
+  application.Status_Central = DISARMED;
 
   memory_read(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte);
   memory_read(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal);

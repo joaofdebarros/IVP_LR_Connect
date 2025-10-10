@@ -102,18 +102,6 @@ static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
 //                          Public Function Definitions
 // -----------------------------------------------------------------------------
 void sl_button_on_change(const sl_button_t *handle){
-//  static bool state = false;
-//
-//  if(!state){
-//      state = !state;
-//      join_sleepy(0);
-//      sl_led_turn_on(&sl_led_led_vermelho);
-//  }else{
-//      state = !state;
-//      leave();
-//      emberResetNetworkState();
-//  }
-
 
   if (sl_button_get_state(handle) == SL_SIMPLE_BUTTON_RELEASED) {
      if(&sl_button_btn0 == handle){
@@ -135,7 +123,6 @@ void sl_button_on_change(const sl_button_t *handle){
       }else if((current_time - press_start_time) < 50000){
           if(application.Status_Operation == WAIT_REGISTRATION){
               join_sleepy(0);
-              pydInit(application.IVP.pydConf.sPYDType.thresholdVal); //ATIVANDO SEMPRE O PIR SOMENTE PARA TESTE DO DIEGO
               sl_led_turn_on(&sl_led_led_vermelho);
           }else if(application.Status_Operation == OPERATION_MODE){
               led_blink(VERMELHO, 2, MED_SPEED_BLINK);
@@ -155,7 +142,7 @@ void reset_parameters(){
   application.IVP.SensorStatus.Status.led_enabled = 1;
   tx_power = 0;
   application.Status_Operation = WAIT_REGISTRATION;
-  application.Status_Central = ARMED;
+  application.Status_Central = DISARMED;
 }
 
 /**************************************************************************//**
@@ -206,7 +193,10 @@ void report_handler(void)
        break;
      case BOOT:
        application.Status_Operation = OPERATION_MODE;
-       TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+       if(application.IVP.SensorStatus.Status.energy_mode != CONTINUOUS){
+           TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+       }
+
        break;
      default:
        break;
@@ -287,6 +277,7 @@ void emberAfStackStatusCallback(EmberStatus status)
         break;
       case EMBER_NETWORK_DOWN:
         joined = false;
+        enable_sleep = false;
         led_blink(VERMELHO, 5, FAST_SPEED_BLINK);
         break;
       case EMBER_JOIN_SCAN_FAILED:

@@ -10,6 +10,7 @@
 
 #include "stdint.h"
 #include "hplatform/hDriver/hADC.h"
+#include "ustimer.h"
 
 typedef struct{
   uint16_t VBAT;

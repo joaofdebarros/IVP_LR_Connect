@@ -17,7 +17,7 @@ void iadcInit(void) {
 
   // Configuração do clock do IADC
   IADC_Init_t iadcInit = IADC_INIT_DEFAULT;
-  iadcInit.warmup = iadcWarmupKeepWarm;  // Mantém o IADC aquecido
+  iadcInit.warmup = iadcWarmupNormal;  // TESTE MUDANDO O MODO DE WARMUP
   iadcInit.srcClkPrescale = IADC_calcSrcClkPrescale(IADC0, CLK_SRC_ADC_FREQ, 0);  // Clock de 1 MHz
 
   // Configuração geral do IADC

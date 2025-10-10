@@ -15,11 +15,11 @@
       },
       {
         "name": "Actual TX Baudrate [baud]",
-        "value": 614399.2932862191
+        "value": 307199.64664310956
       },
       {
         "name": "Calculated RSSI Offset [dB]",
-        "value": -10.4
+        "value": -12.13220112736489
       },
       {
         "name": "Preamble Binary Pattern",
@@ -31,11 +31,11 @@
       },
       {
         "name": "Pre Signal Lock RX Bandwidth [Hz]",
-        "value": 768000
+        "value": 384000
       },
       {
         "name": "Desired Bitrate [bps]",
-        "value": 614400
+        "value": 307200
       },
       {
         "name": "Actual Carrier Frequency [Hz]",
@@ -43,7 +43,7 @@
       },
       {
         "name": "Actual Intermediate Frequency [Hz]",
-        "value": 433996
+        "value": 241979
       },
       {
         "name": "Synthesizer Resolution [Hz]",
@@ -51,7 +51,7 @@
       },
       {
         "name": "Actual RX Baudrate [baud]",
-        "value": 614411.8156118387
+        "value": 307192.61556212587
       },
       {
         "name": "Actual Deviation [Hz]",
@@ -71,11 +71,11 @@
       },
       {
         "name": "Carson Bandwidth [Hz]",
-        "value": 921600
+        "value": 460800
       },
       {
         "name": "Theoretical Required Demodulator Bandwidth [Hz]",
-        "value": 768000
+        "value": 384000
       },
       {
         "name": "RX Crystal Accuracy [ppm]",
@@ -87,7 +87,7 @@
       },
       {
         "name": "Post Signal Lock RX Bandwidth [Hz]",
-        "value": 768000
+        "value": 384000
       },
       {
         "name": "RSSI Measurement Period",
@@ -95,15 +95,15 @@
       },
       {
         "name": "Actual Demodulator Oversampling Rate",
-        "value": 5.0
+        "value": 5.000000000000001
       },
       {
         "name": "Raw Data Sampling Rate [sps]",
-        "value": 3072059.078059193
+        "value": 1535963.0778106295
       },
       {
         "name": "Signal Propagation Delay [symbol]",
-        "value": 11
+        "value": 9
       },
       {
         "name": "Injection Side",
@@ -115,7 +115,7 @@
       },
       {
         "name": "RSSI Access Time After RX Start [us]",
-        "value": 39.97045287820513
+        "value": 76.43124013782051
       }
     ]
   }

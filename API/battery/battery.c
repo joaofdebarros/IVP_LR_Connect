@@ -29,6 +29,11 @@ uint32_t iadcRead(void) {
  * @return Tensão de Vdd em mV.
  */
 uint32_t calculateVdd(void) {
+
     uint32_t iadcValue = iadcRead();  // Lê o valor do IADC
+//    IADC_command(IADC0, iadcCmdStopSingle);
+
     return (iadcValue * VREF_MV * VDD_DIV_FACTOR) / IADC_RESOLUTION;
+
+
 }

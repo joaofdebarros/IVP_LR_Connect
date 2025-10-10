@@ -49,7 +49,7 @@ void led_handler(sl_sleeptimer_timer_handle_t *handle, void *data){
   switch (led_target) {
     case VERMELHO:
 
-      if(blink_count < (blink_target * 2)){
+      if((blink_count < (blink_target * 2)) && application.IVP.SensorStatus.Status.energy_mode != UECONOMIC){
           blink_count++;
           hGpio_ledToggle(&sl_led_led_vermelho, application.IVP.SensorStatus.Status.led_enabled);
       }else{
@@ -131,6 +131,10 @@ void radio_handler(void){
           application.IVP.SensorStatus.Status.led_enabled = false;
       }else{
           application.IVP.SensorStatus.Status.led_enabled = receive->data[2];
+      }
+
+      if(application.IVP.SensorStatus.Status.energy_mode == CONTINUOUS){
+          pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
       }
 
       tx_power = receive->data[3];

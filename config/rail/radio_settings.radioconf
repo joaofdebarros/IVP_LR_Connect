@@ -8,11 +8,11 @@
           <channel_number_end>20</channel_number_end>
           <physical_channel_offset>SAME_AS_FIRST_CHANNEL</physical_channel_offset>
           <max_power>RAIL_TX_POWER_MAX</max_power>
-          <metadata>{"selectedPhy":"PHY_Longrange_915M_OQPSK_DSSS8_76p8kbps"}</metadata>
+          <metadata>{"selectedPhy":"PHY_Longrange_915M_OQPSK_DSSS8_38p4kbps"}</metadata>
         </channel_config_entry>
       </channel_config_entries>
-      <metadata>{"selectedPhy":"PHY_Longrange_915M_OQPSK_DSSS8_76p8kbps"}</metadata>
-      <phy name="PHY_Longrange_915M_OQPSK_DSSS8_76p8kbps"/>
+      <metadata>{"selectedPhy":"PHY_Longrange_915M_OQPSK_DSSS8_38p4kbps"}</metadata>
+      <phy name="PHY_Longrange_915M_OQPSK_DSSS8_38p4kbps"/>
     </base_channel_configuration>
   </base_channel_configurations>
 </multi_phy_configuration>
