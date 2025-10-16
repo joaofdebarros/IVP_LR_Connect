@@ -22,7 +22,7 @@
  * Enumerates
  */
 typedef enum SensorCmd_e{
-  REGISTRATION = 21,
+  IVP_REGISTRATION = 21,
   MOTION_DETECTED = 22,
   SETUP_IVP,
 	KEEP_ALIVE,
@@ -33,6 +33,19 @@ typedef enum SensorCmd_e{
 	CMD_UNKNOWN = 0xFF
 }SensorCmd_e;
 
+typedef union
+{
+    uint8_t Registerbyte;
+
+    struct
+    {
+        uint8_t Type                  :5;
+        uint8_t range                 :2;
+        uint8_t reserved              :1;
+    } Status;
+
+}
+Register_Sensor_t;
 
 typedef struct{
 		SensorCmd_e cmd;

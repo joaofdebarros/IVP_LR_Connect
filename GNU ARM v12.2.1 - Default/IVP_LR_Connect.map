@@ -15842,378 +15842,378 @@ LOAD linker stubs
  .debug_line    0x0005d75b      0x16a C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//platform/radio/rail_lib/autogen/librail_release/librail_config_fgm230sa27hgn_gcc.a(rail_pa_curves.o)
  .debug_line    0x0005d8c5      0x4dd C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-packet-queue-library-efr32xg2x-gcc.a(mac-queue.o)
 
-.debug_str      0x00000000    0x3128d
+.debug_str      0x00000000    0x3129e
  .debug_str     0x00000000      0x7d1 ./API/battery/battery.o
                                 0x920 (size before relaxing)
  .debug_str     0x000007d1      0x1d8 ./API/hNetwork.o
                                 0x423 (size before relaxing)
  .debug_str     0x000009a9      0x392 ./API/memory/memory.o
                                 0x607 (size before relaxing)
- .debug_str     0x00000d3b       0xb7 ./API/packet/packet.o
-                                0x2d3 (size before relaxing)
- .debug_str     0x00000df2      0x204 ./API/pyd/motion.o
+ .debug_str     0x00000d3b       0xc8 ./API/packet/packet.o
+                                0x2d7 (size before relaxing)
+ .debug_str     0x00000e03      0x204 ./API/pyd/motion.o
                                 0x43e (size before relaxing)
- .debug_str     0x00000ff6      0x172 ./API/pyd/pyd.o
+ .debug_str     0x00001007      0x172 ./API/pyd/pyd.o
                                 0x568 (size before relaxing)
- .debug_str     0x00001168      0x4dd ./Application/application.o
-                                0xa68 (size before relaxing)
- .debug_str     0x00001645      0x220 ./Application/callbacks.o
-                                0xacb (size before relaxing)
- .debug_str     0x00001865     0x101b ./app_cli.o
+ .debug_str     0x00001179      0x4dd ./Application/application.o
+                                0xa6c (size before relaxing)
+ .debug_str     0x00001656      0x220 ./Application/callbacks.o
+                                0xacf (size before relaxing)
+ .debug_str     0x00001876     0x101b ./app_cli.o
                                0x15a3 (size before relaxing)
- .debug_str     0x00002880      0x239 ./app_init.o
-                               0x131a (size before relaxing)
- .debug_str     0x00002ab9      0x306 ./app_process.o
-                               0x139c (size before relaxing)
- .debug_str     0x00002dbf      0x717 ./main.o
+ .debug_str     0x00002891      0x239 ./app_init.o
+                               0x131e (size before relaxing)
+ .debug_str     0x00002aca      0x306 ./app_process.o
+                               0x13a0 (size before relaxing)
+ .debug_str     0x00002dd0      0x717 ./main.o
                                 0x9fd (size before relaxing)
- .debug_str     0x000034d6      0x1b7 ./autogen/app_framework_event_table.o
+ .debug_str     0x000034e7      0x1b7 ./autogen/app_framework_event_table.o
                                 0x493 (size before relaxing)
- .debug_str     0x0000368d      0x3fe ./autogen/callback_dispatcher.o
+ .debug_str     0x0000369e      0x3fe ./autogen/callback_dispatcher.o
                                 0x803 (size before relaxing)
- .debug_str     0x00003a8b      0x3f6 ./autogen/rail_config.o
+ .debug_str     0x00003a9c      0x3f6 ./autogen/rail_config.o
                                 0x660 (size before relaxing)
- .debug_str     0x00003e81       0x4f ./autogen/sl_board_default_init.o
+ .debug_str     0x00003e92       0x4f ./autogen/sl_board_default_init.o
                                 0x248 (size before relaxing)
- .debug_str     0x00003ed0      0x1b3 ./autogen/sl_cli_command_table.o
+ .debug_str     0x00003ee1      0x1b3 ./autogen/sl_cli_command_table.o
                                 0x6c9 (size before relaxing)
- .debug_str     0x00004083      0x205 ./autogen/sl_cli_instances.o
+ .debug_str     0x00004094      0x205 ./autogen/sl_cli_instances.o
                                 0x715 (size before relaxing)
- .debug_str     0x00004288      0x44a ./autogen/sl_event_handler.o
+ .debug_str     0x00004299      0x44a ./autogen/sl_event_handler.o
                                 0x6b5 (size before relaxing)
- .debug_str     0x000046d2      0x191 ./autogen/sl_iostream_handles.o
+ .debug_str     0x000046e3      0x191 ./autogen/sl_iostream_handles.o
                                 0x4b9 (size before relaxing)
- .debug_str     0x00004863     0x13db ./autogen/sl_iostream_init_eusart_instances.o
+ .debug_str     0x00004874     0x13db ./autogen/sl_iostream_init_eusart_instances.o
                                0x202c (size before relaxing)
- .debug_str     0x00005c3e      0x173 ./autogen/sl_power_manager_handler.o
+ .debug_str     0x00005c4f      0x173 ./autogen/sl_power_manager_handler.o
                                 0x407 (size before relaxing)
- .debug_str     0x00005db1      0x162 ./autogen/sl_simple_button_instances.o
+ .debug_str     0x00005dc2      0x162 ./autogen/sl_simple_button_instances.o
                                 0x4d4 (size before relaxing)
- .debug_str     0x00005f13      0x101 ./autogen/sl_simple_led_instances.o
+ .debug_str     0x00005f24      0x101 ./autogen/sl_simple_led_instances.o
                                 0x451 (size before relaxing)
- .debug_str     0x00006014     0x1783 ./hplatform/hDriver/source/hADC_efr32.o
+ .debug_str     0x00006025     0x1783 ./hplatform/hDriver/source/hADC_efr32.o
                                0x1fc5 (size before relaxing)
- .debug_str     0x00007797      0xe82 ./hplatform/hDriver/source/hGpio_erf32.o
+ .debug_str     0x000077a8      0xe82 ./hplatform/hDriver/source/hGpio_erf32.o
                                0x174d (size before relaxing)
- .debug_str     0x00008619      0x3b7 ./hplatform/hDriver/source/hTimer_efr32.o
+ .debug_str     0x0000862a      0x3b7 ./hplatform/hDriver/source/hTimer_efr32.o
                                0x1317 (size before relaxing)
- .debug_str     0x000089d0       0x32 ./privAPI/Radio.o
+ .debug_str     0x000089e1       0x32 ./privAPI/Radio.o
                                 0x2df (size before relaxing)
- .debug_str     0x00008a02       0x1a ./privAPI/privCallback.o
+ .debug_str     0x00008a13       0x1a ./privAPI/privCallback.o
                                 0x25a (size before relaxing)
- .debug_str     0x00008a1c      0x1b0 ./simplicity_sdk_2025.6.2/app/common/util/app_log/app_log.o
+ .debug_str     0x00008a2d      0x1b0 ./simplicity_sdk_2025.6.2/app/common/util/app_log/app_log.o
                                 0x527 (size before relaxing)
- .debug_str     0x00008bcc      0x2a3 ./simplicity_sdk_2025.6.2/hardware/board/src/sl_board_control_gpio.o
+ .debug_str     0x00008bdd      0x2a3 ./simplicity_sdk_2025.6.2/hardware/board/src/sl_board_control_gpio.o
                                 0x4ea (size before relaxing)
- .debug_str     0x00008e6f       0x97 ./simplicity_sdk_2025.6.2/hardware/board/src/sl_board_init.o
+ .debug_str     0x00008e80       0x97 ./simplicity_sdk_2025.6.2/hardware/board/src/sl_board_init.o
                                 0x2fc (size before relaxing)
- .debug_str     0x00008f06      0x34d ./simplicity_sdk_2025.6.2/hardware/driver/configuration_over_swo/src/sl_cos.o
+ .debug_str     0x00008f17      0x34d ./simplicity_sdk_2025.6.2/hardware/driver/configuration_over_swo/src/sl_cos.o
                                 0x5f6 (size before relaxing)
- .debug_str     0x00009253      0xb4d ./simplicity_sdk_2025.6.2/hardware/driver/mx25_flash_shutdown/src/sl_mx25_flash_shutdown_eusart/sl_mx25_flash_shutdown.o
+ .debug_str     0x00009264      0xb4d ./simplicity_sdk_2025.6.2/hardware/driver/mx25_flash_shutdown/src/sl_mx25_flash_shutdown_eusart/sl_mx25_flash_shutdown.o
                                0x227b (size before relaxing)
- .debug_str     0x00009da0      0x1f4 ./simplicity_sdk_2025.6.2/platform/Device/SiliconLabs/FGM23/Source/startup_fgm23.o
+ .debug_str     0x00009db1      0x1f4 ./simplicity_sdk_2025.6.2/platform/Device/SiliconLabs/FGM23/Source/startup_fgm23.o
                                 0x3f8 (size before relaxing)
- .debug_str     0x00009f94      0xde7 ./simplicity_sdk_2025.6.2/platform/Device/SiliconLabs/FGM23/Source/system_fgm23.o
+ .debug_str     0x00009fa5      0xde7 ./simplicity_sdk_2025.6.2/platform/Device/SiliconLabs/FGM23/Source/system_fgm23.o
                                0x1817 (size before relaxing)
- .debug_str     0x0000ad7b      0x254 ./simplicity_sdk_2025.6.2/platform/common/src/sl_core_cortexm.o
+ .debug_str     0x0000ad8c      0x254 ./simplicity_sdk_2025.6.2/platform/common/src/sl_core_cortexm.o
                                 0x584 (size before relaxing)
- .debug_str     0x0000afcf      0x129 ./simplicity_sdk_2025.6.2/platform/common/src/sl_slist.o
+ .debug_str     0x0000afe0      0x129 ./simplicity_sdk_2025.6.2/platform/common/src/sl_slist.o
                                 0x341 (size before relaxing)
- .debug_str     0x0000b0f8      0x109 ./simplicity_sdk_2025.6.2/platform/common/src/sl_string.o
+ .debug_str     0x0000b109      0x109 ./simplicity_sdk_2025.6.2/platform/common/src/sl_string.o
                                 0x330 (size before relaxing)
- .debug_str     0x0000b201       0x84 ./simplicity_sdk_2025.6.2/platform/driver/button/src/sl_button.o
+ .debug_str     0x0000b212       0x84 ./simplicity_sdk_2025.6.2/platform/driver/button/src/sl_button.o
                                 0x340 (size before relaxing)
- .debug_str     0x0000b285      0x243 ./simplicity_sdk_2025.6.2/platform/driver/button/src/sl_simple_button.o
+ .debug_str     0x0000b296      0x243 ./simplicity_sdk_2025.6.2/platform/driver/button/src/sl_simple_button.o
                                 0x860 (size before relaxing)
- .debug_str     0x0000b4c8      0x70a ./simplicity_sdk_2025.6.2/platform/driver/debug/src/sl_debug_swo.o
+ .debug_str     0x0000b4d9      0x70a ./simplicity_sdk_2025.6.2/platform/driver/debug/src/sl_debug_swo.o
                                0x1ce9 (size before relaxing)
- .debug_str     0x0000bbd2      0x9b5 ./simplicity_sdk_2025.6.2/platform/driver/gpio/src/sl_gpio.o
+ .debug_str     0x0000bbe3      0x9b5 ./simplicity_sdk_2025.6.2/platform/driver/gpio/src/sl_gpio.o
                                0x2697 (size before relaxing)
- .debug_str     0x0000c587       0x6f ./simplicity_sdk_2025.6.2/platform/driver/leddrv/src/sl_led.o
+ .debug_str     0x0000c598       0x6f ./simplicity_sdk_2025.6.2/platform/driver/leddrv/src/sl_led.o
                                 0x305 (size before relaxing)
- .debug_str     0x0000c5f6       0x65 ./simplicity_sdk_2025.6.2/platform/driver/leddrv/src/sl_simple_led.o
+ .debug_str     0x0000c607       0x65 ./simplicity_sdk_2025.6.2/platform/driver/leddrv/src/sl_simple_led.o
                                 0x624 (size before relaxing)
- .debug_str     0x0000c65b      0xa5f ./simplicity_sdk_2025.6.2/platform/emdrv/dmadrv/src/dmadrv.o
+ .debug_str     0x0000c66c      0xa5f ./simplicity_sdk_2025.6.2/platform/emdrv/dmadrv/src/dmadrv.o
                                0x10f9 (size before relaxing)
- .debug_str     0x0000d0ba      0x104 ./simplicity_sdk_2025.6.2/platform/emdrv/gpiointerrupt/src/gpiointerrupt.o
+ .debug_str     0x0000d0cb      0x104 ./simplicity_sdk_2025.6.2/platform/emdrv/gpiointerrupt/src/gpiointerrupt.o
                                 0x437 (size before relaxing)
- .debug_str     0x0000d1be     0x135e ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3.o
+ .debug_str     0x0000d1cf     0x135e ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3.o
                                0x19b7 (size before relaxing)
- .debug_str     0x0000e51c       0xcd ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_cache.o
+ .debug_str     0x0000e52d       0xcd ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_cache.o
                                 0x530 (size before relaxing)
- .debug_str     0x0000e5e9      0x106 ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_default_common_linker.o
+ .debug_str     0x0000e5fa      0x106 ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_default_common_linker.o
                                 0x6b9 (size before relaxing)
- .debug_str     0x0000e6ef      0x233 ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_hal_flash.o
+ .debug_str     0x0000e700      0x233 ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_hal_flash.o
                                 0x639 (size before relaxing)
- .debug_str     0x0000e922       0x8a ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_lock.o
+ .debug_str     0x0000e933       0x8a ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_lock.o
                                 0x4bb (size before relaxing)
- .debug_str     0x0000e9ac       0xdb ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_object.o
+ .debug_str     0x0000e9bd       0xdb ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_object.o
                                 0x72d (size before relaxing)
- .debug_str     0x0000ea87      0x182 ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_page.o
+ .debug_str     0x0000ea98      0x182 ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_page.o
                                 0x7ab (size before relaxing)
- .debug_str     0x0000ec09       0x7b ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_utils.o
+ .debug_str     0x0000ec1a       0x7b ./simplicity_sdk_2025.6.2/platform/emdrv/nvm3/src/nvm3_utils.o
                                 0x2a0 (size before relaxing)
- .debug_str     0x0000ec84      0x43b ./simplicity_sdk_2025.6.2/platform/emdrv/ustimer/src/ustimer.o
+ .debug_str     0x0000ec95      0x43b ./simplicity_sdk_2025.6.2/platform/emdrv/ustimer/src/ustimer.o
                                0x17ad (size before relaxing)
- .debug_str     0x0000f0bf     0x4077 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_cmu.o
+ .debug_str     0x0000f0d0     0x4077 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_cmu.o
                                0x6753 (size before relaxing)
- .debug_str     0x00013136      0xc8b ./simplicity_sdk_2025.6.2/platform/emlib/src/em_emu.o
+ .debug_str     0x00013147      0xc8b ./simplicity_sdk_2025.6.2/platform/emlib/src/em_emu.o
                                0x30cb (size before relaxing)
- .debug_str     0x00013dc1      0x7a6 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_eusart.o
+ .debug_str     0x00013dd2      0x7a6 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_eusart.o
                                0x4f4e (size before relaxing)
- .debug_str     0x00014567       0xf3 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_gpio.o
+ .debug_str     0x00014578       0xf3 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_gpio.o
                                0x193d (size before relaxing)
- .debug_str     0x0001465a      0x2ba ./simplicity_sdk_2025.6.2/platform/emlib/src/em_iadc.o
+ .debug_str     0x0001466b      0x2ba ./simplicity_sdk_2025.6.2/platform/emlib/src/em_iadc.o
                                0x25ee (size before relaxing)
- .debug_str     0x00014914      0x10c ./simplicity_sdk_2025.6.2/platform/emlib/src/em_ldma.o
+ .debug_str     0x00014925      0x10c ./simplicity_sdk_2025.6.2/platform/emlib/src/em_ldma.o
                                0x14b8 (size before relaxing)
- .debug_str     0x00014a20      0x427 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_msc.o
+ .debug_str     0x00014a31      0x427 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_msc.o
                                0x1c03 (size before relaxing)
- .debug_str     0x00014e47     0x172a ./simplicity_sdk_2025.6.2/platform/emlib/src/em_prs.o
+ .debug_str     0x00014e58     0x172a ./simplicity_sdk_2025.6.2/platform/emlib/src/em_prs.o
                                0x4ecf (size before relaxing)
- .debug_str     0x00016571      0x154 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_rmu.o
+ .debug_str     0x00016582      0x154 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_rmu.o
                                 0x9ab (size before relaxing)
- .debug_str     0x000166c5      0x2e0 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_system.o
+ .debug_str     0x000166d6      0x2e0 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_system.o
                                0x16b7 (size before relaxing)
- .debug_str     0x000169a5      0x2d5 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_timer.o
+ .debug_str     0x000169b6      0x2d5 ./simplicity_sdk_2025.6.2/platform/emlib/src/em_timer.o
                                0x3328 (size before relaxing)
- .debug_str     0x00016c7a      0x201 ./simplicity_sdk_2025.6.2/platform/peripheral/src/sl_hal_gpio.o
+ .debug_str     0x00016c8b      0x201 ./simplicity_sdk_2025.6.2/platform/peripheral/src/sl_hal_gpio.o
                                0x1ee4 (size before relaxing)
- .debug_str     0x00016e7b      0x700 ./simplicity_sdk_2025.6.2/platform/peripheral/src/sl_hal_sysrtc.o
+ .debug_str     0x00016e8c      0x700 ./simplicity_sdk_2025.6.2/platform/peripheral/src/sl_hal_sysrtc.o
                                 0xb83 (size before relaxing)
- .debug_str     0x0001757b       0xca ./simplicity_sdk_2025.6.2/platform/radio/rail_lib/plugin/fem_util/sl_fem_util.o
+ .debug_str     0x0001758c       0xca ./simplicity_sdk_2025.6.2/platform/radio/rail_lib/plugin/fem_util/sl_fem_util.o
                                 0x2d2 (size before relaxing)
- .debug_str     0x00017645      0xf2c ./simplicity_sdk_2025.6.2/platform/radio/rail_lib/plugin/pa-conversions/pa_conversions_efr32.o
+ .debug_str     0x00017656      0xf2c ./simplicity_sdk_2025.6.2/platform/radio/rail_lib/plugin/pa-conversions/pa_conversions_efr32.o
                                0x1281 (size before relaxing)
- .debug_str     0x00018571       0xb3 ./simplicity_sdk_2025.6.2/platform/radio/rail_lib/plugin/rail_util_power_manager_init/sl_rail_util_power_manager_init.o
+ .debug_str     0x00018582       0xb3 ./simplicity_sdk_2025.6.2/platform/radio/rail_lib/plugin/rail_util_power_manager_init/sl_rail_util_power_manager_init.o
                                 0x2f4 (size before relaxing)
- .debug_str     0x00018624      0x12b ./simplicity_sdk_2025.6.2/platform/radio/rail_lib/plugin/rail_util_pti/sl_rail_util_pti.o
+ .debug_str     0x00018635      0x12b ./simplicity_sdk_2025.6.2/platform/radio/rail_lib/plugin/rail_util_pti/sl_rail_util_pti.o
                                 0x4cd (size before relaxing)
- .debug_str     0x0001874f      0x2a3 ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sl_se_manager.o
+ .debug_str     0x00018760      0x2a3 ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sl_se_manager.o
                                 0xfeb (size before relaxing)
- .debug_str     0x000189f2      0x70b ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sl_se_manager_cipher.o
+ .debug_str     0x00018a03      0x70b ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sl_se_manager_cipher.o
                                 0xae9 (size before relaxing)
- .debug_str     0x000190fd       0xb6 ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sl_se_manager_entropy.o
+ .debug_str     0x0001910e       0xb6 ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sl_se_manager_entropy.o
                                 0x3fd (size before relaxing)
- .debug_str     0x000191b3      0x244 ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sl_se_manager_key_handling.o
+ .debug_str     0x000191c4      0x244 ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sl_se_manager_key_handling.o
                                 0x6eb (size before relaxing)
- .debug_str     0x000193f7       0x8f ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sli_se_manager_mailbox.o
+ .debug_str     0x00019408       0x8f ./simplicity_sdk_2025.6.2/platform/security/sl_component/se_manager/src/sli_se_manager_mailbox.o
                                 0x41c (size before relaxing)
- .debug_str     0x00019486      0x127 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_mbedtls_support/src/se_aes.o
+ .debug_str     0x00019497      0x127 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_mbedtls_support/src/se_aes.o
                                 0x5a5 (size before relaxing)
- .debug_str     0x000195ad       0x7d ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_mbedtls_support/src/sl_mbedtls.o
+ .debug_str     0x000195be       0x7d ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_mbedtls_support/src/sl_mbedtls.o
                                 0x2a8 (size before relaxing)
- .debug_str     0x0001962a      0x3d2 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sl_psa_its_nvm3.o
+ .debug_str     0x0001963b      0x3d2 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sl_psa_its_nvm3.o
                                 0xaae (size before relaxing)
- .debug_str     0x000199fc       0xc1 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_psa_driver_init.o
+ .debug_str     0x00019a0d       0xc1 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_psa_driver_init.o
                                 0x312 (size before relaxing)
- .debug_str     0x00019abd       0xe6 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_psa_trng.o
+ .debug_str     0x00019ace       0xe6 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_psa_trng.o
                                 0x44b (size before relaxing)
- .debug_str     0x00019ba3      0x35e ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_driver_aead.o
+ .debug_str     0x00019bb4      0x35e ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_driver_aead.o
                                 0xb38 (size before relaxing)
- .debug_str     0x00019f01      0x24b ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_driver_cipher.o
+ .debug_str     0x00019f12      0x24b ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_driver_cipher.o
                                 0x8ac (size before relaxing)
- .debug_str     0x0001a14c      0x2a9 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_driver_key_management.o
+ .debug_str     0x0001a15d      0x2a9 ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_driver_key_management.o
                                 0x8eb (size before relaxing)
- .debug_str     0x0001a3f5      0x21f ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_transparent_driver_aead.o
+ .debug_str     0x0001a406      0x21f ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_transparent_driver_aead.o
                                 0xa24 (size before relaxing)
- .debug_str     0x0001a614      0x1fd ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_transparent_driver_cipher.o
+ .debug_str     0x0001a625      0x1fd ./simplicity_sdk_2025.6.2/platform/security/sl_component/sl_psa_driver/src/sli_se_transparent_driver_cipher.o
                                 0x8c0 (size before relaxing)
- .debug_str     0x0001a811      0x1dd ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli.o
+ .debug_str     0x0001a822      0x1dd ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli.o
                                 0x7c1 (size before relaxing)
- .debug_str     0x0001a9ee      0x24b ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_arguments.o
+ .debug_str     0x0001a9ff      0x24b ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_arguments.o
                                 0x554 (size before relaxing)
- .debug_str     0x0001ac39      0x275 ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_command.o
+ .debug_str     0x0001ac4a      0x275 ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_command.o
                                 0x882 (size before relaxing)
- .debug_str     0x0001aeae      0x1bf ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_input.o
+ .debug_str     0x0001aebf      0x1bf ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_input.o
                                 0x6d7 (size before relaxing)
- .debug_str     0x0001b06d       0xc0 ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_io.o
+ .debug_str     0x0001b07e       0xc0 ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_io.o
                                 0x386 (size before relaxing)
- .debug_str     0x0001b12d       0x75 ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_tokenize.o
+ .debug_str     0x0001b13e       0x75 ./simplicity_sdk_2025.6.2/platform/service/cli/src/sl_cli_tokenize.o
                                 0x2d1 (size before relaxing)
- .debug_str     0x0001b1a2      0x9f7 ./simplicity_sdk_2025.6.2/platform/service/clock_manager/src/sl_clock_manager.o
+ .debug_str     0x0001b1b3      0x9f7 ./simplicity_sdk_2025.6.2/platform/service/clock_manager/src/sl_clock_manager.o
                                 0xd21 (size before relaxing)
- .debug_str     0x0001bb99      0x5ef ./simplicity_sdk_2025.6.2/platform/service/clock_manager/src/sl_clock_manager_hal_s2.o
+ .debug_str     0x0001bbaa      0x5ef ./simplicity_sdk_2025.6.2/platform/service/clock_manager/src/sl_clock_manager_hal_s2.o
                                0x27ee (size before relaxing)
- .debug_str     0x0001c188       0xa6 ./simplicity_sdk_2025.6.2/platform/service/clock_manager/src/sl_clock_manager_init.o
+ .debug_str     0x0001c199       0xa6 ./simplicity_sdk_2025.6.2/platform/service/clock_manager/src/sl_clock_manager_init.o
                                 0x29f (size before relaxing)
- .debug_str     0x0001c22e      0x5da ./simplicity_sdk_2025.6.2/platform/service/clock_manager/src/sl_clock_manager_init_hal_s2.o
+ .debug_str     0x0001c23f      0x5da ./simplicity_sdk_2025.6.2/platform/service/clock_manager/src/sl_clock_manager_init_hal_s2.o
                                0x1baa (size before relaxing)
- .debug_str     0x0001c808       0x88 ./simplicity_sdk_2025.6.2/platform/service/device_init/src/sl_device_init_dcdc_s2.o
+ .debug_str     0x0001c819       0x88 ./simplicity_sdk_2025.6.2/platform/service/device_init/src/sl_device_init_dcdc_s2.o
                                 0x92f (size before relaxing)
- .debug_str     0x0001c890      0x620 ./simplicity_sdk_2025.6.2/platform/service/device_manager/clocks/sl_device_clock_efr32xg23.o
+ .debug_str     0x0001c8a1      0x620 ./simplicity_sdk_2025.6.2/platform/service/device_manager/clocks/sl_device_clock_efr32xg23.o
                                 0x88f (size before relaxing)
- .debug_str     0x0001ceb0      0x573 ./simplicity_sdk_2025.6.2/platform/service/device_manager/devices/sl_device_peripheral_hal_efr32xg23.o
+ .debug_str     0x0001cec1      0x573 ./simplicity_sdk_2025.6.2/platform/service/device_manager/devices/sl_device_peripheral_hal_efr32xg23.o
                                0x1069 (size before relaxing)
- .debug_str     0x0001d423      0x3aa ./simplicity_sdk_2025.6.2/platform/service/hfxo_manager/src/sl_hfxo_manager.o
+ .debug_str     0x0001d434      0x3aa ./simplicity_sdk_2025.6.2/platform/service/hfxo_manager/src/sl_hfxo_manager.o
                                 0x65b (size before relaxing)
- .debug_str     0x0001d7cd      0x17e ./simplicity_sdk_2025.6.2/platform/service/hfxo_manager/src/sl_hfxo_manager_hal_s2.o
+ .debug_str     0x0001d7de      0x17e ./simplicity_sdk_2025.6.2/platform/service/hfxo_manager/src/sl_hfxo_manager_hal_s2.o
                                0x15a2 (size before relaxing)
- .debug_str     0x0001d94b      0x3e5 ./simplicity_sdk_2025.6.2/platform/service/interrupt_manager/src/sl_interrupt_manager_cortexm.o
+ .debug_str     0x0001d95c      0x3e5 ./simplicity_sdk_2025.6.2/platform/service/interrupt_manager/src/sl_interrupt_manager_cortexm.o
                                 0xd32 (size before relaxing)
- .debug_str     0x0001dd30      0x151 ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream.o
+ .debug_str     0x0001dd41      0x151 ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream.o
                                 0x51c (size before relaxing)
- .debug_str     0x0001de81      0x2dc ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream_eusart.o
+ .debug_str     0x0001de92      0x2dc ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream_eusart.o
                                0x3558 (size before relaxing)
- .debug_str     0x0001e15d      0x17f ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream_retarget_stdio.o
+ .debug_str     0x0001e16e      0x17f ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream_retarget_stdio.o
                                 0x4a6 (size before relaxing)
- .debug_str     0x0001e2dc      0x335 ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream_stdlib_config.o
+ .debug_str     0x0001e2ed      0x335 ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream_stdlib_config.o
                                 0x5b9 (size before relaxing)
- .debug_str     0x0001e611      0x37f ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream_uart.o
+ .debug_str     0x0001e622      0x37f ./simplicity_sdk_2025.6.2/platform/service/iostream/src/sl_iostream_uart.o
                                0x1c6e (size before relaxing)
- .debug_str     0x0001e990      0x940 ./simplicity_sdk_2025.6.2/platform/service/memory_manager/src/sl_memory_manager.o
+ .debug_str     0x0001e9a1      0x940 ./simplicity_sdk_2025.6.2/platform/service/memory_manager/src/sl_memory_manager.o
                                 0xcf4 (size before relaxing)
- .debug_str     0x0001f2d0       0xbf ./simplicity_sdk_2025.6.2/platform/service/memory_manager/src/sl_memory_manager_region.o
+ .debug_str     0x0001f2e1       0xbf ./simplicity_sdk_2025.6.2/platform/service/memory_manager/src/sl_memory_manager_region.o
                                 0x304 (size before relaxing)
- .debug_str     0x0001f38f       0xbe ./simplicity_sdk_2025.6.2/platform/service/memory_manager/src/sl_memory_manager_retarget.o
+ .debug_str     0x0001f3a0       0xbe ./simplicity_sdk_2025.6.2/platform/service/memory_manager/src/sl_memory_manager_retarget.o
                                 0x608 (size before relaxing)
- .debug_str     0x0001f44d      0x149 ./simplicity_sdk_2025.6.2/platform/service/memory_manager/src/sli_memory_manager_common.o
+ .debug_str     0x0001f45e      0x149 ./simplicity_sdk_2025.6.2/platform/service/memory_manager/src/sli_memory_manager_common.o
                                 0x7a4 (size before relaxing)
- .debug_str     0x0001f596      0x23b ./simplicity_sdk_2025.6.2/platform/service/mpu/src/sl_mpu_s2.o
+ .debug_str     0x0001f5a7      0x23b ./simplicity_sdk_2025.6.2/platform/service/mpu/src/sl_mpu_s2.o
                                 0x60d (size before relaxing)
- .debug_str     0x0001f7d1      0x16f ./simplicity_sdk_2025.6.2/platform/service/power_manager/src/common/sl_power_manager_common.o
+ .debug_str     0x0001f7e2      0x16f ./simplicity_sdk_2025.6.2/platform/service/power_manager/src/common/sl_power_manager_common.o
                                 0x632 (size before relaxing)
- .debug_str     0x0001f940      0x131 ./simplicity_sdk_2025.6.2/platform/service/power_manager/src/common/sl_power_manager_em4.o
+ .debug_str     0x0001f951      0x131 ./simplicity_sdk_2025.6.2/platform/service/power_manager/src/common/sl_power_manager_em4.o
                                0x1304 (size before relaxing)
- .debug_str     0x0001fa71      0x941 ./simplicity_sdk_2025.6.2/platform/service/power_manager/src/sleep_loop/sl_power_manager.o
+ .debug_str     0x0001fa82      0x941 ./simplicity_sdk_2025.6.2/platform/service/power_manager/src/sleep_loop/sl_power_manager.o
                                0x1616 (size before relaxing)
- .debug_str     0x000203b2      0x224 ./simplicity_sdk_2025.6.2/platform/service/power_manager/src/sleep_loop/sl_power_manager_hal_s2.o
+ .debug_str     0x000203c3      0x224 ./simplicity_sdk_2025.6.2/platform/service/power_manager/src/sleep_loop/sl_power_manager_hal_s2.o
                                0x1680 (size before relaxing)
- .debug_str     0x000205d6       0xe2 ./simplicity_sdk_2025.6.2/platform/service/sl_main/src/sl_main_init.o
+ .debug_str     0x000205e7       0xe2 ./simplicity_sdk_2025.6.2/platform/service/sl_main/src/sl_main_init.o
                                0x1023 (size before relaxing)
- .debug_str     0x000206b8       0x88 ./simplicity_sdk_2025.6.2/platform/service/sl_main/src/sl_main_init_memory.o
+ .debug_str     0x000206c9       0x88 ./simplicity_sdk_2025.6.2/platform/service/sl_main/src/sl_main_init_memory.o
                                 0x301 (size before relaxing)
- .debug_str     0x00020740       0x70 ./simplicity_sdk_2025.6.2/platform/service/sl_main/src/sl_main_process_action.o
+ .debug_str     0x00020751       0x70 ./simplicity_sdk_2025.6.2/platform/service/sl_main/src/sl_main_process_action.o
                                 0x24c (size before relaxing)
- .debug_str     0x000207b0      0x642 ./simplicity_sdk_2025.6.2/platform/service/sleeptimer/src/sl_sleeptimer.o
+ .debug_str     0x000207c1      0x642 ./simplicity_sdk_2025.6.2/platform/service/sleeptimer/src/sl_sleeptimer.o
                                0x1084 (size before relaxing)
- .debug_str     0x00020df2      0x167 ./simplicity_sdk_2025.6.2/platform/service/sleeptimer/src/sl_sleeptimer_hal_sysrtc.o
+ .debug_str     0x00020e03      0x167 ./simplicity_sdk_2025.6.2/platform/service/sleeptimer/src/sl_sleeptimer_hal_sysrtc.o
                                0x2ca6 (size before relaxing)
- .debug_str     0x00020f59      0x2ff ./simplicity_sdk_2025.6.2/platform/service/token_manager/legacy/src/sl_token_def.o
+ .debug_str     0x00020f6a      0x2ff ./simplicity_sdk_2025.6.2/platform/service/token_manager/legacy/src/sl_token_def.o
                                 0x570 (size before relaxing)
- .debug_str     0x00021258      0x755 ./simplicity_sdk_2025.6.2/platform/service/token_manager/legacy/src/sl_token_manager.o
+ .debug_str     0x00021269      0x755 ./simplicity_sdk_2025.6.2/platform/service/token_manager/legacy/src/sl_token_manager.o
                                 0xe26 (size before relaxing)
- .debug_str     0x000219ad     0x15b0 ./simplicity_sdk_2025.6.2/platform/service/token_manager/legacy/src/sl_token_manufacturing.o
+ .debug_str     0x000219be     0x15b0 ./simplicity_sdk_2025.6.2/platform/service/token_manager/legacy/src/sl_token_manufacturing.o
                                0x2061 (size before relaxing)
- .debug_str     0x00022f5d       0x8a ./simplicity_sdk_2025.6.2/platform/service/udelay/src/sl_udelay.o
+ .debug_str     0x00022f6e       0x8a ./simplicity_sdk_2025.6.2/platform/service/udelay/src/sl_udelay.o
                                 0x2ae (size before relaxing)
- .debug_str     0x00022fe7       0x7b ./simplicity_sdk_2025.6.2/platform/service/udelay/src/sl_udelay_armv6m_gcc.o
+ .debug_str     0x00022ff8       0x7b ./simplicity_sdk_2025.6.2/platform/service/udelay/src/sl_udelay_armv6m_gcc.o
                                  0xd7 (size before relaxing)
- .debug_str     0x00023062      0x1b9 ./simplicity_sdk_2025.6.2/protocol/flex/app-framework-common/app_framework_common.o
+ .debug_str     0x00023073      0x1b9 ./simplicity_sdk_2025.6.2/protocol/flex/app-framework-common/app_framework_common.o
                                0x1381 (size before relaxing)
- .debug_str     0x0002321b      0x17e ./simplicity_sdk_2025.6.2/protocol/flex/app-framework-common/app_framework_sleep.o
+ .debug_str     0x0002322c      0x17e ./simplicity_sdk_2025.6.2/protocol/flex/app-framework-common/app_framework_sleep.o
                                 0x867 (size before relaxing)
- .debug_str     0x00023399      0x1f5 ./simplicity_sdk_2025.6.2/protocol/flex/app-framework-common/app_framework_stack_cb.o
+ .debug_str     0x000233aa      0x1f5 ./simplicity_sdk_2025.6.2/protocol/flex/app-framework-common/app_framework_stack_cb.o
                                 0x931 (size before relaxing)
- .debug_str     0x0002358e      0x156 ./simplicity_sdk_2025.6.2/protocol/flex/poll/poll.o
+ .debug_str     0x0002359f      0x156 ./simplicity_sdk_2025.6.2/protocol/flex/poll/poll.o
                                 0x5e3 (size before relaxing)
- .debug_str     0x000236e4      0x478 ./simplicity_sdk_2025.6.2/protocol/flex/stack/config/ember-configuration.o
+ .debug_str     0x000236f5      0x478 ./simplicity_sdk_2025.6.2/protocol/flex/stack/config/ember-configuration.o
                                 0x818 (size before relaxing)
- .debug_str     0x00023b5c      0x10f ./simplicity_sdk_2025.6.2/protocol/flex/stack/config/stack-stubs.o
+ .debug_str     0x00023b6d      0x10f ./simplicity_sdk_2025.6.2/protocol/flex/stack/config/stack-stubs.o
                                 0xb0a (size before relaxing)
- .debug_str     0x00023c6b       0xa1 ./simplicity_sdk_2025.6.2/protocol/flex/stack/core/sl-connect-rail-assert.o
+ .debug_str     0x00023c7c       0xa1 ./simplicity_sdk_2025.6.2/protocol/flex/stack/core/sl-connect-rail-assert.o
                                 0x366 (size before relaxing)
- .debug_str     0x00023d0c       0x9b ./simplicity_sdk_2025.6.2/protocol/flex/stack/core/sl-connect-watchdog.o
+ .debug_str     0x00023d1d       0x9b ./simplicity_sdk_2025.6.2/protocol/flex/stack/core/sl-connect-watchdog.o
                                 0x447 (size before relaxing)
- .debug_str     0x00023da7      0xe9a ./simplicity_sdk_2025.6.2/protocol/flex/stack/core/sli-connect-api.o
+ .debug_str     0x00023db8      0xe9a ./simplicity_sdk_2025.6.2/protocol/flex/stack/core/sli-connect-api.o
                                0x15b2 (size before relaxing)
- .debug_str     0x00024c41       0x7b ./simplicity_sdk_2025.6.2/protocol/flex/stack/core/sli-connect-token.o
+ .debug_str     0x00024c52       0x7b ./simplicity_sdk_2025.6.2/protocol/flex/stack/core/sli-connect-token.o
                                 0x3f3 (size before relaxing)
- .debug_str     0x00024cbc       0x73 ./simplicity_sdk_2025.6.2/protocol/flex/stack/framework/sl-connect-power-manager.o
+ .debug_str     0x00024ccd       0x73 ./simplicity_sdk_2025.6.2/protocol/flex/stack/framework/sl-connect-power-manager.o
                                 0x336 (size before relaxing)
- .debug_str     0x00024d2f       0xb4 ./simplicity_sdk_2025.6.2/protocol/flex/stack/framework/sli-connect-random.o
+ .debug_str     0x00024d40       0xb4 ./simplicity_sdk_2025.6.2/protocol/flex/stack/framework/sli-connect-random.o
                                 0x2c0 (size before relaxing)
- .debug_str     0x00024de3      0xb2d ./simplicity_sdk_2025.6.2/util/silicon_labs/silabs_core/buffer_manager/buffer-management.o
+ .debug_str     0x00024df4      0xb2d ./simplicity_sdk_2025.6.2/util/silicon_labs/silabs_core/buffer_manager/buffer-management.o
                                 0xee5 (size before relaxing)
- .debug_str     0x00025910      0x3dc ./simplicity_sdk_2025.6.2/util/silicon_labs/silabs_core/buffer_manager/buffer-queue.o
+ .debug_str     0x00025921      0x3dc ./simplicity_sdk_2025.6.2/util/silicon_labs/silabs_core/buffer_manager/buffer-queue.o
                                 0x80e (size before relaxing)
- .debug_str     0x00025cec      0x3da ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/block_cipher.o
+ .debug_str     0x00025cfd      0x3da ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/block_cipher.o
                                 0x85e (size before relaxing)
- .debug_str     0x000260c6      0x2bf ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/ccm.o
+ .debug_str     0x000260d7      0x2bf ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/ccm.o
                                 0x84e (size before relaxing)
- .debug_str     0x00026385      0x16c ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/constant_time.o
+ .debug_str     0x00026396      0x16c ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/constant_time.o
                                 0x3ea (size before relaxing)
- .debug_str     0x000264f1       0x90 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/platform_util.o
+ .debug_str     0x00026502       0x90 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/platform_util.o
                                 0x2a9 (size before relaxing)
- .debug_str     0x00026581     0x28c6 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto.o
+ .debug_str     0x00026592     0x28c6 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto.o
                                0x3af6 (size before relaxing)
- .debug_str     0x00028e47      0x200 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_aead.o
+ .debug_str     0x00028e58      0x200 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_aead.o
                                 0xb2e (size before relaxing)
- .debug_str     0x00029047       0xd9 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_cipher.o
+ .debug_str     0x00029058       0xd9 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_cipher.o
                                 0x5b6 (size before relaxing)
- .debug_str     0x00029120       0x6f ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_client.o
+ .debug_str     0x00029131       0x6f ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_client.o
                                 0x39d (size before relaxing)
- .debug_str     0x0002918f      0x335 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_slot_management.o
+ .debug_str     0x000291a0      0x335 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_slot_management.o
                                 0x9e0 (size before relaxing)
- .debug_str     0x000294c4      0x1ec ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_storage.o
+ .debug_str     0x000294d5      0x1ec ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_crypto_storage.o
                                 0x718 (size before relaxing)
- .debug_str     0x000296b0       0xb2 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_util.o
+ .debug_str     0x000296c1       0xb2 ./simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/psa_util.o
                                 0x391 (size before relaxing)
- .debug_str     0x00029762      0x22d ./simplicity_sdk_2025.6.2/util/third_party/printf/printf.o
+ .debug_str     0x00029773      0x22d ./simplicity_sdk_2025.6.2/util/third_party/printf/printf.o
                                 0x51b (size before relaxing)
- .debug_str     0x0002998f       0x85 ./simplicity_sdk_2025.6.2/util/third_party/printf/src/iostream_printf.o
+ .debug_str     0x000299a0       0x85 ./simplicity_sdk_2025.6.2/util/third_party/printf/src/iostream_printf.o
                                 0x371 (size before relaxing)
- .debug_str     0x00029a14      0x99a C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-frequency-hopping-library-efr32xg2x-gcc.a(frequency-hopping.o)
+ .debug_str     0x00029a25      0x99a C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-frequency-hopping-library-efr32xg2x-gcc.a(frequency-hopping.o)
                                0x1a40 (size before relaxing)
- .debug_str     0x0002a3ae      0x50b C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-parent-support-library-efr32xg2x-gcc.a(parent-support.o)
+ .debug_str     0x0002a3bf      0x50b C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-parent-support-library-efr32xg2x-gcc.a(parent-support.o)
                                0x1240 (size before relaxing)
- .debug_str     0x0002a8b9      0x580 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-parent-support-library-efr32xg2x-gcc.a(indirect-queue.o)
+ .debug_str     0x0002a8ca      0x580 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-parent-support-library-efr32xg2x-gcc.a(indirect-queue.o)
                                0x174d (size before relaxing)
- .debug_str     0x0002ae39      0x31e C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-parent-support-library-efr32xg2x-gcc.a(child-table.o)
+ .debug_str     0x0002ae4a      0x31e C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-parent-support-library-efr32xg2x-gcc.a(child-table.o)
                                0x15dd (size before relaxing)
- .debug_str     0x0002b157      0x1ce C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-parent-support-library-efr32xg2x-gcc.a(coordinator-support.o)
+ .debug_str     0x0002b168      0x1ce C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-parent-support-library-efr32xg2x-gcc.a(coordinator-support.o)
                                 0xec4 (size before relaxing)
- .debug_str     0x0002b325      0x836 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(security-common.o)
+ .debug_str     0x0002b336      0x836 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(security-common.o)
                                0x1e51 (size before relaxing)
- .debug_str     0x0002bb5b       0x4b C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(security-api-key.o)
+ .debug_str     0x0002bb6c       0x4b C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(security-api-key.o)
                                 0xc48 (size before relaxing)
- .debug_str     0x0002bba6      0x1cf C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(security-aes.o)
+ .debug_str     0x0002bbb7      0x1cf C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(security-aes.o)
                                0x1338 (size before relaxing)
- .debug_str     0x0002bd75       0x30 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(aes-psa-crypto-interface.o)
+ .debug_str     0x0002bd86       0x30 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(aes-psa-crypto-interface.o)
                                 0x2c6 (size before relaxing)
- .debug_str     0x0002bda5       0x4c C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(security-psa-ccm.o)
+ .debug_str     0x0002bdb6       0x4c C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-psa-security-library-efr32xg2x-gcc.a(security-psa-ccm.o)
                                 0xd97 (size before relaxing)
- .debug_str     0x0002bdf1      0x6c3 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(stack.o)
+ .debug_str     0x0002be02      0x6c3 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(stack.o)
                                0x232c (size before relaxing)
- .debug_str     0x0002c4b4       0x46 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(ember-library.o)
+ .debug_str     0x0002c4c5       0x46 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(ember-library.o)
                                 0x27d (size before relaxing)
- .debug_str     0x0002c4fa      0x12b C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(event-control.o)
+ .debug_str     0x0002c50b      0x12b C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(event-control.o)
                                 0x518 (size before relaxing)
- .debug_str     0x0002c625       0x2b C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(eui64.o)
+ .debug_str     0x0002c636       0x2b C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(eui64.o)
                                 0x823 (size before relaxing)
- .debug_str     0x0002c650      0x1cd C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(packet-header.o)
+ .debug_str     0x0002c661      0x1cd C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(packet-header.o)
                                 0xa16 (size before relaxing)
- .debug_str     0x0002c81d       0xc7 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(buffers-bookkeeping.o)
+ .debug_str     0x0002c82e       0xc7 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(buffers-bookkeeping.o)
                                 0x369 (size before relaxing)
- .debug_str     0x0002c8e4       0xd2 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(byte-utilities.o)
+ .debug_str     0x0002c8f5       0xd2 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(byte-utilities.o)
                                 0x348 (size before relaxing)
- .debug_str     0x0002c9b6      0x224 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(network.o)
+ .debug_str     0x0002c9c7      0x224 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(network.o)
                                0x2257 (size before relaxing)
- .debug_str     0x0002cbda      0x5eb C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(association.o)
+ .debug_str     0x0002cbeb      0x5eb C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(association.o)
                                0x1d58 (size before relaxing)
- .debug_str     0x0002d1c5      0x13d C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(network-command.o)
+ .debug_str     0x0002d1d6      0x13d C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(network-command.o)
                                0x1140 (size before relaxing)
- .debug_str     0x0002d302       0x61 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(multi-address-filtering.o)
+ .debug_str     0x0002d313       0x61 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(multi-address-filtering.o)
                                 0xac8 (size before relaxing)
- .debug_str     0x0002d363     0x3669 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(lower-mac-rail-802.15.4.o)
+ .debug_str     0x0002d374     0x3669 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(lower-mac-rail-802.15.4.o)
                                0x59ba (size before relaxing)
- .debug_str     0x000309cc      0x2ef C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(upper-mac.o)
+ .debug_str     0x000309dd      0x2ef C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(upper-mac.o)
                                0x2c76 (size before relaxing)
- .debug_str     0x00030cbb       0xa2 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(command.o)
+ .debug_str     0x00030ccc       0xa2 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(command.o)
                                 0xde8 (size before relaxing)
- .debug_str     0x00030d5d      0x129 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(scan.o)
+ .debug_str     0x00030d6e      0x129 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(scan.o)
                                0x1059 (size before relaxing)
- .debug_str     0x00030e86       0x27 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(packet-validate.o)
+ .debug_str     0x00030e97       0x27 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(packet-validate.o)
                                 0x778 (size before relaxing)
- .debug_str     0x00030ead       0x2f C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(security-api-legacy-key.o)
+ .debug_str     0x00030ebe       0x2f C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(security-api-legacy-key.o)
                                 0xc25 (size before relaxing)
- .debug_str     0x00030edc       0x6d C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(security-api-address-mapping.o)
+ .debug_str     0x00030eed       0x6d C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-common-library-efr32xg2x-gcc.a(security-api-address-mapping.o)
                                 0xcf1 (size before relaxing)
- .debug_str     0x00030f49       0x95 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-counters-library-efr32xg2x-gcc.a(counters.o)
+ .debug_str     0x00030f5a       0x95 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-stack-counters-library-efr32xg2x-gcc.a(counters.o)
                                 0xee6 (size before relaxing)
- .debug_str     0x00030fde      0x212 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//platform/radio/rail_lib/autogen/librail_release/librail_config_fgm230sa27hgn_gcc.a(rail_pa_curves.o)
+ .debug_str     0x00030fef      0x212 C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//platform/radio/rail_lib/autogen/librail_release/librail_config_fgm230sa27hgn_gcc.a(rail_pa_curves.o)
                                 0x4bb (size before relaxing)
- .debug_str     0x000311f0       0x9d C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-packet-queue-library-efr32xg2x-gcc.a(mac-queue.o)
+ .debug_str     0x00031201       0x9d C:/Users/joao.victor/SimplicityStudio/SDKs/simplicity_sdk//protocol/flex/libs/libconnect-packet-queue-library-efr32xg2x-gcc.a(mac-queue.o)
                                 0xd36 (size before relaxing)
 
 .debug_frame    0x00000000     0xfb94

@@ -71,8 +71,6 @@ EmberEventControl *motionDetected_control;
 EmberEventControl *timeout_control;
 EmberEventControl *TimeoutAck_control;
 
-extern tx_power;
-
 /// report timing period
 uint16_t sensor_report_period_ms =  (1 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
@@ -91,7 +89,7 @@ bool button_is_pressed = false;
 
 bool joined = false;
 
-extern tx_power;
+extern uint8_t tx_power;
 // -----------------------------------------------------------------------------
 //                                Static Variables
 // -----------------------------------------------------------------------------
@@ -159,7 +157,7 @@ void report_handler(void)
        Register_Sensor.Status.Type = MOTION_DETECT;
        Register_Sensor.Status.range = LONG_RANGE;
 
-       sendRadio.cmd = REGISTRATION;
+       sendRadio.cmd = IVP_REGISTRATION;
        sendRadio.len = 2;
        sendRadio.data[0] = Register_Sensor.Registerbyte;
 
@@ -245,7 +243,7 @@ void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
 void emberAfMessageSentCallback(EmberStatus status,
                                 EmberOutgoingMessage *message)
 {
-  if(message->payload[0] == REGISTRATION && application.Status_Operation == WAIT_REGISTRATION){
+  if(message->payload[0] == IVP_REGISTRATION && application.Status_Operation == WAIT_REGISTRATION){
         //Estado inicial do sensor apos cadastro
         TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
         application.Status_Operation = OPERATION_MODE;

@@ -80,20 +80,6 @@ typedef union
 }
 SensorStatus_t;
 
-typedef union
-{
-    uint8_t Registerbyte;
-
-    struct
-    {
-        uint8_t Type                  :5;
-        uint8_t range                 :2;
-        uint8_t reserved              :1;
-    } Status;
-
-}
-Register_Sensor_t;
-
 typedef struct{
   packet_void_t Packet;
   SensorCmd_e LastCMD;
