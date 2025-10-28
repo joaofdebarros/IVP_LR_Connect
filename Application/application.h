@@ -49,8 +49,8 @@ typedef enum{
 }Type;
 
 typedef enum{
-  ARMED = 0,
-  DISARMED
+  DISARMED = 0,
+  ARMED
 }Status_Central_t;
 
 typedef enum{
@@ -63,6 +63,11 @@ typedef enum{
   VERDE,
   AZUL
 }LED_t;
+
+typedef enum{
+  SUCCESS,
+  FAIL
+}IVP_config_error_e;
 
 typedef union
 {
@@ -83,11 +88,13 @@ SensorStatus_t;
 typedef struct{
   packet_void_t Packet;
   SensorCmd_e LastCMD;
+  IVP_config_error_e error;
 }application_radio_t;
 
 typedef struct{
   uPYDType pydConf;
   SensorStatus_t SensorStatus;
+  uint32_t ID_partition;
 }application_IVP_t;
 
 typedef struct{

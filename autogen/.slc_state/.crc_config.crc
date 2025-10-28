@@ -1,5 +1,6 @@
 #CRC Codes for initially generated config files -- do not modify!
 app_assert_config.h=1479688922
+app_button_press_config.h=-623290782
 app_log_config.h=28794088
 debug_print_config.h=-1825782702
 dmadrv_config.h=1207334949

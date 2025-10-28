@@ -27,7 +27,10 @@ autogen \
 boards/chipset \
 hplatform/hDriver/source \
 privAPI \
+simplicity_sdk_2025.6.2/app/common/util/app_button_press \
 simplicity_sdk_2025.6.2/app/common/util/app_log \
+simplicity_sdk_2025.6.2/app/common/util/app_queue \
+simplicity_sdk_2025.6.2/app/common/util/app_rta/src/bm \
 simplicity_sdk_2025.6.2/hardware/board/src \
 simplicity_sdk_2025.6.2/hardware/driver/configuration_over_swo/src \
 simplicity_sdk_2025.6.2/hardware/driver/mx25_flash_shutdown/src/sl_mx25_flash_shutdown_eusart \

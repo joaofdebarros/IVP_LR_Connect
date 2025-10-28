@@ -58,7 +58,7 @@
 // <i> 0  Active Low
 // <i> 1  Active High
 // <i> Default: 0
-#define SL_SIMPLE_BUTTON_POLARITY         0U
+#define SL_SIMPLE_BUTTON_POLARITY         1U
 
 // <q SL_SIMPLE_BUTTON_ALLOW_LED_CONFLICT> Allow the app to manage Buttons and LEDs on the same pin
 // <i> 0  Error if Buttons and LEDs are on the same pin

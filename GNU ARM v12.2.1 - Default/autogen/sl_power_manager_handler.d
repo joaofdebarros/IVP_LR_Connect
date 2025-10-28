@@ -13,6 +13,7 @@ autogen/sl_power_manager_handler.o: ../autogen/sl_power_manager_handler.c \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\cmsis\core\include\cmsis_gcc.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_code_classification.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_enum.h \
+ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\app\common\util\app_rta\inc\bm\app_rta_internal_bm.h \
  ../autogen/sl_cli_instances.h ../autogen/sl_component_catalog.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\cli\inc\sl_cli.h \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\autogen/sl_component_catalog.h \
@@ -202,6 +203,7 @@ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\cmsis\core\in
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\cmsis\core\include\cmsis_gcc.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_code_classification.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_enum.h:
+c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\app\common\util\app_rta\inc\bm\app_rta_internal_bm.h:
 ../autogen/sl_cli_instances.h:
 ../autogen/sl_component_catalog.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\cli\inc\sl_cli.h:

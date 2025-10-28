@@ -207,6 +207,7 @@ autogen/sl_event_handler.o: ../autogen/sl_event_handler.c \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/sl_power_manager_config.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\sleeptimer\inc\sl_sleeptimer.h \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/app_log_config.h \
+ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\app\common\util\app_rta\inc\bm\app_rta_internal_bm.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\protocol\flex\stack\core\sl-connect-watchdog.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\driver\debug\inc\sl_debug_swo.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\driver\gpio\inc\sl_gpio.h \
@@ -445,6 +446,7 @@ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\power
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/sl_power_manager_config.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\sleeptimer\inc\sl_sleeptimer.h:
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/app_log_config.h:
+c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\app\common\util\app_rta\inc\bm\app_rta_internal_bm.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\protocol\flex\stack\core\sl-connect-watchdog.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\driver\debug\inc\sl_debug_swo.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\driver\gpio\inc\sl_gpio.h:

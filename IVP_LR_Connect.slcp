@@ -31,6 +31,7 @@ toolchain_settings:
 component:
 - {id: FGM230SA27HGN}
 - {id: app_assert}
+- {id: app_button_press}
 - {id: app_log}
 - {id: board_control}
 - {id: brd4002a}

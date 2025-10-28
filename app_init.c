@@ -102,6 +102,7 @@ void emberAfInitCallback(void)
   memory_read(TXPOWER_MEMORY_KEY, &tx_power);
   memory_read(STATUSOP_MEMORY_KEY, &application.Status_Operation);
   memory_read(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central);
+  memory_read(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition);
 
   // Ensure that psa is initialized correctly
   psa_crypto_init();

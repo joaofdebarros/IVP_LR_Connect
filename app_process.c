@@ -99,35 +99,54 @@ static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
 // -----------------------------------------------------------------------------
 //                          Public Function Definitions
 // -----------------------------------------------------------------------------
-void sl_button_on_change(const sl_button_t *handle){
+//void sl_button_on_change(const sl_button_t *handle){
+//
+//  if (sl_button_get_state(handle) == SL_SIMPLE_BUTTON_RELEASED) {
+//     if(&sl_button_btn0 == handle){
+//         press_start_time = sl_sleeptimer_get_tick_count();
+//         button_is_pressed = true;
+//     }
+//  }
+//
+//  if(sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED){
+//      uint32_t current_time = sl_sleeptimer_get_tick_count();
+//      button_is_pressed = false;
+//      if((current_time - press_start_time) > 100000){
+//          hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
+//          emberEventControlSetInactive(*timeout_control);
+//
+//          reset_parameters();
+//          leave();
+//          emberResetNetworkState();
+//      }else if((current_time - press_start_time) < 50000){
+//          if(application.Status_Operation == WAIT_REGISTRATION){
+//              join_sleepy(0);
+//              sl_led_turn_on(&sl_led_led_vermelho);
+//          }else if(application.Status_Operation == OPERATION_MODE){
+//              led_blink(VERMELHO, 2, MED_SPEED_BLINK);
+//          }
+//      }
+//  }
+//}
 
-  if (sl_button_get_state(handle) == SL_SIMPLE_BUTTON_RELEASED) {
-     if(&sl_button_btn0 == handle){
-         press_start_time = sl_sleeptimer_get_tick_count();
-         button_is_pressed = true;
-     }
-  }
-
-  if(sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED){
-      uint32_t current_time = sl_sleeptimer_get_tick_count();
-      button_is_pressed = false;
-      if((current_time - press_start_time) > 100000){
-          hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
-          emberEventControlSetInactive(*timeout_control);
-
-          reset_parameters();
-          leave();
-          emberResetNetworkState();
-      }else if((current_time - press_start_time) < 50000){
-          if(application.Status_Operation == WAIT_REGISTRATION){
-              join_sleepy(0);
-              sl_led_turn_on(&sl_led_led_vermelho);
-          }else if(application.Status_Operation == OPERATION_MODE){
-              led_blink(VERMELHO, 2, MED_SPEED_BLINK);
-          }
+void app_button_press_cb(uint8_t button, uint8_t duration)
+{
+  if(duration < 3){
+      if(application.Status_Operation == WAIT_REGISTRATION){
+          join_sleepy(0);
+          sl_led_turn_on(&sl_led_led_vermelho);
+      }else if(application.Status_Operation == OPERATION_MODE){
+          led_blink(VERMELHO, 2, MED_SPEED_BLINK);
       }
+  }else{
+      hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
+      emberEventControlSetInactive(*timeout_control);
+
+      reset_parameters();
+      leave();
   }
 }
+
 
 void reset_parameters(){
   memory_erase(STATUSBYTE_MEMORY_KEY);
@@ -150,7 +169,7 @@ void reset_parameters(){
 void report_handler(void)
 {
   volatile Register_Sensor_t Register_Sensor;
-   uint16_t Vbat = calculateVdd();
+  battery.VBAT = calculateVdd();
 
    switch (application.Status_Operation) {
      case WAIT_REGISTRATION:
@@ -165,15 +184,6 @@ void report_handler(void)
        break;
 
      case OPERATION_MODE:
-
-       if(application.radio.LastCMD == STATUS_CENTRAL){
-           sendRadio.cmd = STATUS_CENTRAL;
-       }
-
-       if(application.radio.LastCMD == SETUP_IVP){
-           sendRadio.cmd = SETUP_IVP;
-       }
-
        volatile SensorStatus_t SensorStatus;
 
        SensorStatus.Status.operation = application.Status_Operation;
@@ -181,12 +191,31 @@ void report_handler(void)
        SensorStatus.Status.energy_mode = application.IVP.SensorStatus.Status.energy_mode;
        SensorStatus.Status.led_enabled = application.IVP.SensorStatus.Status.led_enabled;
 
-       sendRadio.len = 6;
-       sendRadio.data[0] = SensorStatus.Statusbyte;                          //Estado de Operação
-       sendRadio.data[1] = battery.VBAT >> 8;                                //
-       sendRadio.data[2] = battery.VBAT;                                     //
-       sendRadio.data[3] = application.IVP.pydConf.sPYDType.thresholdVal;    //
-       sendRadio.data[4] = tx_power;
+       if(application.radio.LastCMD == SENSOR_PARTITION){
+           sendRadio.cmd = SENSOR_PARTITION;
+           sendRadio.len = 4;
+           sendRadio.data[0] = application.radio.error;
+           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
+           sendRadio.data[2] = battery.VBAT;                                     //
+       }
+
+       if(application.radio.LastCMD == STATUS_CENTRAL){
+           sendRadio.cmd = STATUS_CENTRAL;
+           sendRadio.len = 6;
+           sendRadio.data[0] = SensorStatus.Statusbyte;                          // Estado de Operação
+           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
+           sendRadio.data[2] = battery.VBAT;                                     //
+       }
+
+       if(application.radio.LastCMD == SETUP_IVP){
+           sendRadio.cmd = SETUP_IVP;
+           sendRadio.len = 6;
+           sendRadio.data[0] = SensorStatus.Statusbyte;                          // Estado de Operação
+           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
+           sendRadio.data[2] = battery.VBAT;                                     //
+           sendRadio.data[3] = application.IVP.pydConf.sPYDType.thresholdVal;    // Sensibilidade sensor
+           sendRadio.data[4] = tx_power;                                         // Potencia de transmissao
+       }
 
        break;
      case BOOT:

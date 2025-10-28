@@ -542,7 +542,112 @@ Example syntax (.slcc or .slcp) for populating this file:
       </div>
       
     </div>
-  </div></div>
+  </div>
+<div class="group">
+  <div class="group-header">
+    <h2 class="group-name"> button</h2>
+  </div>
+  <div class="group-info">
+    <span class="help">Emulating button events (various type of button presses).</span>
+    
+    <div class="command-list">
+    
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name"> button press</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">button_press_from_cli</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Emulating a button press</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias"> btn p</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Button: 0: BTN0, 1+: BTN1
+        </li>
+        <li>
+        <span class="argument-name">u8</span>Press and hold duration: 0 - short, 1- medium, 2 - long, 3+ - verylong
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+    
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name"> button hold</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">button_hold_from_cli</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Emulates pressing and holding a button.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias"> btn h</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Button: 0: BTN0, 1+: BTN1
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+    
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name"> button release</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">button_release_from_cli</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Emulates releasing a button.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias"> btn r</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Button: 0: BTN0, 1+: BTN1
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+    </div>
+  </div>
+</div></div>
 
 <script>
 searchbar = document.getElementById('search');

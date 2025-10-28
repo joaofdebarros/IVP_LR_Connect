@@ -2,6 +2,7 @@
 #include "sl_core.h"
 #include "sl_power_manager.h"
 #include "sl_sleeptimer.h"
+#include "app_rta_internal_bm.h"
 #include "sl_cli_instances.h"
 #include "app_framework_common.h"
 #include "sl-connect-power-manager.h"
@@ -59,6 +60,9 @@ __WEAK sl_power_manager_on_isr_exit_t app_sleep_on_isr_exit(void)
 bool sl_power_manager_is_ok_to_sleep(void)
 {
   bool ok_to_sleep = true;
+  if (app_rta_is_ok_to_sleep() == false) {
+    ok_to_sleep = false;
+  }
   if (sl_cli_instances_is_ok_to_sleep() == false) {
     ok_to_sleep = false;
   }
@@ -92,6 +96,13 @@ bool sl_power_manager_sleep_on_isr_exit(void)
   // the HFXO interrupt. 
   // Most of the time we want to get back to sleep until the next event occurs.
   sleep = sl_power_manager_is_latest_wakeup_internal();
+
+  answer = app_rta_on_isr_exit();
+  if (answer == SL_POWER_MANAGER_WAKEUP) {
+    force_wakeup = true;
+  } else if (answer == SL_POWER_MANAGER_SLEEP) {
+    sleep = true;
+  }
 
   answer = sl_connect_sleep_on_isr_exit();
   if (answer == SL_POWER_MANAGER_WAKEUP) {

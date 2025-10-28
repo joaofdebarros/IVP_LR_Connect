@@ -60,6 +60,8 @@ int main(void)
 
   sl_main_init();
 
+  app_button_press_enable();
+
   sl_mx25_flash_shutdown();
 
   gpioSetup();

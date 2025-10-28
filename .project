@@ -501,6 +501,21 @@
 			<locationURI>STUDIO_SDK_LOC/app/common/util/app_assert/sl_app_assert.h</locationURI>
 		</link>
 		<link>
+			<name>simplicity_sdk_2025.6.2/app/common/util/app_button_press/app_button_press.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/app/common/util/app_button_press/app_button_press.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/app/common/util/app_button_press/app_button_press.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/app/common/util/app_button_press/app_button_press.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/app/common/util/app_button_press/app_button_press_internal.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/app/common/util/app_button_press/app_button_press_internal.h</locationURI>
+		</link>
+		<link>
 			<name>simplicity_sdk_2025.6.2/app/common/util/app_log/app_log.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/app/common/util/app_log/app_log.c</locationURI>
@@ -514,6 +529,16 @@
 			<name>simplicity_sdk_2025.6.2/app/common/util/app_log/sl_app_log.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/app/common/util/app_log/sl_app_log.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/app/common/util/app_queue/app_queue.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/app/common/util/app_queue/app_queue.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/app/common/util/app_queue/app_queue.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/app/common/util/app_queue/app_queue.h</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/app/connect/component/sl_sensor_sink/sl_app_common.h</name>
@@ -1859,6 +1884,11 @@
 			<name>simplicity_sdk_2025.6.2/util/third_party/printf/src/iostream_printf.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/util/third_party/printf/src/iostream_printf.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/app/common/util/app_rta/inc/app_rta.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/app/common/util/app_rta/inc/app_rta.h</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/hardware/driver/mx25_flash_shutdown/inc/sl_mx25_flash_shutdown_eusart/sl_mx25_flash_shutdown.h</name>
@@ -3244,6 +3274,16 @@
 			<name>simplicity_sdk_2025.6.2/util/third_party/mbedtls/include/psa/crypto_values.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/util/third_party/mbedtls/include/psa/crypto_values.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/app/common/util/app_rta/inc/bm/app_rta_internal_bm.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/app/common/util/app_rta/inc/bm/app_rta_internal_bm.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/app/common/util/app_rta/src/bm/app_rta_bm.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/app/common/util/app_rta/src/bm/app_rta_bm.c</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/platform/radio/rail_lib/chip/efr32/efr32xg2x/rail_chip_specific.h</name>

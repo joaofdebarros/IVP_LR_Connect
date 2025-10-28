@@ -92,23 +92,43 @@ void radio_handler(void){
   receive = &application.radio.Packet;
 
   switch(receive->cmd){
-    case STATUS_CENTRAL:
-      application.Status_Central = receive->data[0];
+    case SENSOR_PARTITION:
       application.radio.LastCMD = receive->cmd;
-      if(application.Status_Central == ARMED){
-          pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
+      application.IVP.ID_partition = ((uint32_t)receive->data[0]) |
+                                     ((uint32_t)receive->data[1] << 8) |
+                                     ((uint32_t)receive->data[2] << 16) |
+                                     ((uint32_t)receive->data[3] << 24);
 
-          led_blink(VERMELHO, 1, MED_SPEED_BLINK);
+      memory_write(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition, sizeof(application.IVP.ID_partition));
 
-          emberEventControlSetActive(*report_control);
-      }
-      else if(application.Status_Central == DISARMED){
-          TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
-          emberEventControlSetInactive(*timeout_control);
+      application.radio.error = SUCCESS;
 
-          led_blink(VERMELHO, 2, MED_SPEED_BLINK);
+      emberEventControlSetActive(*report_control);
+      break;
+    case STATUS_CENTRAL:
+      application.radio.LastCMD = receive->cmd;
+      application.Status_Central = receive->data[0];
+      uint32_t ID_partition_received = ((uint32_t)receive->data[1]) |
+                                       ((uint32_t)receive->data[2] << 8) |
+                                       ((uint32_t)receive->data[3] << 16) |
+                                       ((uint32_t)receive->data[4] << 24);
 
-          emberEventControlSetActive(*report_control);
+      if(ID_partition_received == application.IVP.ID_partition){
+
+          if(application.Status_Central == ARMED){
+              pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
+
+              led_blink(VERMELHO, 1, MED_SPEED_BLINK);
+
+              emberEventControlSetActive(*report_control);
+          } else if(application.Status_Central == DISARMED){
+              TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+              emberEventControlSetInactive(*timeout_control);
+
+              led_blink(VERMELHO, 2, MED_SPEED_BLINK);
+
+              emberEventControlSetActive(*report_control);
+          }
       }
 
       memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
@@ -123,35 +143,35 @@ void radio_handler(void){
       application.IVP.pydConf.sPYDType.alarm.sAlarmConf.blindTime = 0;                     // 0.5seg + val*0.5s
       application.IVP.pydConf.sPYDType.alarm.sAlarmConf.pulseCtr = 1;                      // 1 + val
       application.IVP.pydConf.sPYDType.alarm.sAlarmConf.wdwTime = 3;                       // 2s + val*2s
-      application.IVP.pydConf.sPYDType.thresholdVal = receive->data[0];                         // will be configured later
+      application.IVP.pydConf.sPYDType.thresholdVal = receive->data[0];                    // Sensibilidade do sensor IVP (Configurável)
 
-      application.IVP.SensorStatus.Status.energy_mode = receive->data[1];
+      application.IVP.SensorStatus.Status.energy_mode = receive->data[1];     //
 
       if(application.IVP.SensorStatus.Status.energy_mode == UECONOMIC){
           application.IVP.SensorStatus.Status.led_enabled = false;
       }else{
-          application.IVP.SensorStatus.Status.led_enabled = receive->data[2];
+          application.IVP.SensorStatus.Status.led_enabled = receive->data[2];     // Estado de funcionamento do LED
       }
 
       if(application.IVP.SensorStatus.Status.energy_mode == CONTINUOUS){
-          pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
+          pydInit(application.IVP.pydConf.sPYDType.thresholdVal);                 // Inicializacao do PIR para modo continuo
       }
 
-      tx_power = receive->data[3];
+      tx_power = receive->data[3];      // Potencia de transmissao
       set_tx(tx_power);
 
-      led_blink(VERMELHO, 2, FAST_SPEED_BLINK);
-
-      motionCounterTimer = MOTION_COUNTER_5S;
+      motionCounterTimer = MOTION_COUNTER_5S;       //Timeout sem deteccao
 
       hGpio_changeToOutput(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
       hGpio_write(DIRECT_LINK_PORT,DIRECT_LINK_PIN,hGPIO_PIN_HIGH);
 
-      pydConfig(application.IVP.pydConf.pydRegisters);
+      pydConfig(application.IVP.pydConf.pydRegisters);        // Aplica a configuracao que foi recebida
 
       memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
       memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
       memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
+
+      led_blink(VERMELHO, 2, FAST_SPEED_BLINK);       // Piscada para confirmar a operacao
 
       emberEventControlSetActive(*report_control);
       break;

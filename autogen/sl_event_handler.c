@@ -10,6 +10,7 @@
 #include "sl_fem_util.h"
 #include "sl_board_control.h"
 #include "app_log.h"
+#include "app_rta_internal_bm.h"
 #include "sl-connect-watchdog.h"
 #include "sl_debug_swo.h"
 #include "sl_gpio.h"
@@ -54,6 +55,7 @@ void sl_platform_init(void)
 
 void sli_internal_init_early(void)
 {
+  app_rta_internal_init();
 }
 
 void sl_driver_init(void)
@@ -94,6 +96,7 @@ void sl_stack_init(void)
 void sl_internal_app_init(void)
 {
   app_log_init();
+  app_rta_ready();
 }
 
 void sli_platform_process_action(void)
@@ -113,6 +116,7 @@ void sli_stack_process_action(void)
 
 void sli_internal_app_process_action(void)
 {
+  app_rta_step();
 }
 
 void sl_iostream_init_instances_stage_1(void)

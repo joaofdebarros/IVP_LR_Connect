@@ -677,10 +677,32 @@
             <file name="app_assert.h" uri="studio:/sdk/app/common/util/app_assert/app_assert.h"/>
             <file name="sl_app_assert.h" uri="studio:/sdk/app/common/util/app_assert/sl_app_assert.h"/>
           </folder>
+          <folder name="app_button_press">
+            <file name="app_button_press.c" uri="studio:/sdk/app/common/util/app_button_press/app_button_press.c"/>
+            <file name="app_button_press.h" uri="studio:/sdk/app/common/util/app_button_press/app_button_press.h"/>
+            <file name="app_button_press_internal.h" uri="studio:/sdk/app/common/util/app_button_press/app_button_press_internal.h"/>
+          </folder>
           <folder name="app_log">
             <file name="app_log.c" uri="studio:/sdk/app/common/util/app_log/app_log.c"/>
             <file name="app_log.h" uri="studio:/sdk/app/common/util/app_log/app_log.h"/>
             <file name="sl_app_log.h" uri="studio:/sdk/app/common/util/app_log/sl_app_log.h"/>
+          </folder>
+          <folder name="app_queue">
+            <file name="app_queue.c" uri="studio:/sdk/app/common/util/app_queue/app_queue.c"/>
+            <file name="app_queue.h" uri="studio:/sdk/app/common/util/app_queue/app_queue.h"/>
+          </folder>
+          <folder name="app_rta">
+            <folder name="src">
+              <folder name="bm">
+                <file name="app_rta_bm.c" uri="studio:/sdk/app/common/util/app_rta/src/bm/app_rta_bm.c"/>
+              </folder>
+            </folder>
+            <folder name="inc">
+              <folder name="bm">
+                <file name="app_rta_internal_bm.h" uri="studio:/sdk/app/common/util/app_rta/inc/bm/app_rta_internal_bm.h"/>
+              </folder>
+              <file name="app_rta.h" uri="studio:/sdk/app/common/util/app_rta/inc/app_rta.h"/>
+            </folder>
           </folder>
         </folder>
       </folder>
@@ -1025,7 +1047,11 @@
   <includePath uri="studio:/project/"/>
   <includePath uri="studio:/sdk/platform/Device/SiliconLabs/FGM23/Include"/>
   <includePath uri="studio:/sdk/app/common/util/app_assert"/>
+  <includePath uri="studio:/sdk/app/common/util/app_button_press"/>
   <includePath uri="studio:/sdk/app/common/util/app_log"/>
+  <includePath uri="studio:/sdk/app/common/util/app_queue"/>
+  <includePath uri="studio:/sdk/app/common/util/app_rta/inc"/>
+  <includePath uri="studio:/sdk/app/common/util/app_rta/inc/bm"/>
   <includePath uri="studio:/sdk/platform/common/inc"/>
   <includePath uri="studio:/sdk/hardware/board/inc"/>
   <includePath uri="studio:/sdk/platform/driver/button/inc"/>

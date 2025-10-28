@@ -13,6 +13,7 @@
 #define TXPOWER_MEMORY_KEY        2
 #define STATUSOP_MEMORY_KEY       3
 #define STATUSCENTRAL_MEMORY_KEY  4
+#define ID_PARTITION_MEMORY_KEY   5
 
 void memory_write(uint32_t key, uint8_t *value, uint8_t len);
 void memory_read(uint32_t key, void *buffer);
