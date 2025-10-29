@@ -120,6 +120,8 @@ void radio_handler(void){
 
               led_blink(VERMELHO, 1, MED_SPEED_BLINK);
 
+              memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
+
               emberEventControlSetActive(*report_control);
           } else if(application.Status_Central == DISARMED){
               TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
@@ -127,11 +129,11 @@ void radio_handler(void){
 
               led_blink(VERMELHO, 2, MED_SPEED_BLINK);
 
+              memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
+
               emberEventControlSetActive(*report_control);
           }
       }
-
-      memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
 
       break;
     case SETUP_IVP:

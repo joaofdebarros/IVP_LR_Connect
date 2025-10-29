@@ -6,7 +6,7 @@
     "generatorIds" : [ "com.silabs.ss.framework.ide.project.core.cdtMbsProjectType" ],
     "fileStates" : {
       "config\\rail\\radio_settings.radioconf" : {
-        "hash" : 1476652998,
+        "hash" : -2018332333,
         "exists" : true
       }
     },

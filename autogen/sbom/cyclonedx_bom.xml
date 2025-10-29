@@ -10,7 +10,7 @@ referenced in this SBOM.)
 -->
 <bom xmlns="http://cyclonedx.org/schema/bom/1.6" version="1">
   <metadata>
-    <timestamp>2025-10-27T16:56:06Z</timestamp>
+    <timestamp>2025-10-29T11:17:49Z</timestamp>
     <authors>
       <author>
         <name>Silicon Laboratories, Inc.</name>
@@ -394,8 +394,8 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:device_manager" type="library">
-          <name>Device Manager</name>
+        <component bom-ref="simplicity_sdk:2025.6.2:power_manager" type="library">
+          <name>Power Manager</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>
@@ -404,8 +404,8 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:power_manager" type="library">
-          <name>Power Manager</name>
+        <component bom-ref="simplicity_sdk:2025.6.2:device_manager" type="library">
+          <name>Device Manager</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>
@@ -662,6 +662,16 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:power_manager_core_impl_sleep_loop" type="library">
+          <name>Power Manager: Core implementation</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
         <component bom-ref="simplicity_sdk:2025.6.2:enum" type="library">
           <name>Enumerations</name>
           <version>2025.6.2</version>
@@ -672,8 +682,8 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:power_manager_core_impl_sleep_loop" type="library">
-          <name>Power Manager: Core implementation</name>
+        <component bom-ref="simplicity_sdk:2025.6.2:memory_manager_retention_control" type="library">
+          <name>Memory Manager Retention Control</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>
@@ -690,16 +700,6 @@ referenced in this SBOM.)
 	      </supplier>
           <licenses>
             <expression>MSLA</expression>
-          </licenses>
-        </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:memory_manager_retention_control" type="library">
-          <name>Memory Manager Retention Control</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
           </licenses>
         </component>
         <component bom-ref="simplicity_sdk:2025.6.2:nvm3_optimization_disable" type="library">
@@ -1188,16 +1188,6 @@ referenced in this SBOM.)
             </ancestors>
           </pedigree>
         </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:emlib_gpio" type="library">
-          <name>GPIO</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
         <component bom-ref="simplicity_sdk:2025.6.2:token_manager_nvm3" type="library">
           <name>Legacy Token Manager - NVM3 Extension</name>
           <version>2025.6.2</version>
@@ -1238,6 +1228,16 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:power_manager_core" type="library">
+          <name>Power Manager: Core</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
         <component bom-ref="simplicity_sdk:2025.6.2:mbedtls_aes" type="library">
           <name>AES Block Cipher</name>
           <version>2025.6.2</version>
@@ -1266,16 +1266,6 @@ referenced in this SBOM.)
               </component>
             </ancestors>
           </pedigree>
-        </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:power_manager_core" type="library">
-          <name>Power Manager: Core</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
         </component>
         <component bom-ref="simplicity_sdk:2025.6.2:mbedtls_slcrypto_driver" type="library">
           <name>Drivers for Silicon Labs Crypto Acceleration</name>
@@ -1477,6 +1467,16 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:emlib_gpio" type="library">
+          <name>GPIO</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
         <component bom-ref="simplicity_sdk:2025.6.2:nvm3_default_flash_backend" type="library">
           <name>NVM3 back-end for default instance in flash</name>
           <version>2025.6.2</version>
@@ -1656,16 +1656,6 @@ referenced in this SBOM.)
             <expression>Zlib</expression>
           </licenses>
         </component>
-        <component bom-ref="simplicity_sdk:2025.6.2:emlib_common" type="library">
-          <name>Common Headers</name>
-          <version>2025.6.2</version>
-	      <supplier>
-	        <name>Silicon Laboratories, Inc.</name>
-	      </supplier>
-          <licenses>
-            <expression>Zlib</expression>
-          </licenses>
-        </component>
         <component bom-ref="simplicity_sdk:2025.6.2:mbedtls_core" type="library">
           <name>Mbed TLS</name>
           <version>2025.6.2</version>
@@ -1736,6 +1726,16 @@ referenced in this SBOM.)
         </component>
         <component bom-ref="simplicity_sdk:2025.6.2:rail_util_built_in_phys" type="library">
           <name>RAIL Utility, Built-in PHYs Across HFXO Frequencies</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:emlib_common" type="library">
+          <name>Common Headers</name>
           <version>2025.6.2</version>
 	      <supplier>
 	        <name>Silicon Laboratories, Inc.</name>

@@ -81,11 +81,8 @@ extern packet_void_t sendRadio;
 
 Status_Operation_t last_status = WAIT_REGISTRATION;
 
-extern sl_sleeptimer_timer_handle_t periodic_timer;
-extern uint8_t blink_target;
-extern uint8_t led_target;
 uint32_t press_start_time = 0;
-bool button_is_pressed = false;
+extern bool button_is_pressed = false;
 
 bool joined = false;
 
@@ -93,8 +90,6 @@ extern uint8_t tx_power;
 // -----------------------------------------------------------------------------
 //                                Static Variables
 // -----------------------------------------------------------------------------
-/// Destination of the currently processed sink node
-static EmberNodeId sink_node_id = EMBER_COORDINATOR_ADDRESS;
 
 // -----------------------------------------------------------------------------
 //                          Public Function Definitions
@@ -139,7 +134,7 @@ void app_button_press_cb(uint8_t button, uint8_t duration)
           led_blink(VERMELHO, 2, MED_SPEED_BLINK);
       }
   }else{
-      hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
+//      hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
       emberEventControlSetInactive(*timeout_control);
 
       reset_parameters();
@@ -160,6 +155,12 @@ void reset_parameters(){
   tx_power = 0;
   application.Status_Operation = WAIT_REGISTRATION;
   application.Status_Central = DISARMED;
+
+  memory_write(STATUSOP_MEMORY_KEY, &application.Status_Operation, sizeof(application.Status_Operation));
+  memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
+  memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
+  memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
+  memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
 }
 
 /**************************************************************************//**
@@ -276,8 +277,8 @@ void emberAfMessageSentCallback(EmberStatus status,
         //Estado inicial do sensor apos cadastro
         TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
         application.Status_Operation = OPERATION_MODE;
-        application.Status_Central = DISARMED;
-        application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
+        application.Status_Central = ARMED;
+        application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
 
         memory_write(STATUSOP_MEMORY_KEY, &application.Status_Operation, sizeof(application.Status_Operation));
         memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
@@ -368,14 +369,14 @@ void emberAfFrequencyHoppingStartClientCompleteCallback(EmberStatus status)
 /**************************************************************************//**
  * This function is called when a requested energy scan is complete.
  *****************************************************************************/
-void emberAfEnergyScanCompleteCallback(int8_t mean,
-                                       int8_t min,
-                                       int8_t max,
-                                       uint16_t variance)
-{
+//void emberAfEnergyScanCompleteCallback(int8_t mean,
+//                                       int8_t min,
+//                                       int8_t max,
+//                                       uint16_t variance)
+//{
 //  app_log_info("Energy scan complete, mean=%d min=%d max=%d var=%d\n",
 //               mean, min, max, variance);
-}
+//}
 
 #if defined(EMBER_AF_PLUGIN_MICRIUM_RTOS) && defined(EMBER_AF_PLUGIN_MICRIUM_RTOS_APP_TASK1)
 
