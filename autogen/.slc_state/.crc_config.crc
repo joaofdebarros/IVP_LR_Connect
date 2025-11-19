@@ -17,6 +17,7 @@ sl_cli_config.h=485671265
 sl_cli_config_example.h=2080657667
 sl_clock_manager_oscillator_config.h=1060840432
 sl_clock_manager_tree_config.h=1129965631
+sl_connect_config.h=1944227366
 sl_core_config.h=-119586893
 sl_custom_manufacturing_token_header.h=-1005115534
 sl_custom_token_header.h=-314003711

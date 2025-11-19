@@ -32,7 +32,8 @@ typedef enum{
   WAIT_REGISTRATION = 0,
   PERIOD_INSTALATION,
   OPERATION_MODE,
-  BOOT
+  BOOT,
+  RESETTING
 }Status_Operation_t;
 
 typedef enum{
@@ -69,15 +70,21 @@ typedef enum{
   FAIL
 }IVP_config_error_e;
 
+typedef enum{
+  HARDWARE_FULL_RESET,
+  LR_FULL_RESET,
+  LR_DISCONNECT
+}leaving_method_t;
+
 typedef union
 {
     uint8_t Statusbyte;
 
     struct
     {
-        uint8_t operation             :2;
-        uint8_t statusCentral         :1;
-        uint8_t energy_mode           :2;
+        Status_Operation_t operation             :2;
+        Status_Central_t statusCentral         :1;
+        Energy_Mode_t energy_mode           :2;
         uint8_t led_enabled           :1;
         uint8_t reserved              :2;
     } Status;
@@ -95,6 +102,7 @@ typedef struct{
   uPYDType pydConf;
   SensorStatus_t SensorStatus;
   uint32_t ID_partition;
+  leaving_method_t leaving_method;
 }application_IVP_t;
 
 typedef struct{
