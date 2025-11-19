@@ -152,7 +152,10 @@ void reset_parameters(){
 
   application.IVP.pydConf.sPYDType.thresholdVal = 120;
   application.IVP.SensorStatus.Status.led_enabled = 1;
-  tx_power = 0;
+  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
+  pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
+  tx_power = 150;
+  set_tx(tx_power);
   application.Status_Operation = WAIT_REGISTRATION;
   application.Status_Central = DISARMED;
 
@@ -161,6 +164,8 @@ void reset_parameters(){
   memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
   memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
   memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
+
+
 }
 
 /**************************************************************************//**
@@ -182,6 +187,7 @@ void report_handler(void)
        sendRadio.data[0] = Register_Sensor.Registerbyte;
 
        application.radio.LastCMD = sendRadio.cmd;
+
        break;
 
      case OPERATION_MODE:
@@ -220,7 +226,12 @@ void report_handler(void)
 
        break;
      case BOOT:
-       application.Status_Operation = OPERATION_MODE;
+       if(joined){
+           application.Status_Operation = OPERATION_MODE;
+       }else{
+           application.Status_Operation = WAIT_REGISTRATION;
+       }
+
        if(application.Status_Central == ARMED){
            pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
        }

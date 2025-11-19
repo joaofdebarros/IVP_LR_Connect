@@ -101,6 +101,10 @@ void radio_handler(void){
 
       memory_write(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition, sizeof(application.IVP.ID_partition));
 
+      application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
+      TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+      memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
+
       application.radio.error = SUCCESS;
 
       emberEventControlSetActive(*report_control);

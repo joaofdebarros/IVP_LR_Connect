@@ -93,7 +93,7 @@ void emberAfInitCallback(void)
   application.IVP.pydConf.sPYDType.thresholdVal = 120;
   application.IVP.SensorStatus.Status.led_enabled = 1;
   application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
-  tx_power = 0;
+  tx_power = 150;
   application.Status_Operation = OPERATION_MODE;
 //  application.Status_Central = ARMED;
 
@@ -105,8 +105,8 @@ void emberAfInitCallback(void)
   memory_read(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition);
 
   // FORCANDO ARMADO E CONTINUO SEMPRE PARA TESTE
-  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
-//  application.Status_Operation = WAIT_REGISTRATION;
+//  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
+  application.Status_Operation = BOOT;
 //  application.Status_Central = ARMED;
 
   // Ensure that psa is initialized correctly
@@ -172,9 +172,9 @@ void emberAfInitCallback(void)
 
   sl_power_manager_subscribe_em_transition_event(&pm_handle, &pm_event_info);
 
-  if (em_status == EMBER_SUCCESS) {
+//  if (em_status == EMBER_SUCCESS) {
     emberEventControlSetActive(*report_control);
-  }
+//  }
 
 #if defined(EMBER_AF_PLUGIN_BLE)
   bleConnectionInfoTableInit();
