@@ -175,6 +175,7 @@ void reset_parameters(){
 void report_handler(void)
 {
   volatile Register_Sensor_t Register_Sensor;
+
   battery.VBAT = calculateVdd();
 
    switch (application.Status_Operation) {
@@ -233,6 +234,7 @@ void report_handler(void)
        }
 
        if(application.Status_Central == ARMED){
+           pydConfig(application.IVP.pydConf.pydRegisters);
            pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
        }
 
@@ -241,6 +243,7 @@ void report_handler(void)
                TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
            }else{
                //Caso seja modo contínuo, ligar o PIR
+               pydConfig(application.IVP.pydConf.pydRegisters);
                pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
            }
        }
