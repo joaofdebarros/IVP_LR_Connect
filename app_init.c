@@ -92,10 +92,10 @@ void emberAfInitCallback(void)
 
   application.IVP.pydConf.sPYDType.thresholdVal = 120;
   application.IVP.SensorStatus.Status.led_enabled = 1;
-  application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
+  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
   tx_power = 150;
-  application.Status_Operation = WAIT_REGISTRATION;
-  application.Status_Central = DISARMED;
+  application.Status_Operation = OPERATION_MODE;
+//  application.Status_Central = ARMED;
 
   memory_read(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte);
   memory_read(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal);
@@ -104,11 +104,9 @@ void emberAfInitCallback(void)
   memory_read(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central);
   memory_read(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition);
 
-  set_tx(tx_power);
-
   // FORCANDO ARMADO E CONTINUO SEMPRE PARA TESTE
 //  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
-//  application.Status_Operation = WAIT_REGISTRATION;
+  application.Status_Operation = BOOT;
 //  application.Status_Central = ARMED;
 
   // Ensure that psa is initialized correctly

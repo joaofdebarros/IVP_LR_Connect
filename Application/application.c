@@ -92,22 +92,17 @@ void radio_handler(void){
   receive = &application.radio.Packet;
 
   switch(receive->cmd){
-    case KEEP_ALIVE:
-      application.radio.LastCMD = receive->cmd;
-      emberEventControlSetActive(*report_control);
-      break;
     case SENSOR_PARTITION:
       application.radio.LastCMD = receive->cmd;
       application.IVP.ID_partition = ((uint32_t)receive->data[0]) |
-                                           ((uint32_t)receive->data[1] << 8) |
-                                           ((uint32_t)receive->data[2] << 16) |
-                                           ((uint32_t)receive->data[3] << 24);
+                                     ((uint32_t)receive->data[1] << 8) |
+                                     ((uint32_t)receive->data[2] << 16) |
+                                     ((uint32_t)receive->data[3] << 24);
 
       memory_write(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition, sizeof(application.IVP.ID_partition));
 
       application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
       TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
-
       memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
 
       application.radio.error = SUCCESS;
@@ -187,21 +182,6 @@ void radio_handler(void){
       emberEventControlSetActive(*report_control);
       break;
 
-    case LEAVE_NETWORK:
-          application.radio.LastCMD = receive->cmd;
-          application.IVP.leaving_method = receive->data[0];
-
-          if(application.IVP.leaving_method == LR_FULL_RESET){
-              reset_parameters();
-              leave();
-          }else if(application.IVP.leaving_method == LR_DISCONNECT){
-              leave();
-          }
-
-          application.Status_Operation = RESETTING;
-          emberEventControlSetActive(*report_control);
-          break;
-
     default:
       break;
   }
@@ -235,8 +215,8 @@ void motionDetected_handler(void){
       sendRadio.len = 4;
 
       sendRadio.data[0] = SensorStatus.Statusbyte;
-      sendRadio.data[1] = battery.VBAT;
-      sendRadio.data[2] = battery.VBAT >> 8;                                // Nivel de bateria
+      sendRadio.data[1] = battery.VBAT >> 8;
+      sendRadio.data[2] = battery.VBAT;
 
       application.radio.LastCMD = sendRadio.cmd;
       radio_send_packet(&sendRadio);

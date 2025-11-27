@@ -137,11 +137,8 @@ void app_button_press_cb(uint8_t button, uint8_t duration)
 //      hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
       emberEventControlSetInactive(*timeout_control);
 
-      application.Status_Operation = RESETTING;
-      application.IVP.leaving_method = HARDWARE_FULL_RESET;
       reset_parameters();
-      emberEventControlSetActive(*report_control);
-//      leave();
+      leave();
   }
 }
 
@@ -155,14 +152,20 @@ void reset_parameters(){
 
   application.IVP.pydConf.sPYDType.thresholdVal = 120;
   application.IVP.SensorStatus.Status.led_enabled = 1;
-  tx_power = 150;
   application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
+  pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
+  tx_power = 150;
+  set_tx(tx_power);
+  application.Status_Operation = WAIT_REGISTRATION;
   application.Status_Central = DISARMED;
 
+  memory_write(STATUSOP_MEMORY_KEY, &application.Status_Operation, sizeof(application.Status_Operation));
   memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
   memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
   memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
   memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
+
+
 }
 
 /**************************************************************************//**
@@ -172,6 +175,7 @@ void reset_parameters(){
 void report_handler(void)
 {
   volatile Register_Sensor_t Register_Sensor;
+
   battery.VBAT = calculateVdd();
 
    switch (application.Status_Operation) {
@@ -185,7 +189,6 @@ void report_handler(void)
 
        application.radio.LastCMD = sendRadio.cmd;
 
-       emberEventControlSetInactive(*report_control);
        break;
 
      case OPERATION_MODE:
@@ -196,75 +199,55 @@ void report_handler(void)
        SensorStatus.Status.energy_mode = application.IVP.SensorStatus.Status.energy_mode;
        SensorStatus.Status.led_enabled = application.IVP.SensorStatus.Status.led_enabled;
 
-       if(application.radio.LastCMD == KEEP_ALIVE){
-           sendRadio.cmd = KEEP_ALIVE;
-           sendRadio.len = 3;
-           sendRadio.data[0] = battery.VBAT;
-           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
-       }
-
        if(application.radio.LastCMD == SENSOR_PARTITION){
            sendRadio.cmd = SENSOR_PARTITION;
            sendRadio.len = 4;
            sendRadio.data[0] = application.radio.error;
-           sendRadio.data[1] = battery.VBAT;
-           sendRadio.data[2] = battery.VBAT >> 8;                                // Nivel de bateria
+           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
+           sendRadio.data[2] = battery.VBAT;                                     //
        }
 
        if(application.radio.LastCMD == STATUS_CENTRAL){
            sendRadio.cmd = STATUS_CENTRAL;
            sendRadio.len = 6;
            sendRadio.data[0] = SensorStatus.Statusbyte;                          // Estado de Operação
-           sendRadio.data[1] = battery.VBAT;
-           sendRadio.data[2] = battery.VBAT >> 8;                                // Nivel de bateria
+           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
+           sendRadio.data[2] = battery.VBAT;                                     //
        }
 
        if(application.radio.LastCMD == SETUP_IVP){
            sendRadio.cmd = SETUP_IVP;
            sendRadio.len = 6;
            sendRadio.data[0] = SensorStatus.Statusbyte;                          // Estado de Operação
-           sendRadio.data[1] = battery.VBAT;
-           sendRadio.data[2] = battery.VBAT >> 8;                                // Nivel de bateria                                      //
+           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
+           sendRadio.data[2] = battery.VBAT;                                     //
            sendRadio.data[3] = application.IVP.pydConf.sPYDType.thresholdVal;    // Sensibilidade sensor
            sendRadio.data[4] = tx_power;                                         // Potencia de transmissao
        }
-       emberEventControlSetInactive(*report_control);
 
        break;
      case BOOT:
-       application.Status_Operation = OPERATION_MODE;
+       if(joined){
+           application.Status_Operation = OPERATION_MODE;
+       }else{
+           application.Status_Operation = WAIT_REGISTRATION;
+       }
 
-       if(application.IVP.SensorStatus.Status.energy_mode == CONTINUOUS){
-
-           //Caso seja modo contínuo, ligar o PIR
+       if(application.Status_Central == ARMED){
+           pydConfig(application.IVP.pydConf.pydRegisters);
            pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
+       }
 
-       }else if(application.IVP.SensorStatus.Status.energy_mode == ECONOMIC){
-
-           if(application.Status_Central == ARMED){
-               pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
-           }else if(application.Status_Central == DISARMED){
+       if(application.Status_Central == DISARMED){
+           if(application.IVP.SensorStatus.Status.energy_mode != CONTINUOUS){
                TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+           }else{
+               //Caso seja modo contínuo, ligar o PIR
+               pydConfig(application.IVP.pydConf.pydRegisters);
+               pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
            }
-
        }
 
-       emberEventControlSetInactive(*report_control);
-
-       break;
-
-     case RESETTING:
-       sendRadio.cmd = LEAVE_NETWORK;
-       sendRadio.len = 2;
-       sendRadio.data[0] = application.IVP.leaving_method;
-
-       application.Status_Operation = WAIT_REGISTRATION; //GAMBIARRA PARA TESTAR MODO CONTINUO
-
-       if(application.IVP.SensorStatus.Status.energy_mode == CONTINUOUS){
-           pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
-       }
-
-       emberEventControlSetInactive(*report_control);
 
        break;
      default:
@@ -274,6 +257,8 @@ void report_handler(void)
    radio_send_packet(&sendRadio);
    emberEventControlSetDelayMS(*TimeoutAck_control,500);
    battery.VBAT = calculateVdd();
+
+   emberEventControlSetInactive(*report_control);
 }
 
 /**************************************************************************//**
@@ -304,18 +289,14 @@ void emberAfMessageSentCallback(EmberStatus status,
 {
   if(message->payload[0] == IVP_REGISTRATION && application.Status_Operation == WAIT_REGISTRATION){
         //Estado inicial do sensor apos cadastro
-        application.Status_Operation = OPERATION_MODE;
-        application.Status_Central = DISARMED;
-        application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
         TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+        application.Status_Operation = OPERATION_MODE;
+        application.Status_Central = ARMED;
+        application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
 
         memory_write(STATUSOP_MEMORY_KEY, &application.Status_Operation, sizeof(application.Status_Operation));
         memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
         memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
-    }
-
-    if(message->payload[0] == LEAVE_NETWORK && application.IVP.leaving_method == HARDWARE_FULL_RESET){
-        leave();
     }
 
     if(application.radio.LastCMD == message->payload[0]){
@@ -334,10 +315,11 @@ void emberAfStackStatusCallback(EmberStatus status)
         // Schedule start of periodic sensor reporting to the Sink
         led_blink(VERMELHO, 2, MED_SPEED_BLINK);
         enable_sleep = true;
-
         if(application.Status_Operation == WAIT_REGISTRATION){
-            emberEventControlSetDelayMS(*report_control, 500);
-        }else if(application.Status_Operation == OPERATION_MODE){
+            emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
+        }
+
+        if(application.Status_Operation == OPERATION_MODE){
             //desligar o pir
             application.Status_Operation = BOOT;
             emberEventControlSetDelayMS(*report_control, 500);
@@ -347,9 +329,6 @@ void emberAfStackStatusCallback(EmberStatus status)
         joined = false;
         enable_sleep = false;
         led_blink(VERMELHO, 5, FAST_SPEED_BLINK);
-
-        application.Status_Operation = WAIT_REGISTRATION;
-        memory_write(STATUSOP_MEMORY_KEY, &application.Status_Operation, sizeof(application.Status_Operation));
         break;
       case EMBER_JOIN_SCAN_FAILED:
         led_blink(VERMELHO, 2, SLOW_SPEED_BLINK);
