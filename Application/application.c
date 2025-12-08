@@ -8,6 +8,7 @@
 
 application_t application;
 packet_void_t sendRadio;
+send_queue_t radioQueue[MAX_QUEUE_PACKETS];
 
 extern EmberEventControl *timeout_control;
 extern EmberEventControl *radio_control;
@@ -19,11 +20,17 @@ sl_sleeptimer_timer_handle_t periodic_timer;
 uint8_t blink_count = 0;
 uint8_t blink_target = 0;
 uint8_t led_target;
+uint8_t queue_size = 0;
+
 extern uint8_t tx_power;
 
-EmberStatus radio_send_packet(packet_void_t *pck){
+EmberStatus radio_send_packet(packet_void_t *pck, bool retrying){
   uint8_t buffer_send[8];
   EmberStatus status;
+
+  if(!retrying){
+      Queue_manager(pck);
+  }
 
   buffer_send[0] = pck->cmd;
   for(uint8_t i = 0; i < (pck->len-1); i++){
@@ -32,6 +39,20 @@ EmberStatus radio_send_packet(packet_void_t *pck){
   status = radioMessageSend(0,pck->len,buffer_send);
 
   return status;
+}
+
+void Queue_manager(packet_void_t *pck){
+
+  if(pck->cmd != 0){
+      for(int i = 0; i < MAX_QUEUE_PACKETS; i++){
+          if(!radioQueue[i].slot_used){
+              radioQueue[i].attempts = 0;
+              radioQueue[i].slot_used = true;
+              radioQueue[i].packet = *pck;
+              break;
+          }
+      }
+  }
 }
 
 void led_blink(uint8_t led, uint8_t blinks, uint16_t speed){
@@ -110,14 +131,14 @@ void radio_handler(void){
       emberEventControlSetActive(*report_control);
       break;
     case STATUS_CENTRAL:
-      application.radio.LastCMD = receive->cmd;
-      application.Status_Central = receive->data[0];
       uint32_t ID_partition_received = ((uint32_t)receive->data[1]) |
                                        ((uint32_t)receive->data[2] << 8) |
                                        ((uint32_t)receive->data[3] << 16) |
                                        ((uint32_t)receive->data[4] << 24);
 
       if(ID_partition_received == application.IVP.ID_partition){
+          application.radio.LastCMD = receive->cmd;
+          application.Status_Central = receive->data[0];
 
           if(application.Status_Central == ARMED){
               pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
@@ -219,7 +240,7 @@ void motionDetected_handler(void){
       sendRadio.data[2] = battery.VBAT;
 
       application.radio.LastCMD = sendRadio.cmd;
-      radio_send_packet(&sendRadio);
+      radio_send_packet(&sendRadio, false);
       emberEventControlSetDelayMS(*TimeoutAck_control,500); //Timeout que indica que não houve resposta
       battery.VBAT = calculateVdd();
 
@@ -232,7 +253,7 @@ void motionDetected_handler(void){
 }
 
 void TimeoutAck_handler(void){
-  radio_send_packet(&sendRadio);
+  radio_send_packet(&sendRadio, false);
   battery.VBAT = calculateVdd();
   emberEventControlSetInactive(*TimeoutAck_control);
 }

@@ -21,6 +21,8 @@
 #define SLOW_SPEED_BLINK  1000
 #define MED_SPEED_BLINK   200
 #define FAST_SPEED_BLINK  100
+#define MAX_QUEUE_PACKETS 3
+#define MAX_QUEUE_PACKET_ATTEMPTS 10
 
 typedef enum{
   SENSOR_IDLE = 0,
@@ -117,7 +119,7 @@ extern application_t application;
 /*
  * Prototypes
  */
-EmberStatus radio_send_packet(packet_void_t *pck);
+EmberStatus radio_send_packet(packet_void_t *pck, bool retrying);
 void radio_handler(void);
 void timeout_handler(void);
 void motionDetected_handler(void);
@@ -126,5 +128,5 @@ void TimeoutAck_handler(void);
 void TurnPIROff(Energy_Mode_t energy_mode);
 void led_blink(uint8_t led, uint8_t blinks, uint16_t speed);
 void led_handler(sl_sleeptimer_timer_handle_t *handle, void *data);
-
+void Queue_manager(packet_void_t *pck);
 #endif /* APPLICATION_APPLICATION_H_ */

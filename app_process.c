@@ -78,6 +78,7 @@ EmberMessageOptions tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SEC
 
 extern application_t application;
 extern packet_void_t sendRadio;
+extern send_queue_t radioQueue[MAX_QUEUE_PACKETS];
 
 Status_Operation_t last_status = WAIT_REGISTRATION;
 
@@ -254,7 +255,7 @@ void report_handler(void)
        break;
    }
 
-   radio_send_packet(&sendRadio);
+   radio_send_packet(&sendRadio, false);
    emberEventControlSetDelayMS(*TimeoutAck_control,500);
    battery.VBAT = calculateVdd();
 
@@ -287,7 +288,7 @@ void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
 void emberAfMessageSentCallback(EmberStatus status,
                                 EmberOutgoingMessage *message)
 {
-  if(message->payload[0] == IVP_REGISTRATION && application.Status_Operation == WAIT_REGISTRATION){
+  if(message->payload[0] == IVP_REGISTRATION && application.Status_Operation == WAIT_REGISTRATION && status == EMBER_SUCCESS){
         //Estado inicial do sensor apos cadastro
         TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
         application.Status_Operation = OPERATION_MODE;
@@ -297,6 +298,24 @@ void emberAfMessageSentCallback(EmberStatus status,
         memory_write(STATUSOP_MEMORY_KEY, &application.Status_Operation, sizeof(application.Status_Operation));
         memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
         memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
+    }
+
+  for(int i = 0; i < MAX_QUEUE_PACKETS; i++){
+          if(message->payload[0] == radioQueue[i].packet.cmd){
+              if(status == EMBER_SUCCESS){
+                  radioQueue[i].slot_used = false;
+                  radioQueue[i].attempts = 0;
+              }else{
+                  if(radioQueue[i].attempts == MAX_QUEUE_PACKET_ATTEMPTS){
+                      radioQueue[i].slot_used = false;
+                      radioQueue[i].attempts = 0;
+                  }else{
+                      radioQueue[i].slot_used = true;
+                      radioQueue[i].attempts++;
+                      radio_send_packet(&radioQueue[i].packet, true);
+                  }
+              }
+          }
     }
 
     if(application.radio.LastCMD == message->payload[0]){
