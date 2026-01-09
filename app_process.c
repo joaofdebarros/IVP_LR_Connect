@@ -204,24 +204,24 @@ void report_handler(void)
            sendRadio.cmd = SENSOR_PARTITION;
            sendRadio.len = 4;
            sendRadio.data[0] = application.radio.error;
-           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
-           sendRadio.data[2] = battery.VBAT;                                     //
+           sendRadio.data[1] = battery.VBAT;                                     // Nivel de bateria
+           sendRadio.data[2] = battery.VBAT >> 8;                                //
        }
 
        if(application.radio.LastCMD == STATUS_CENTRAL){
            sendRadio.cmd = STATUS_CENTRAL;
-           sendRadio.len = 6;
-           sendRadio.data[0] = SensorStatus.Statusbyte;                          // Estado de Operação
-           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
-           sendRadio.data[2] = battery.VBAT;                                     //
+           sendRadio.len = 4;
+           sendRadio.data[0] = 0;                                                // NULL
+           sendRadio.data[1] = battery.VBAT;                                     // Nivel de bateria
+           sendRadio.data[2] = battery.VBAT >> 8;                                //
        }
 
        if(application.radio.LastCMD == SETUP_IVP){
            sendRadio.cmd = SETUP_IVP;
            sendRadio.len = 6;
            sendRadio.data[0] = SensorStatus.Statusbyte;                          // Estado de Operação
-           sendRadio.data[1] = battery.VBAT >> 8;                                // Nivel de bateria
-           sendRadio.data[2] = battery.VBAT;                                     //
+           sendRadio.data[1] = battery.VBAT;                                     // Nivel de bateria
+           sendRadio.data[2] = battery.VBAT >> 8;                                //
            sendRadio.data[3] = application.IVP.pydConf.sPYDType.thresholdVal;    // Sensibilidade sensor
            sendRadio.data[4] = tx_power;                                         // Potencia de transmissao
        }

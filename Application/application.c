@@ -235,9 +235,9 @@ void motionDetected_handler(void){
       sendRadio.cmd = MOTION_DETECTED;
       sendRadio.len = 4;
 
-      sendRadio.data[0] = SensorStatus.Statusbyte;
-      sendRadio.data[1] = battery.VBAT >> 8;
-      sendRadio.data[2] = battery.VBAT;
+      sendRadio.data[0] = 0;
+      sendRadio.data[1] = battery.VBAT;
+      sendRadio.data[2] = battery.VBAT >> 8;
 
       application.radio.LastCMD = sendRadio.cmd;
       radio_send_packet(&sendRadio, false);
