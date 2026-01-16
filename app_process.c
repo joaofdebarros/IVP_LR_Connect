@@ -55,6 +55,7 @@
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
 #define MAX_TX_FAILURES     (10U)
+#define ALPHA 0.1f
 // -----------------------------------------------------------------------------
 //                          Static Function Declarations
 // -----------------------------------------------------------------------------
@@ -150,6 +151,7 @@ void reset_parameters(){
   memory_erase(TXPOWER_MEMORY_KEY);
   memory_erase(STATUSOP_MEMORY_KEY);
   memory_erase(STATUSCENTRAL_MEMORY_KEY);
+  memory_erase(ID_PARTITION_MEMORY_KEY);
 
   application.IVP.pydConf.sPYDType.thresholdVal = 120;
   application.IVP.SensorStatus.Status.led_enabled = 1;
@@ -169,6 +171,22 @@ void reset_parameters(){
 
 }
 
+void battery_read(){
+  uint16_t reading = 0;
+
+  reading = calculateVdd();
+
+  if(reading != 0){
+      if(battery.VBAT == 0){
+          battery.VBAT = reading;
+      }else{
+          battery.VBAT = ALPHA * reading + (1.0f - ALPHA) * battery.VBAT;
+      }
+  }
+
+  memory_write(BATTERY_MEMORY_KEY, &battery.VBAT, sizeof(battery.VBAT));
+}
+
 /**************************************************************************//**
  * Here we print out the first two bytes reported by the sinks as a little
  * endian 16-bits decimal.
@@ -177,7 +195,7 @@ void report_handler(void)
 {
   volatile Register_Sensor_t Register_Sensor;
 
-  battery.VBAT = calculateVdd();
+  battery_read();
 
    switch (application.Status_Operation) {
      case WAIT_REGISTRATION:
@@ -257,7 +275,7 @@ void report_handler(void)
 
    radio_send_packet(&sendRadio, false);
    emberEventControlSetDelayMS(*TimeoutAck_control,500);
-   battery.VBAT = calculateVdd();
+   battery_read();
 
    emberEventControlSetInactive(*report_control);
 }

@@ -6,6 +6,12 @@
  */
 #include "application.h"
 
+#define setor_silencioso    0b00000001
+#define setor_auto_anulavel 0b00000010
+#define setor_24            0b00000100
+#define setor_interior      0b00001000
+#define setor_inibir        0b00010000
+
 application_t application;
 packet_void_t sendRadio;
 send_queue_t radioQueue[MAX_QUEUE_PACKETS];
@@ -114,6 +120,7 @@ void radio_handler(void){
 
   switch(receive->cmd){
     case SENSOR_PARTITION:
+      uint8_t sector_type = receive->data[4];
       application.radio.LastCMD = receive->cmd;
       application.IVP.ID_partition = ((uint32_t)receive->data[0]) |
                                      ((uint32_t)receive->data[1] << 8) |
@@ -122,9 +129,24 @@ void radio_handler(void){
 
       memory_write(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition, sizeof(application.IVP.ID_partition));
 
-      application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
-      TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+      if(sector_type == setor_silencioso){
+
+      }else if(sector_type == setor_auto_anulavel){
+
+      }else if(sector_type == setor_24){
+          application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
+      }else if(sector_type == setor_interior){
+
+      }else if(sector_type == setor_inibir){
+
+      }else{
+          application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
+          TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+      }
+
       memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
+
+      led_blink(VERMELHO, 3, FAST_SPEED_BLINK);
 
       application.radio.error = SUCCESS;
 
@@ -135,10 +157,11 @@ void radio_handler(void){
                                        ((uint32_t)receive->data[2] << 8) |
                                        ((uint32_t)receive->data[3] << 16) |
                                        ((uint32_t)receive->data[4] << 24);
+      application.radio.LastCMD = receive->cmd;
+      application.Status_Central = receive->data[0];
 
       if(ID_partition_received == application.IVP.ID_partition){
-          application.radio.LastCMD = receive->cmd;
-          application.Status_Central = receive->data[0];
+
 
           if(application.Status_Central == ARMED){
               pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
@@ -147,7 +170,6 @@ void radio_handler(void){
 
               memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
 
-              emberEventControlSetActive(*report_control);
           } else if(application.Status_Central == DISARMED){
               TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
               emberEventControlSetInactive(*timeout_control);
@@ -156,10 +178,17 @@ void radio_handler(void){
 
               memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
 
-              emberEventControlSetActive(*report_control);
+          }
+
+      }else{
+          if(application.Status_Central == ARMED){
+              led_blink(VERMELHO, 1, MED_SPEED_BLINK);
+          }else{
+              led_blink(VERMELHO, 2, MED_SPEED_BLINK);
           }
       }
 
+      emberEventControlSetActive(*report_control);
       break;
     case SETUP_IVP:
       application.radio.LastCMD = receive->cmd;
@@ -242,7 +271,7 @@ void motionDetected_handler(void){
       application.radio.LastCMD = sendRadio.cmd;
       radio_send_packet(&sendRadio, false);
       emberEventControlSetDelayMS(*TimeoutAck_control,500); //Timeout que indica que não houve resposta
-      battery.VBAT = calculateVdd();
+      battery_read();
 
       hGpio_ledTurnOn(&sl_led_led_vermelho, application.IVP.SensorStatus.Status.led_enabled);
       motionCounterTimer = MOTION_COUNTER_2S;
@@ -254,7 +283,7 @@ void motionDetected_handler(void){
 
 void TimeoutAck_handler(void){
   radio_send_packet(&sendRadio, false);
-  battery.VBAT = calculateVdd();
+  battery_read();
   emberEventControlSetInactive(*TimeoutAck_control);
 }
 

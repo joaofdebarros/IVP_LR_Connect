@@ -73,6 +73,7 @@ extern EmberEventControl *PeriodInstalation_control;
 extern EmberEventControl *TimeoutAck_control;
 
 extern uint8_t tx_power;
+extern battery_t battery;
 // -----------------------------------------------------------------------------
 //                                Static Variables
 // -----------------------------------------------------------------------------
@@ -103,6 +104,7 @@ void emberAfInitCallback(void)
   memory_read(STATUSOP_MEMORY_KEY, &application.Status_Operation);
   memory_read(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central);
   memory_read(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition);
+  memory_read(BATTERY_MEMORY_KEY, &battery.VBAT);
 
   // FORCANDO ARMADO E CONTINUO SEMPRE PARA TESTE
 //  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
