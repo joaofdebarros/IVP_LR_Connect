@@ -62,4 +62,9 @@ int start_timer(void);
 void led_handler(sl_sleeptimer_timer_handle_t *handle, void *data);
 void reset_parameters();
 void battery_read();
+void app_init();
+void Init_handler();
+static void gpioSetup(void);
+void CallbackGPIO(uint8_t interrupt_no);
+static void timerSetup(void);
 #endif  // APP_PROCESS_H

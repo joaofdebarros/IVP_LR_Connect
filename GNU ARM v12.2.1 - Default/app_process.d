@@ -225,7 +225,11 @@ app_process.o: ../app_process.c \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_iadc.h \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/memory/memory.h \
  C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/hNetwork.h \
- ../API/battery/battery.h ../API/hNetwork.h
+ ../API/battery/battery.h ../API/hNetwork.h \
+ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emdrv\gpiointerrupt\inc\gpiointerrupt.h \
+ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_gpio.h \
+ ../hplatform/hDriver/hGpio.h ../API/pyd/pyd.h \
+ ../hplatform/hDriver/hADC.h ../API/memory/memory.h
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\service\legacy_hal\inc\platform-header.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_core.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_code_classification.h:
@@ -455,3 +459,9 @@ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/memory/mem
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect/API/hNetwork.h:
 ../API/battery/battery.h:
 ../API/hNetwork.h:
+c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emdrv\gpiointerrupt\inc\gpiointerrupt.h:
+c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\emlib\inc\em_gpio.h:
+../hplatform/hDriver/hGpio.h:
+../API/pyd/pyd.h:
+../hplatform/hDriver/hADC.h:
+../API/memory/memory.h:

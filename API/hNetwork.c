@@ -65,7 +65,7 @@ void join_sleepy(uint16_t channel)
 
 void leave(void)
 {
-  emberNetworkLeave();
+//  emberNetworkLeave();
   emberResetNetworkState();
 }
 

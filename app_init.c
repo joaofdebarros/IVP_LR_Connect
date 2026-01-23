@@ -66,14 +66,6 @@ static sl_power_manager_em_transition_event_info_t pm_event_info =
 extern EmberKeyData security_key;
 /// Connect security key id
 extern psa_key_id_t security_key_id;
-extern EmberEventControl *radio_control;
-extern EmberEventControl *motionDetected_control;
-extern EmberEventControl *timeout_control;
-extern EmberEventControl *PeriodInstalation_control;
-extern EmberEventControl *TimeoutAck_control;
-
-extern uint8_t tx_power;
-extern battery_t battery;
 // -----------------------------------------------------------------------------
 //                                Static Variables
 // -----------------------------------------------------------------------------
@@ -89,36 +81,8 @@ void emberAfInitCallback(void)
   uint8_t device_id = 0;
   EmberStatus em_status = EMBER_ERR_FATAL;
 
-  emberAfPluginPollEnableShortPolling(true);
-
-  application.IVP.pydConf.sPYDType.thresholdVal = 120;
-  application.IVP.SensorStatus.Status.led_enabled = 1;
-  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
-  tx_power = 150;
-  application.Status_Operation = OPERATION_MODE;
-//  application.Status_Central = ARMED;
-
-  memory_read(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte);
-  memory_read(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal);
-  memory_read(TXPOWER_MEMORY_KEY, &tx_power);
-  memory_read(STATUSOP_MEMORY_KEY, &application.Status_Operation);
-  memory_read(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central);
-  memory_read(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition);
-  memory_read(BATTERY_MEMORY_KEY, &battery.VBAT);
-
-  // FORCANDO ARMADO E CONTINUO SEMPRE PARA TESTE
-//  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
-  application.Status_Operation = BOOT;
-//  application.Status_Central = ARMED;
-
   // Ensure that psa is initialized correctly
   psa_crypto_init();
-
-  emberAfAllocateEvent(&report_control, &report_handler);
-  emberAfAllocateEvent(&radio_control, &radio_handler);
-  emberAfAllocateEvent(&motionDetected_control, &motionDetected_handler);
-  emberAfAllocateEvent(&timeout_control, &timeout_handler);
-  emberAfAllocateEvent(&TimeoutAck_control, &TimeoutAck_handler);
 
   // CLI info message
 //  app_log_info("\nSensor\n");
@@ -175,7 +139,7 @@ void emberAfInitCallback(void)
   sl_power_manager_subscribe_em_transition_event(&pm_handle, &pm_event_info);
 
 //  if (em_status == EMBER_SUCCESS) {
-    emberEventControlSetActive(*report_control);
+//    emberEventControlSetActive(*report_control);
 //  }
 
 #if defined(EMBER_AF_PLUGIN_BLE)

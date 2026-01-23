@@ -38,20 +38,6 @@
 #include "sl_main_process_action.h"
 #endif // SL_CATALOG_KERNEL_PRESENT
 
-#include "gpiointerrupt.h"
-#include "API/hNetwork.h"
-#include "hplatform/hDriver/hGpio.h"
-#include "API/pyd/pyd.h"
-#include "poll.h"
-#include "hplatform/hDriver/hADC.h"
-#include "API/memory/memory.h"
-
-uint8_t tx_power = 0;
-
-static void gpioSetup(void);
-void CallbackGPIO(uint8_t interrupt_no);
-static void timerSetup(void);
-
 int main(void)
 {
   // Initialize Silicon Labs device, system, service(s) and protocol stack(s).
@@ -59,15 +45,6 @@ int main(void)
   // component initialization will take place there.
 
   sl_main_init();
-
-  app_button_press_enable();
-
-  sl_mx25_flash_shutdown();
-
-  gpioSetup();
-  timerSetup();
-  set_tx(tx_power);
-  iadcInit();
 
 #if defined(SL_CATALOG_KERNEL_PRESENT)
   // Start the kernel. The start task will be executed (Highest priority) to complete
@@ -92,33 +69,5 @@ int main(void)
 #endif
   }
 #endif // SL_CATALOG_KERNEL_PRESENT
-}
-
-static void gpioSetup(void){
-  GPIO_PinModeSet(SER_IN_PORT, SER_IN_PIN, gpioModePushPull, 0);
-  GPIO_PinModeSet(SENSE_LOW_PORT, SENSE_LOW_PIN, gpioModePushPull, 1);
-  // Configure Button PB0 as input and enable interrupt
-  //GPIO_PinModeSet(DIRECT_LINK_PORT, DIRECT_LINK_PIN, gpioModeInputPull, 1);
-  GPIO_PinModeSet(DIRECT_LINK_PORT, DIRECT_LINK_PIN, gpioModeInput, 0);
-  GPIO_ExtIntConfig(DIRECT_LINK_PORT,
-                    DIRECT_LINK_PIN,
-                    DIRECT_LINK_PIN,
-                    true,
-                    false,
-                    true);
-
-  GPIOINT_CallbackRegister((uint8_t)DIRECT_LINK_PIN,(GPIOINT_IrqCallbackPtr_t)CallbackGPIO);
-
-  // Enable EVEN interrupt to catch button press that changes slew rate
-  NVIC_ClearPendingIRQ(GPIO_EVEN_IRQn);
-  NVIC_EnableIRQ(GPIO_EVEN_IRQn);
-}
-
-static void timerSetup(void){
-  USTIMER_Init();
-}
-
-void CallbackGPIO(uint8_t interrupt_no){
-      GPIO_EXTI_Callback(interrupt_no);
 }
 

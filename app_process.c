@@ -51,6 +51,14 @@
 #include "Application/application.h"
 #include "API/battery/battery.h"
 #include "API/hNetwork.h"
+
+#include "gpiointerrupt.h"
+
+#include "hplatform/hDriver/hGpio.h"
+#include "API/pyd/pyd.h"
+#include "poll.h"
+#include "hplatform/hDriver/hADC.h"
+#include "API/memory/memory.h"
 // -----------------------------------------------------------------------------
 //                              Macros and Typedefs
 // -----------------------------------------------------------------------------
@@ -71,6 +79,7 @@ EmberEventControl *radio_control;
 EmberEventControl *motionDetected_control;
 EmberEventControl *timeout_control;
 EmberEventControl *TimeoutAck_control;
+EmberEventControl *Init_control;
 
 /// report timing period
 uint16_t sensor_report_period_ms =  (1 * MILLISECOND_TICKS_PER_SECOND);
@@ -87,8 +96,8 @@ uint32_t press_start_time = 0;
 extern bool button_is_pressed = false;
 
 bool joined = false;
-
-extern uint8_t tx_power;
+bool initialized = false;
+uint8_t tx_power = 0;
 // -----------------------------------------------------------------------------
 //                                Static Variables
 // -----------------------------------------------------------------------------
@@ -96,35 +105,87 @@ extern uint8_t tx_power;
 // -----------------------------------------------------------------------------
 //                          Public Function Definitions
 // -----------------------------------------------------------------------------
-//void sl_button_on_change(const sl_button_t *handle){
-//
-//  if (sl_button_get_state(handle) == SL_SIMPLE_BUTTON_RELEASED) {
-//     if(&sl_button_btn0 == handle){
-//         press_start_time = sl_sleeptimer_get_tick_count();
-//         button_is_pressed = true;
-//     }
-//  }
-//
-//  if(sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED){
-//      uint32_t current_time = sl_sleeptimer_get_tick_count();
-//      button_is_pressed = false;
-//      if((current_time - press_start_time) > 100000){
-//          hGpio_disableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
-//          emberEventControlSetInactive(*timeout_control);
-//
-//          reset_parameters();
-//          leave();
-//          emberResetNetworkState();
-//      }else if((current_time - press_start_time) < 50000){
-//          if(application.Status_Operation == WAIT_REGISTRATION){
-//              join_sleepy(0);
-//              sl_led_turn_on(&sl_led_led_vermelho);
-//          }else if(application.Status_Operation == OPERATION_MODE){
-//              led_blink(VERMELHO, 2, MED_SPEED_BLINK);
-//          }
-//      }
-//  }
-//}
+
+static void gpioSetup(void){
+  GPIO_PinModeSet(SER_IN_PORT, SER_IN_PIN, gpioModePushPull, 0);
+  GPIO_PinModeSet(SENSE_LOW_PORT, SENSE_LOW_PIN, gpioModePushPull, 1);
+  // Configure Button PB0 as input and enable interrupt
+  //GPIO_PinModeSet(DIRECT_LINK_PORT, DIRECT_LINK_PIN, gpioModeInputPull, 1);
+  GPIO_PinModeSet(DIRECT_LINK_PORT, DIRECT_LINK_PIN, gpioModeInput, 0);
+  GPIO_ExtIntConfig(DIRECT_LINK_PORT,
+                    DIRECT_LINK_PIN,
+                    DIRECT_LINK_PIN,
+                    true,
+                    false,
+                    true);
+
+  GPIOINT_CallbackRegister((uint8_t)DIRECT_LINK_PIN,(GPIOINT_IrqCallbackPtr_t)CallbackGPIO);
+
+  // Enable EVEN interrupt to catch button press that changes slew rate
+  NVIC_ClearPendingIRQ(GPIO_EVEN_IRQn);
+  NVIC_EnableIRQ(GPIO_EVEN_IRQn);
+}
+
+static void timerSetup(void){
+  USTIMER_Init();
+}
+
+void CallbackGPIO(uint8_t interrupt_no){
+      GPIO_EXTI_Callback(interrupt_no);
+}
+
+void app_init(){
+  emberAfAllocateEvent(&report_control, &report_handler);
+  emberAfAllocateEvent(&radio_control, &radio_handler);
+  emberAfAllocateEvent(&motionDetected_control, &motionDetected_handler);
+  emberAfAllocateEvent(&timeout_control, &timeout_handler);
+  emberAfAllocateEvent(&TimeoutAck_control, &TimeoutAck_handler);
+  emberAfAllocateEvent(&Init_control, &Init_handler);
+
+  emberEventControlSetDelayMS(*Init_control, 100);
+}
+
+void Init_handler(){
+  emberAfPluginPollEnableShortPolling(true);
+
+  application.IVP.pydConf.sPYDType.thresholdVal = 120;
+  application.IVP.SensorStatus.Status.led_enabled = 1;
+  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
+  tx_power = 150;
+  application.Status_Operation = OPERATION_MODE;
+  //  application.Status_Central = ARMED;
+
+  memory_read(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte);
+  memory_read(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal);
+  memory_read(TXPOWER_MEMORY_KEY, &tx_power);
+  memory_read(STATUSOP_MEMORY_KEY, &application.Status_Operation);
+  memory_read(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central);
+  memory_read(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition);
+  memory_read(BATTERY_MEMORY_KEY, &battery.VBAT);
+
+  // FORCANDO ARMADO E CONTINUO SEMPRE PARA TESTE
+  //  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
+  application.Status_Operation = BOOT;
+  //  application.Status_Central = ARMED;
+
+  app_button_press_enable();
+
+  sl_mx25_flash_shutdown();
+
+  gpioSetup();
+  timerSetup();
+  set_tx(tx_power);
+  iadcInit();
+
+  if(application.Status_Operation == OPERATION_MODE){
+      application.Status_Operation = BOOT;
+  }
+
+  initialized = true;
+
+  emberEventControlSetInactive(*Init_control);
+  emberEventControlSetDelayMS(*report_control, 500);
+}
 
 void app_button_press_cb(uint8_t button, uint8_t duration)
 {
@@ -167,8 +228,6 @@ void reset_parameters(){
   memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
   memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
   memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
-
-
 }
 
 void battery_read(){
@@ -349,18 +408,12 @@ void emberAfStackStatusCallback(EmberStatus status)
   switch (status) {
       case EMBER_NETWORK_UP:
         joined = true;
-        // Schedule start of periodic sensor reporting to the Sink
         led_blink(VERMELHO, 2, MED_SPEED_BLINK);
         enable_sleep = true;
-        if(application.Status_Operation == WAIT_REGISTRATION){
-            emberEventControlSetDelayMS(*report_control, sensor_report_period_ms);
+        if(application.Status_Operation == WAIT_REGISTRATION && initialized){
+            emberEventControlSetDelayMS(*report_control, 10);
         }
 
-        if(application.Status_Operation == OPERATION_MODE){
-            //desligar o pir
-            application.Status_Operation = BOOT;
-            emberEventControlSetDelayMS(*report_control, 500);
-        }
         break;
       case EMBER_NETWORK_DOWN:
         joined = false;
