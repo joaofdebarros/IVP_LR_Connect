@@ -12,7 +12,8 @@ autogen/sl_simple_button_instances.o: \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_enum.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_code_classification.h \
  c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sli_code_classification.h \
- C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/sl_simple_button_btn0_config.h
+ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/sl_simple_button_btn0_config.h \
+ C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/sl_simple_button_btn1_config.h
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\driver\button\inc\sl_simple_button.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\driver\button\inc\sl_button.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_common.h:
@@ -26,3 +27,4 @@ c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sl_code_classification.h:
 c:\users\joao.victor\simplicitystudio\sdks\simplicity_sdk\platform\common\inc\sli_code_classification.h:
 C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/sl_simple_button_btn0_config.h:
+C:\Users\joao.victor\SimplicityStudio\v5_workspace\IVP_LR_Connect\config/sl_simple_button_btn1_config.h:

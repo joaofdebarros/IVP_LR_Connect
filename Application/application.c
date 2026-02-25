@@ -19,7 +19,7 @@ send_queue_t radioQueue[MAX_QUEUE_PACKETS];
 extern EmberEventControl *timeout_control;
 extern EmberEventControl *radio_control;
 extern EmberEventControl *motionDetected_control;
-extern EmberEventControl *TimeoutAck_control;
+//extern EmberEventControl *TimeoutAck_control;
 extern EmberEventControl *report_control;
 
 sl_sleeptimer_timer_handle_t periodic_timer;
@@ -141,7 +141,7 @@ void radio_handler(void){
 
       }else{
           application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
-          TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+//          TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
       }
 
       memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
@@ -190,7 +190,7 @@ void radio_handler(void){
 
       emberEventControlSetActive(*report_control);
       break;
-    case SETUP_IVP:
+    case SETUP_LR:
       application.radio.LastCMD = receive->cmd;
       application.IVP.pydConf.sPYDType.operationConf.sOpMode.reserved = 2;                 // reserved
       application.IVP.pydConf.sPYDType.operationConf.sOpMode.reserved1 = 0;                // reserved
@@ -199,21 +199,31 @@ void radio_handler(void){
       application.IVP.pydConf.sPYDType.alarm.sAlarmConf.blindTime = 0;                     // 0.5seg + val*0.5s
       application.IVP.pydConf.sPYDType.alarm.sAlarmConf.pulseCtr = 1;                      // 1 + val
       application.IVP.pydConf.sPYDType.alarm.sAlarmConf.wdwTime = 3;                       // 2s + val*2s
-      application.IVP.pydConf.sPYDType.thresholdVal = receive->data[0];                    // Sensibilidade do sensor IVP (Configurável)
 
-      application.IVP.SensorStatus.Status.energy_mode = receive->data[1];     //
-
-      if(application.IVP.SensorStatus.Status.energy_mode == UECONOMIC){
-          application.IVP.SensorStatus.Status.led_enabled = false;
-      }else{
-          application.IVP.SensorStatus.Status.led_enabled = receive->data[2];     // Estado de funcionamento do LED
+      if(receive->data[0] == HIGH_sense){
+          application.IVP.pydConf.sPYDType.thresholdVal = PYD_SEN_HIGH;                    // Sensibilidade do sensor IVP (Configurável)
+      }else if(receive->data[0] == MED_sense){
+          application.IVP.pydConf.sPYDType.thresholdVal = PYD_SEN_MED;                    // Sensibilidade do sensor IVP (Configurável)
+      }else if(receive->data[0] == LOW_sense){
+          application.IVP.pydConf.sPYDType.thresholdVal = PYD_SEN_LOW;                    // Sensibilidade do sensor IVP (Configurável)
       }
+
+      application.IVP.SensorStatus.Status.energy_mode = receive->data[1];
+
+      application.IVP.SensorStatus.Status.led_enabled = receive->data[2];     // Estado de funcionamento do LED
 
       if(application.IVP.SensorStatus.Status.energy_mode == CONTINUOUS){
           pydInit(application.IVP.pydConf.sPYDType.thresholdVal);                 // Inicializacao do PIR para modo continuo
       }
 
-      tx_power = receive->data[3];      // Potencia de transmissao
+      if(receive->data[3] == HIGH_power){
+          tx_power = TX_POWER_HIGH;
+      }else if(receive->data[3] == MED_power){
+          tx_power = TX_POWER_MED;
+      }else if(receive->data[3] == LOW_power){
+          tx_power = TX_POWER_LOW;
+      }
+
       set_tx(tx_power);
 
       motionCounterTimer = MOTION_COUNTER_5S;       //Timeout sem deteccao
@@ -227,7 +237,7 @@ void radio_handler(void){
       memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
       memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
 
-      led_blink(VERMELHO, 2, FAST_SPEED_BLINK);       // Piscada para confirmar a operacao
+      led_blink(VERMELHO, 3, FAST_SPEED_BLINK);
 
       emberEventControlSetActive(*report_control);
       break;
@@ -245,14 +255,13 @@ void timeout_handler(void)
   pydAckTrigger();
   hGpio_enableInterrupt(DIRECT_LINK_PORT, DIRECT_LINK_PIN);
 
-
   emberEventControlSetInactive(*timeout_control);
 }
 
 void motionDetected_handler(void){
   volatile SensorStatus_t SensorStatus;
 
-  if(application.Status_Central == DISARMED && !application.IVP.SensorStatus.Status.energy_mode == CONTINUOUS){
+  if(application.Status_Central == DISARMED && !application.IVP.SensorStatus.Status.energy_mode == CONTINUOUS && application.Status_Operation != PERIOD_INSTALATION){
       emberEventControlSetInactive(*motionDetected_control); //Desativa o motionDetected_control até a próxima detecção
       TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
   }else{
@@ -261,16 +270,20 @@ void motionDetected_handler(void){
       SensorStatus.Status.operation = application.Status_Operation;
       SensorStatus.Status.statusCentral = application.Status_Central;
 
-      sendRadio.cmd = MOTION_DETECTED;
-      sendRadio.len = 4;
+      uint8_t tamper_state =  GPIO_PinInGet(gpioPortA, 10);
 
-      sendRadio.data[0] = 0;
-      sendRadio.data[1] = battery.VBAT;
-      sendRadio.data[2] = battery.VBAT >> 8;
+      sendRadio.cmd = MOTION_DETECTED;
+      sendRadio.len = 6;
+
+      sendRadio.data[0] = 1;
+      sendRadio.data[1] = tamper_state;
+      sendRadio.data[2] = battery.VBAT;
+      sendRadio.data[3] = battery.VBAT >> 8;
+      sendRadio.data[4] = application.radio.RSSI;
 
       application.radio.LastCMD = sendRadio.cmd;
       radio_send_packet(&sendRadio, false);
-      emberEventControlSetDelayMS(*TimeoutAck_control,500); //Timeout que indica que não houve resposta
+
       battery_read();
 
       hGpio_ledTurnOn(&sl_led_led_vermelho, application.IVP.SensorStatus.Status.led_enabled);
@@ -281,17 +294,12 @@ void motionDetected_handler(void){
 
 }
 
-void TimeoutAck_handler(void){
-  radio_send_packet(&sendRadio, false);
-  battery_read();
-  emberEventControlSetInactive(*TimeoutAck_control);
-}
-
 void TurnPIROff(Energy_Mode_t energy_mode){
   switch (energy_mode) {
     case CONTINUOUS:
       hGpio_ledTurnOff(&sl_led_led_vermelho, application.IVP.SensorStatus.Status.led_enabled);
       hGpio_enableInterrupt(DIRECT_LINK_PORT,DIRECT_LINK_PIN);
+      emberEventControlSetDelayMS(*timeout_control,100);
       break;
     case ECONOMIC:
       hGpio_ledTurnOff(&sl_led_led_vermelho, application.IVP.SensorStatus.Status.led_enabled);

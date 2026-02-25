@@ -23,9 +23,9 @@
 #define PYD_MODE_WAKE_UP     2
 
 #define PYD_SEN_VERY_LOW    250
-#define PYD_SEN_LOW         50
-#define PYD_SEN_MED         15
-#define PYD_SEN_HIGH        5
+#define PYD_SEN_LOW         200
+#define PYD_SEN_MED         120
+#define PYD_SEN_HIGH        50
 
 //-----------------------------------------------------------------------------
 // Variables

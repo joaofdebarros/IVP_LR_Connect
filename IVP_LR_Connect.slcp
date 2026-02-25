@@ -58,7 +58,7 @@ component:
 - {id: psa_its}
 - {id: radio_config_simple_connect_singlephy}
 - {id: restrictions_profile_connect_ofdm}
-- instance: [btn0]
+- instance: [btn0, btn1]
   id: simple_button
 - instance: [LED_VERMELHO]
   id: simple_led

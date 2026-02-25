@@ -67,4 +67,5 @@ void Init_handler();
 static void gpioSetup(void);
 void CallbackGPIO(uint8_t interrupt_no);
 static void timerSetup(void);
+void Instalation_handler();
 #endif  // APP_PROCESS_H

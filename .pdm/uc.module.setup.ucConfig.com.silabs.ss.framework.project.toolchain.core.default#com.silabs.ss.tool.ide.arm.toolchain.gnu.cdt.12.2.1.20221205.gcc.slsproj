@@ -18,6 +18,7 @@
     <file name="poll-config.h" generated="true" linked="false"/>
     <file name="stack-common-config.h" generated="true" linked="false"/>
     <file name="sl_simple_button_btn0_config.h" generated="true" linked="false"/>
+    <file name="sl_simple_button_btn1_config.h" generated="true" linked="false"/>
     <file name="sl_simple_led_LED_VERMELHO_config.h" generated="true" linked="false"/>
     <file name="sl_sensor_sink_config.h" generated="true" linked="false"/>
     <file name="sl_token_manager_config.h" generated="true" linked="false"/>

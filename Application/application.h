@@ -21,8 +21,13 @@
 #define SLOW_SPEED_BLINK  1000
 #define MED_SPEED_BLINK   200
 #define FAST_SPEED_BLINK  100
+
 #define MAX_QUEUE_PACKETS 3
 #define MAX_QUEUE_PACKET_ATTEMPTS 10
+
+#define TX_POWER_HIGH   150
+#define TX_POWER_MED    110
+#define TX_POWER_LOW    80
 
 typedef enum{
   SENSOR_IDLE = 0,
@@ -43,6 +48,23 @@ typedef enum{
   ECONOMIC,
   UECONOMIC
 }Energy_Mode_t;
+
+typedef enum{
+  LOW_sense = 0,
+  MED_sense,
+  HIGH_sense
+}PIR_sensibility;
+
+typedef enum{
+  LOW_power = 0,
+  MED_power,
+  HIGH_power
+}Tx_power_t;
+
+typedef enum{
+  Always_off = 0,
+  Detection_only,
+}LED_status;
 
 typedef enum{
   CONTROL = 0,
@@ -72,12 +94,6 @@ typedef enum{
   FAIL
 }IVP_config_error_e;
 
-typedef enum{
-  HARDWARE_FULL_RESET,
-  LR_FULL_RESET,
-  LR_DISCONNECT
-}leaving_method_t;
-
 typedef union
 {
     uint8_t Statusbyte;
@@ -87,7 +103,7 @@ typedef union
         Status_Operation_t operation             :2;
         Status_Central_t statusCentral         :1;
         Energy_Mode_t energy_mode           :2;
-        uint8_t led_enabled           :1;
+        LED_status led_enabled           :1;
         uint8_t reserved              :2;
     } Status;
 
@@ -98,13 +114,13 @@ typedef struct{
   packet_void_t Packet;
   SensorCmd_e LastCMD;
   IVP_config_error_e error;
+  uint8_t RSSI;
 }application_radio_t;
 
 typedef struct{
   uPYDType pydConf;
   SensorStatus_t SensorStatus;
   uint32_t ID_partition;
-  leaving_method_t leaving_method;
 }application_IVP_t;
 
 typedef struct{

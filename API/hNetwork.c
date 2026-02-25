@@ -11,7 +11,8 @@
 #include "hNetwork.h"
 
 
-
+#define SL_SENSOR_SINK_PAN_ID_JB    (0x1234)
+#define SL_SENSOR_SINK_PAN_ID_WS    (0x1FFF)
 // -----------------------------------------------------------------------------
 //                          Variables Definitions
 // -----------------------------------------------------------------------------

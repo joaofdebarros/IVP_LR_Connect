@@ -38,6 +38,7 @@ sl_rail_util_power_manager_init_config.h=950125848
 sl_rail_util_pti_config.h=1659850021
 sl_sensor_sink_config.h=-1390553418
 sl_simple_button_btn0_config.h=109381819
+sl_simple_button_btn1_config.h=-1260469142
 sl_simple_button_config.h=-1109451986
 sl_simple_led_LED_AZUL_config.h=1823494600
 sl_simple_led_LED_VERDE_config.h=-1903185180
