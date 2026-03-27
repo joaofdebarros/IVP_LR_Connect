@@ -40,7 +40,7 @@
 // <o EMBER_AF_PLUGIN_POLL_LONG_POLL_INTERVAL_S> Long Poll Interval in seconds<1-65535>
 // <i> Default: 600
 // <i> The amount of time (in seconds) the device will wait between MAC data polls to ensure connectivity with its parent.
-#define EMBER_AF_PLUGIN_POLL_LONG_POLL_INTERVAL_S          30
+#define EMBER_AF_PLUGIN_POLL_LONG_POLL_INTERVAL_S          5
 
 // </h>
 

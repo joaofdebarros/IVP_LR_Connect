@@ -13,6 +13,10 @@
 
 #define SL_SENSOR_SINK_PAN_ID_JB    (0x1234)
 #define SL_SENSOR_SINK_PAN_ID_WS    (0x1FFF)
+#define SL_SENSOR_SINK_PAN_ID_PROT  (0x4321)
+#define SL_SENSOR_SINK_PAN_ID_15     (0x4224)
+
+
 // -----------------------------------------------------------------------------
 //                          Variables Definitions
 // -----------------------------------------------------------------------------
@@ -58,7 +62,7 @@ void join_sleepy(uint16_t channel)
   parameters.radioChannel = channel;
 
   // set default PAN ID or the one passed as parameter
-  parameters.panId = SL_SENSOR_SINK_PAN_ID;
+  parameters.panId = SL_SENSOR_SINK_PAN_ID_15;
 
   emberJoinNetwork(EMBER_STAR_SLEEPY_END_DEVICE, &parameters);
   //app_log_info("join sleepy 0x%02X\n", status);

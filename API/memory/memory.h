@@ -15,6 +15,7 @@
 #define STATUSCENTRAL_MEMORY_KEY  4
 #define ID_PARTITION_MEMORY_KEY   5
 #define BATTERY_MEMORY_KEY        6
+#define LR_KEY_MEMORY_KEY         7
 
 void memory_write(uint32_t key, uint8_t *value, uint8_t len);
 void memory_read(uint32_t key, void *buffer);

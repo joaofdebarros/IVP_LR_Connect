@@ -28,8 +28,7 @@ typedef enum SensorCmd_e{
   SETUP_LR,
 	KEEP_ALIVE,
 	STATUS_CENTRAL,
-	TAMPER,
-	LEAVE_NETWORK,
+	LR_KEY = 47,
 
 	CMD_UNKNOWN = 0xFF
 }SensorCmd_e;

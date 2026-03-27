@@ -15,7 +15,7 @@ static char buffer[100];
 // Use the default nvm3 handle from nvm3_default.h
 #define NVM3_DEFAULT_HANDLE nvm3_defaultHandle
 
-void memory_write(uint32_t key, uint8_t *value, uint8_t len){
+void memory_write(uint32_t key, uint16_t *value, uint8_t len){
   sl_status_t status;
 
   status = nvm3_writeData(nvm3_defaultHandle, key, value, len);

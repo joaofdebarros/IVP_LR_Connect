@@ -100,11 +100,12 @@ typedef union
 
     struct
     {
-        Status_Operation_t operation             :2;
-        Status_Central_t statusCentral         :1;
-        Energy_Mode_t energy_mode           :2;
-        LED_status led_enabled           :1;
-        uint8_t reserved              :2;
+        Status_Operation_t operation              :2;
+        Status_Central_t statusCentral            :1;
+        Energy_Mode_t energy_mode                 :2;
+        LED_status led_enabled                    :1;
+        bool received_setup                       :1;
+        uint8_t reserved                          :1;
     } Status;
 
 }
@@ -128,6 +129,7 @@ typedef struct{
   application_IVP_t IVP;
   Status_Operation_t Status_Operation;
   Status_Central_t Status_Central;
+  uint16_t LR_key;
 }application_t;
 
 extern application_t application;

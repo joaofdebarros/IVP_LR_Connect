@@ -96,6 +96,9 @@ Status_Operation_t last_status = WAIT_REGISTRATION;
 uint32_t press_start_time = 0;
 extern bool button_is_pressed = false;
 
+bool reset_pressed = false;
+uint8_t reset_time = 0;
+
 bool joined = false;
 bool just_joined = false;
 bool waiting_registration = false;
@@ -149,45 +152,64 @@ void app_init(){
 }
 
 void Init_handler(){
-  application.IVP.pydConf.sPYDType.thresholdVal = 120;
-  application.IVP.SensorStatus.Status.led_enabled = Detection_only;
-  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
-  tx_power = 150;
-  application.Status_Operation = WAIT_REGISTRATION;
-  application.Status_Central = DISARMED;
+  if(!initialized){
+      application.IVP.pydConf.sPYDType.thresholdVal = 120;
+      application.IVP.SensorStatus.Status.led_enabled = Detection_only;
+      application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
+      tx_power = 150;
+      application.Status_Operation = WAIT_REGISTRATION;
+      application.Status_Central = DISARMED;
 
-  memory_read(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte);
-  memory_read(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal);
-  memory_read(TXPOWER_MEMORY_KEY, &tx_power);
-  memory_read(STATUSOP_MEMORY_KEY, &application.Status_Operation);
-  memory_read(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central);
-  memory_read(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition);
-  memory_read(BATTERY_MEMORY_KEY, &battery.VBAT);
+      memory_read(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte);
+      memory_read(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal);
+      memory_read(TXPOWER_MEMORY_KEY, &tx_power);
+      memory_read(STATUSOP_MEMORY_KEY, &application.Status_Operation);
+      memory_read(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central);
+      memory_read(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition);
+      memory_read(BATTERY_MEMORY_KEY, &battery.VBAT);
+      memory_read(LR_KEY_MEMORY_KEY, &application.LR_key);
 
-  app_button_press_enable();
+      app_button_press_enable();
 
-  sl_mx25_flash_shutdown();
+      sl_mx25_flash_shutdown();
 
-  gpioSetup();
-  timerSetup();
-  set_tx(tx_power);
-  iadcInit();
+      gpioSetup();
+      timerSetup();
+      set_tx(tx_power);
+      iadcInit();
 
-  if(application.Status_Operation == OPERATION_MODE || application.Status_Operation == PERIOD_INSTALATION || application.Status_Operation == WAIT_REGISTRATION){
-      if(application.Status_Operation == PERIOD_INSTALATION){
-          just_joined = true;
+      if(application.Status_Operation == OPERATION_MODE || application.Status_Operation == PERIOD_INSTALATION || application.Status_Operation == WAIT_REGISTRATION){
+          if(application.Status_Operation == PERIOD_INSTALATION){
+              just_joined = true;
+          }
+
+          if(application.Status_Operation == WAIT_REGISTRATION){
+              waiting_registration = true;
+          }
+          application.Status_Operation = BOOT;
+          emberEventControlSetDelayMS(*report_control, 1000);
       }
 
-      if(application.Status_Operation == WAIT_REGISTRATION){
-          waiting_registration = true;
+      initialized = true;
+
+      emberEventControlSetInactive(*Init_control);
+  }else{
+      bool button_state = GPIO_PinInGet(gpioPortA, 8);
+
+      if(button_state){
+          reset_pressed = true;
+          reset_time++;
+          if(reset_time >= 5){
+              hGpio_ledTurnOn(&sl_led_led_vermelho, true);
+          }
+          emberEventControlSetDelayMS(*Init_control, 1000);
+      }else{
+          reset_pressed = false;
+          reset_time = 0;
+          emberEventControlSetInactive(*Init_control);
       }
-      application.Status_Operation = BOOT;
-      emberEventControlSetDelayMS(*report_control, 1000);
   }
 
-  initialized = true;
-
-  emberEventControlSetInactive(*Init_control);
 }
 
 void Instalation_handler(){
@@ -195,14 +217,16 @@ void Instalation_handler(){
 
   emberAfPluginPollEnableShortPolling(false);
 
-  application.Status_Operation = OPERATION_MODE;
-  //PADRAO DE FABRICA
-  application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
-  application.IVP.SensorStatus.Status.led_enabled = Detection_only;
+  if(!application.IVP.SensorStatus.Status.received_setup){
+      //PADRAO DE FABRICA
+      application.IVP.SensorStatus.Status.energy_mode = ECONOMIC;
+      application.IVP.SensorStatus.Status.led_enabled = Detection_only;
+      memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
+  }
 
   TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+  application.Status_Operation = OPERATION_MODE;
 
-  memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
   memory_write(STATUSOP_MEMORY_KEY, &application.Status_Operation, sizeof(application.Status_Operation));
 
   emberEventControlSetInactive(*report_control);
@@ -223,9 +247,12 @@ void app_button_press_cb(uint8_t button, uint8_t duration)
           }else if(application.Status_Operation == OPERATION_MODE){
               led_blink(VERMELHO, 2, MED_SPEED_BLINK);
           }
-      }else{
+      }else if(duration >= 3 && duration != 5){
           reset_parameters();
           leave();
+      }else if(duration == 5){
+          reset_pressed = true;
+          emberEventControlSetDelayMS(*Init_control, 1000);
       }
   }else if(button == 1){
       if(duration >= 3){
@@ -242,11 +269,15 @@ void reset_parameters(){
   memory_erase(STATUSOP_MEMORY_KEY);
   memory_erase(STATUSCENTRAL_MEMORY_KEY);
   memory_erase(ID_PARTITION_MEMORY_KEY);
+  memory_erase(LR_KEY_MEMORY_KEY);
+
+  application.LR_key = 0;
 
   application.IVP.pydConf.sPYDType.thresholdVal = PYD_SEN_LOW;
   application.IVP.SensorStatus.Status.led_enabled = Detection_only;
   application.IVP.SensorStatus.Status.energy_mode = CONTINUOUS;
   application.IVP.pydConf.sPYDType.thresholdVal = PYD_SEN_MED;
+  application.IVP.SensorStatus.Status.received_setup = false;
 
   tx_power = TX_POWER_HIGH;
 
@@ -263,6 +294,7 @@ void reset_parameters(){
   memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
   memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
   memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
+  memory_write(LR_KEY_MEMORY_KEY, &application.LR_key, sizeof(application.LR_key));
 }
 
 void battery_read(){
@@ -356,6 +388,8 @@ void report_handler(void)
 
        break;
      case BOOT:
+       pydConfig(application.IVP.pydConf.pydRegisters);
+
        if(waiting_registration){
            application.Status_Operation = WAIT_REGISTRATION;
            emberAfPluginPollEnableShortPolling(true);
@@ -374,7 +408,7 @@ void report_handler(void)
 
        if(application.Status_Operation == OPERATION_MODE){
            if(application.Status_Central == ARMED){
-               pydConfig(application.IVP.pydConf.pydRegisters);
+//               pydConfig(application.IVP.pydConf.pydRegisters);
                pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
            }
 
@@ -383,7 +417,7 @@ void report_handler(void)
                    TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
                }else{
                    //Caso seja modo contínuo, ligar o PIR
-                   pydConfig(application.IVP.pydConf.pydRegisters);
+//                   pydConfig(application.IVP.pydConf.pydRegisters);
                    pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
                }
            }
@@ -395,14 +429,14 @@ void report_handler(void)
 
            memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
 
-           pydConfig(application.IVP.pydConf.pydRegisters);
+//           pydConfig(application.IVP.pydConf.pydRegisters);
            pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
 
            emberEventControlSetDelayMinutes(*Instalation_control, 15);
            emberEventControlSetInactive(*report_control);
 
        }else if(application.Status_Operation == WAIT_REGISTRATION){
-           pydConfig(application.IVP.pydConf.pydRegisters);
+//           pydConfig(application.IVP.pydConf.pydRegisters);
            pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
            TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
            emberEventControlSetInactive(*report_control);
@@ -435,8 +469,24 @@ bool emberAfCommonOkToEnterLowPowerCallback(bool enter_em2, uint32_t duration_ms
  *****************************************************************************/
 void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
 {
-  privcallback_Radio_Receive(message->payload,message->length);
-  application.radio.RSSI = -(message->rssi);
+  if(application.Status_Operation == WAIT_REGISTRATION){
+      privcallback_Radio_Receive(message->payload,message->length);
+      application.radio.RSSI = -(message->rssi);
+  }else if(application.Status_Operation == PERIOD_INSTALATION || application.Status_Operation == OPERATION_MODE){
+      uint16_t received_key = 0;
+
+      received_key = (message->payload[message->length - 1] << 8) | (message->payload[message->length - 2]);
+
+      if(application.LR_key != 0){
+          if(received_key == application.LR_key){
+              privcallback_Radio_Receive(message->payload,message->length - 2);
+              application.radio.RSSI = -(message->rssi);
+          }
+      }else{
+          privcallback_Radio_Receive(message->payload,message->length - 2);
+          application.radio.RSSI = -(message->rssi);
+      }
+  }
 }
 
 /**************************************************************************//**

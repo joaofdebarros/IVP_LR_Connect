@@ -42,7 +42,10 @@ EmberStatus radio_send_packet(packet_void_t *pck, bool retrying){
   for(uint8_t i = 0; i < (pck->len-1); i++){
       buffer_send[i+1] = pck->data[i];
   }
-  status = radioMessageSend(0,pck->len,buffer_send);
+  buffer_send[pck->len] = application.LR_key;
+  buffer_send[(pck->len)+1] = application.LR_key >> 8;
+
+  status = radioMessageSend(0,(pck->len)+2,buffer_send);
 
   return status;
 }
@@ -224,7 +227,13 @@ void radio_handler(void){
           tx_power = TX_POWER_LOW;
       }
 
+
+
       set_tx(tx_power);
+
+      uint16_t get_tx_power = 0;
+
+      get_tx_power = emberGetRadioPower();
 
       motionCounterTimer = MOTION_COUNTER_5S;       //Timeout sem deteccao
 
@@ -233,13 +242,22 @@ void radio_handler(void){
 
       pydConfig(application.IVP.pydConf.pydRegisters);        // Aplica a configuracao que foi recebida
 
+      application.IVP.SensorStatus.Status.received_setup = true;
+
       memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
       memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
       memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
 
-      led_blink(VERMELHO, 3, FAST_SPEED_BLINK);
+      if(get_tx_power != 178){
+          led_blink(VERMELHO, 3, FAST_SPEED_BLINK);
+      }
 
       emberEventControlSetActive(*report_control);
+      break;
+    case LR_KEY:
+      application.LR_key = (receive->data[1] << 8) | (receive->data[0]);
+
+      memory_write(LR_KEY_MEMORY_KEY, &application.LR_key, sizeof(application.LR_key));
       break;
 
     default:
@@ -275,7 +293,7 @@ void motionDetected_handler(void){
       sendRadio.cmd = MOTION_DETECTED;
       sendRadio.len = 6;
 
-      sendRadio.data[0] = 1;
+      sendRadio.data[0] = 0;
       sendRadio.data[1] = tamper_state;
       sendRadio.data[2] = battery.VBAT;
       sendRadio.data[3] = battery.VBAT >> 8;
