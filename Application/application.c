@@ -156,42 +156,43 @@ void radio_handler(void){
       emberEventControlSetActive(*report_control);
       break;
     case STATUS_CENTRAL:
-      uint32_t ID_partition_received = ((uint32_t)receive->data[1]) |
-                                       ((uint32_t)receive->data[2] << 8) |
-                                       ((uint32_t)receive->data[3] << 16) |
-                                       ((uint32_t)receive->data[4] << 24);
       application.radio.LastCMD = receive->cmd;
-      application.Status_Central = receive->data[0];
 
-      if(ID_partition_received == application.IVP.ID_partition){
+      if(receive->len == 6){
+          uint32_t ID_partition_received = ((uint32_t)receive->data[1]) |
+                                                 ((uint32_t)receive->data[2] << 8) |
+                                                 ((uint32_t)receive->data[3] << 16) |
+                                                 ((uint32_t)receive->data[4] << 24);
+
+          application.Status_Central = receive->data[0];
+
+          if(ID_partition_received == application.IVP.ID_partition){
 
 
-          if(application.Status_Central == ARMED){
-              pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
+              if(application.Status_Central == ARMED){
+                  pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
 
-              led_blink(VERMELHO, 1, MED_SPEED_BLINK);
+                  led_blink(VERMELHO, 1, MED_SPEED_BLINK);
 
-              memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
+                  memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
 
-          } else if(application.Status_Central == DISARMED){
-              TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
-              emberEventControlSetInactive(*timeout_control);
+              } else if(application.Status_Central == DISARMED){
+                  TurnPIROff(application.IVP.SensorStatus.Status.energy_mode);
+                  emberEventControlSetInactive(*timeout_control);
 
-              led_blink(VERMELHO, 2, MED_SPEED_BLINK);
+                  led_blink(VERMELHO, 2, MED_SPEED_BLINK);
 
-              memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
+                  memory_write(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central, sizeof(application.Status_Central));
+
+              }
 
           }
-
-      }else{
-          if(application.Status_Central == ARMED){
-              led_blink(VERMELHO, 1, MED_SPEED_BLINK);
-          }else{
-              led_blink(VERMELHO, 2, MED_SPEED_BLINK);
-          }
+      }else if(receive->len == 1){
+          led_blink(VERMELHO, 2, FAST_SPEED_BLINK);
       }
 
       emberEventControlSetActive(*report_control);
+
       break;
     case SETUP_LR:
       application.radio.LastCMD = receive->cmd;
@@ -248,9 +249,7 @@ void radio_handler(void){
       memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
       memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
 
-      if(get_tx_power != 178){
-          led_blink(VERMELHO, 3, FAST_SPEED_BLINK);
-      }
+      led_blink(VERMELHO, 3, FAST_SPEED_BLINK);
 
       emberEventControlSetActive(*report_control);
       break;
@@ -294,7 +293,7 @@ void motionDetected_handler(void){
       sendRadio.len = 6;
 
       sendRadio.data[0] = 0;
-      sendRadio.data[1] = tamper_state;
+      sendRadio.data[1] = true;
       sendRadio.data[2] = battery.VBAT;
       sendRadio.data[3] = battery.VBAT >> 8;
       sendRadio.data[4] = application.radio.RSSI;

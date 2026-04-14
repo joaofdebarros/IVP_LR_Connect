@@ -40,6 +40,8 @@ packet_error_e packet_data_demount(uint8_t *inData, uint8_t inLen, packet_void_t
       packet->data[i] = inData[i+1];
   }
 
+  packet->len = inLen;
+
   return PACKET_OK;
 }
 

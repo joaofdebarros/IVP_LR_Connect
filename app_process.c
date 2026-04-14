@@ -338,6 +338,8 @@ void report_handler(void)
 
        emberEventControlSetInactive(*report_control);
 
+       radio_send_packet(&sendRadio, false);
+
        break;
 
      case PERIOD_INSTALATION:
@@ -355,12 +357,14 @@ void report_handler(void)
 
        sendRadio.len = 6;
        sendRadio.data[0] = 0;
-       sendRadio.data[1] = tamper_state;
+       sendRadio.data[1] = true;                                             // TAMPER
        sendRadio.data[2] = battery.VBAT;                                     // Nivel de bateria
        sendRadio.data[3] = battery.VBAT >> 8;                                //
        sendRadio.data[4] = application.radio.RSSI;
 
        emberEventControlSetInactive(*report_control);
+
+       radio_send_packet(&sendRadio, false);
 
        break;
 
@@ -379,12 +383,14 @@ void report_handler(void)
 
        sendRadio.len = 6;
        sendRadio.data[0] = 0;
-       sendRadio.data[1] = tamper_state;
+       sendRadio.data[1] = true;
        sendRadio.data[2] = battery.VBAT;                                     // Nivel de bateria
        sendRadio.data[3] = battery.VBAT >> 8;                                //
        sendRadio.data[4] = application.radio.RSSI;
 
        emberEventControlSetInactive(*report_control);
+
+       radio_send_packet(&sendRadio, false);
 
        break;
      case BOOT:
@@ -448,7 +454,7 @@ void report_handler(void)
        break;
    }
 
-   radio_send_packet(&sendRadio, false);
+//   radio_send_packet(&sendRadio, false);
    battery_read();
 
 }

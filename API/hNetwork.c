@@ -11,10 +11,11 @@
 #include "hNetwork.h"
 
 
-#define SL_SENSOR_SINK_PAN_ID_JB    (0x1234)
-#define SL_SENSOR_SINK_PAN_ID_WS    (0x1FFF)
-#define SL_SENSOR_SINK_PAN_ID_PROT  (0x4321)
+#define SL_SENSOR_SINK_PAN_ID_76     (0x1234)
+#define SL_SENSOR_SINK_PAN_ID_WS     (0x1FFF)
+#define SL_SENSOR_SINK_PAN_ID_PROT   (0x4321)
 #define SL_SENSOR_SINK_PAN_ID_15     (0x4224)
+#define SL_SENSOR_SINK_PAN_ID_25     (0x4334)
 
 
 // -----------------------------------------------------------------------------
