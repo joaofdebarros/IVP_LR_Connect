@@ -82,6 +82,8 @@ EmberEventControl *timeout_control;
 EmberEventControl *Init_control;
 EmberEventControl *Instalation_control;
 
+extern EmberKeyData connect_network_key;
+
 /// report timing period
 uint16_t sensor_report_period_ms =  (1 * MILLISECOND_TICKS_PER_SECOND);
 /// TX options set up for the network
@@ -167,7 +169,7 @@ void Init_handler(){
       memory_read(STATUSCENTRAL_MEMORY_KEY, &application.Status_Central);
       memory_read(ID_PARTITION_MEMORY_KEY, &application.IVP.ID_partition);
       memory_read(BATTERY_MEMORY_KEY, &battery.VBAT);
-      memory_read(LR_KEY_MEMORY_KEY, &application.LR_key);
+      memory_read(SECURITY_KEY_MEMORY_KEY, connect_network_key.contents);
 
       app_button_press_enable();
 
@@ -239,6 +241,7 @@ void app_button_press_cb(uint8_t button, uint8_t duration)
       if(duration < 3){
           if(application.Status_Operation == WAIT_REGISTRATION){
               if(!joined){
+                  TurnPIROff(ECONOMIC);
                   join_sleepy(0);
                   sl_led_turn_on(&sl_led_led_vermelho);
               }else{
@@ -269,9 +272,7 @@ void reset_parameters(){
   memory_erase(STATUSOP_MEMORY_KEY);
   memory_erase(STATUSCENTRAL_MEMORY_KEY);
   memory_erase(ID_PARTITION_MEMORY_KEY);
-  memory_erase(LR_KEY_MEMORY_KEY);
-
-  application.LR_key = 0;
+  memory_erase(SECURITY_KEY_MEMORY_KEY);
 
   application.IVP.pydConf.sPYDType.thresholdVal = PYD_SEN_LOW;
   application.IVP.SensorStatus.Status.led_enabled = Detection_only;
@@ -294,7 +295,6 @@ void reset_parameters(){
   memory_write(STATUSBYTE_MEMORY_KEY, &application.IVP.SensorStatus.Statusbyte, sizeof(application.IVP.SensorStatus.Statusbyte));
   memory_write(TXPOWER_MEMORY_KEY, &tx_power, sizeof(tx_power));
   memory_write(SENSIBILITY_MEMORY_KEY, &application.IVP.pydConf.sPYDType.thresholdVal, sizeof(application.IVP.pydConf.sPYDType.thresholdVal));
-  memory_write(LR_KEY_MEMORY_KEY, &application.LR_key, sizeof(application.LR_key));
 }
 
 void battery_read(){
@@ -339,6 +339,8 @@ void report_handler(void)
        emberEventControlSetInactive(*report_control);
 
        radio_send_packet(&sendRadio, false);
+
+       pydInit(application.IVP.pydConf.sPYDType.thresholdVal);
 
        break;
 
@@ -475,21 +477,24 @@ bool emberAfCommonOkToEnterLowPowerCallback(bool enter_em2, uint32_t duration_ms
  *****************************************************************************/
 void emberAfIncomingMessageCallback(EmberIncomingMessage *message)
 {
-  if(application.Status_Operation == WAIT_REGISTRATION){
-      privcallback_Radio_Receive(message->payload,message->length);
-      application.radio.RSSI = -(message->rssi);
-  }else if(application.Status_Operation == PERIOD_INSTALATION || application.Status_Operation == OPERATION_MODE){
-      uint16_t received_key = 0;
+  if(message->payload[0] == LR_KEY && application.Status_Operation == WAIT_REGISTRATION){
+      memcpy(connect_network_key.contents,message->payload + 1,EMBER_ENCRYPTION_KEY_SIZE);
 
-      received_key = (message->payload[message->length - 1] << 8) | (message->payload[message->length - 2]);
-
-      if(application.LR_key != 0){
-          if(received_key == application.LR_key){
-              privcallback_Radio_Receive(message->payload,message->length - 2);
-              application.radio.RSSI = -(message->rssi);
+      if (set_security_key(connect_network_key.contents, (size_t)EMBER_ENCRYPTION_KEY_SIZE) == true) {
+          memory_write(SECURITY_KEY_MEMORY_KEY, connect_network_key.contents, sizeof(connect_network_key.contents));
+          if(application.Status_Operation == WAIT_REGISTRATION && initialized){
+              emberEventControlSetDelayMS(*report_control, 100);
           }
-      }else{
-          privcallback_Radio_Receive(message->payload,message->length - 2);
+//          app_log_info("Connect: set the random key as network key succeed\n");
+      } else {
+//          app_log_error("Connect: set the random key as network key failed\n");
+      }
+  }else{
+      if(application.Status_Operation == WAIT_REGISTRATION){
+          privcallback_Radio_Receive(message->payload,message->length);
+          application.radio.RSSI = -(message->rssi);
+      }else if(application.Status_Operation == PERIOD_INSTALATION || application.Status_Operation == OPERATION_MODE){
+          privcallback_Radio_Receive(message->payload,message->length);
           application.radio.RSSI = -(message->rssi);
       }
   }
@@ -549,9 +554,9 @@ void emberAfStackStatusCallback(EmberStatus status)
         joined = true;
         led_blink(VERMELHO, 2, MED_SPEED_BLINK);
         enable_sleep = true;
-        if(application.Status_Operation == WAIT_REGISTRATION && initialized){
-            emberEventControlSetDelayMS(*report_control, 10);
-        }
+//        if(application.Status_Operation == WAIT_REGISTRATION && initialized){
+//            emberEventControlSetDelayMS(*report_control, 10);
+//        }
         break;
       case EMBER_NETWORK_DOWN:
         joined = false;
@@ -586,67 +591,6 @@ void emberAfTickCallback(void)
           sl_led_turn_on(&sl_led_led_vermelho);
       }
   }
-#if defined(SL_CATALOG_LED0_PRESENT)
-  if (emberStackIsUp()) {
-    sl_led_turn_on(&sl_led_led0);
-  } else {
-    sl_led_turn_off(&sl_led_led0);
-  }
-#endif
 }
 
-/**************************************************************************//**
- * This function is called when a frequency hopping client completed the start
- * procedure.
- *****************************************************************************/
-void emberAfFrequencyHoppingStartClientCompleteCallback(EmberStatus status)
-{
-  if (status != EMBER_SUCCESS) {
-//    app_log_error("FH Client sync failed, status=0x%02X\n", status);
-  } else {
-//    app_log_info("FH Client Sync Success\n");
-  }
-}
 
-/**************************************************************************//**
- * This function is called when a requested energy scan is complete.
- *****************************************************************************/
-//void emberAfEnergyScanCompleteCallback(int8_t mean,
-//                                       int8_t min,
-//                                       int8_t max,
-//                                       uint16_t variance)
-//{
-//  app_log_info("Energy scan complete, mean=%d min=%d max=%d var=%d\n",
-//               mean, min, max, variance);
-//}
-
-#if defined(EMBER_AF_PLUGIN_MICRIUM_RTOS) && defined(EMBER_AF_PLUGIN_MICRIUM_RTOS_APP_TASK1)
-
-/**************************************************************************//**
- * This function is called from the Micrium RTOS plugin before the
- * Application (1) task is created.
- *****************************************************************************/
-void emberAfPluginMicriumRtosAppTask1InitCallback(void)
-{
-//  app_log_info("app task init\n");
-}
-
-#include <kernel/include/os.h>
-#define TICK_INTERVAL_MS 1000
-
-/**************************************************************************//**
- * This function implements the Application (1) task main loop.
- *****************************************************************************/
-void emberAfPluginMicriumRtosAppTask1MainLoopCallback(void *p_arg)
-{
-  RTOS_ERR err;
-  OS_TICK yield_time_ticks = (OSCfg_TickRate_Hz * TICK_INTERVAL_MS) / 1000;
-
-  while (true) {
-//    app_log_info("app task tick\n");
-
-    OSTimeDly(yield_time_ticks, OS_OPT_TIME_DLY, &err);
-  }
-}
-
-#endif // EMBER_AF_PLUGIN_MICRIUM_RTOS && EMBER_AF_PLUGIN_MICRIUM_RTOS_APP_TASK1

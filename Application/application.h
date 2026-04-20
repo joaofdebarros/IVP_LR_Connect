@@ -129,7 +129,6 @@ typedef struct{
   application_IVP_t IVP;
   Status_Operation_t Status_Operation;
   Status_Central_t Status_Central;
-  uint16_t LR_key;
 }application_t;
 
 extern application_t application;

@@ -10,7 +10,7 @@ referenced in this SBOM.)
 -->
 <bom xmlns="http://cyclonedx.org/schema/bom/1.6" version="1">
   <metadata>
-    <timestamp>2026-02-09T14:48:40Z</timestamp>
+    <timestamp>2026-04-17T11:55:27Z</timestamp>
     <authors>
       <author>
         <name>Silicon Laboratories, Inc.</name>
@@ -274,6 +274,93 @@ referenced in this SBOM.)
           <licenses>
             <expression>MIT</expression>
           </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:psa_crypto_ecc_curve25519" type="library">
+          <name>Curve25519</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Apache-2.0</expression>
+          </licenses>
+          <pedigree>
+            <ancestors>
+              <component bom-ref="psa_crypto_ecc_curve25519:v3.6.2" type="library">
+                <supplier>
+                  <name>Trusted Firmware</name>
+                </supplier>
+                <name>Mbed TLS</name>
+                <version>v3.6.2</version>
+                <pedigree>
+                  <notes>Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols</notes>
+                </pedigree>
+                <externalReferences>
+                  <reference type="website">
+                    <url>https://github.com/Mbed-TLS/mbedtls.git</url>
+                  </reference>
+                </externalReferences>
+              </component>
+            </ancestors>
+          </pedigree>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:psa_crypto_ecc_secp192r1" type="library">
+          <name>secp192r1</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Apache-2.0</expression>
+          </licenses>
+          <pedigree>
+            <ancestors>
+              <component bom-ref="psa_crypto_ecc_secp192r1:v3.6.2" type="library">
+                <supplier>
+                  <name>Trusted Firmware</name>
+                </supplier>
+                <name>Mbed TLS</name>
+                <version>v3.6.2</version>
+                <pedigree>
+                  <notes>Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols</notes>
+                </pedigree>
+                <externalReferences>
+                  <reference type="website">
+                    <url>https://github.com/Mbed-TLS/mbedtls.git</url>
+                  </reference>
+                </externalReferences>
+              </component>
+            </ancestors>
+          </pedigree>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:psa_crypto_ecc_secp256r1" type="library">
+          <name>secp256r1</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Apache-2.0</expression>
+          </licenses>
+          <pedigree>
+            <ancestors>
+              <component bom-ref="psa_crypto_ecc_secp256r1:v3.6.2" type="library">
+                <supplier>
+                  <name>Trusted Firmware</name>
+                </supplier>
+                <name>Mbed TLS</name>
+                <version>v3.6.2</version>
+                <pedigree>
+                  <notes>Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols</notes>
+                </pedigree>
+                <externalReferences>
+                  <reference type="website">
+                    <url>https://github.com/Mbed-TLS/mbedtls.git</url>
+                  </reference>
+                </externalReferences>
+              </component>
+            </ancestors>
+          </pedigree>
         </component>
         <component bom-ref="simplicity_sdk:2025.6.2:psa_its" type="library">
           <name>PSA Persistent Storage Support (ITS)</name>
@@ -1168,6 +1255,35 @@ referenced in this SBOM.)
           <licenses>
             <expression>Zlib</expression>
           </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:psa_crypto_ecc" type="library">
+          <name>ECC</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Apache-2.0</expression>
+          </licenses>
+          <pedigree>
+            <ancestors>
+              <component bom-ref="psa_crypto_ecc:v3.6.2" type="library">
+                <supplier>
+                  <name>Trusted Firmware</name>
+                </supplier>
+                <name>Mbed TLS</name>
+                <version>v3.6.2</version>
+                <pedigree>
+                  <notes>Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols</notes>
+                </pedigree>
+                <externalReferences>
+                  <reference type="website">
+                    <url>https://github.com/Mbed-TLS/mbedtls.git</url>
+                  </reference>
+                </externalReferences>
+              </component>
+            </ancestors>
+          </pedigree>
         </component>
         <component bom-ref="simplicity_sdk:2025.6.2:mbedtls_source" type="library">
           <name>Source Code</name>

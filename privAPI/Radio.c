@@ -12,10 +12,9 @@ extern EmberMessageOptions tx_options;
 void SL_WEAK privcallback_Radio_Receive(uint8_t *data,uint8_t length);
 
 
-
-status_radio_t radioMessageSend(uint8_t destination, uint8_t messageLength, uint8_t *data){
+status_radio_t radioMessageSend(uint8_t destination, uint8_t messageLength, uint8_t *data, EmberMessageOptions packet_tx_options){
   EmberStatus status;
-  status = emberMessageSend(destination,1,0,messageLength,data,tx_options);
+  status = emberMessageSend(destination,1,0,messageLength,data,packet_tx_options);
   return status;
 }
 

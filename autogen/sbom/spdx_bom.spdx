@@ -13,7 +13,7 @@ DocumentNamespace: https://silabs.com
 
 ## Creation Information
 Creator: Organization: Silicon Laboratories, Inc.
-Created: 2026-02-09T14:48:40Z
+Created: 2026-04-17T11:55:27Z
 ## Relationships
 Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-simplicity_sdk-2025.6.2
 
@@ -50,6 +50,9 @@ Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-20
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-iostream_retarget_stdio
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-mpu
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-printf
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_curve25519
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp192r1
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp256r1
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-psa_its
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-radio_config_simple_connect_singlephy
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-restrictions_profile_connect_ofdm
@@ -128,6 +131,7 @@ Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-20
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-se_manager_mailbox
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-se_manager_config
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-power_manager_handler_implementation
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-mbedtls_source
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-token_manager_nvm3
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-emlib_rmu
@@ -470,6 +474,81 @@ PackageSupplier: Organization: Silicon Laboratories, Inc.
 PackageLicenseConcluded: MIT
 ## Relationships
 Relationship: SPDXRef-simplicity_sdk-2025.6.2-printf CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+
+## Package Information
+PackageName: Curve25519
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_curve25519
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Apache-2.0
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_curve25519 CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_curve25519 ANCESTOR_OF SPDXRef-psa_crypto_ecc_curve25519-v3.6.2
+
+## Package Information
+PackageName: Mbed TLS
+SPDXID: SPDXRef-psa_crypto_ecc_curve25519-v3.6.2
+PackageVersion: v3.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Trusted Firmware
+PackageOriginator: Organization: NOASSERTION
+PackageHomePage: https://github.com/Mbed-TLS/mbedtls.git
+PackageComment: <text>Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols</text>
+## Relationships
+Relationship: SPDXRef-psa_crypto_ecc_curve25519-v3.6.2 DESCENDANT_OF SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_curve25519
+
+## Package Information
+PackageName: secp192r1
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp192r1
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Apache-2.0
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp192r1 CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp192r1 ANCESTOR_OF SPDXRef-psa_crypto_ecc_secp192r1-v3.6.2
+
+## Package Information
+PackageName: Mbed TLS
+SPDXID: SPDXRef-psa_crypto_ecc_secp192r1-v3.6.2
+PackageVersion: v3.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Trusted Firmware
+PackageOriginator: Organization: NOASSERTION
+PackageHomePage: https://github.com/Mbed-TLS/mbedtls.git
+PackageComment: <text>Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols</text>
+## Relationships
+Relationship: SPDXRef-psa_crypto_ecc_secp192r1-v3.6.2 DESCENDANT_OF SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp192r1
+
+## Package Information
+PackageName: secp256r1
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp256r1
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Apache-2.0
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp256r1 CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp256r1 ANCESTOR_OF SPDXRef-psa_crypto_ecc_secp256r1-v3.6.2
+
+## Package Information
+PackageName: Mbed TLS
+SPDXID: SPDXRef-psa_crypto_ecc_secp256r1-v3.6.2
+PackageVersion: v3.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Trusted Firmware
+PackageOriginator: Organization: NOASSERTION
+PackageHomePage: https://github.com/Mbed-TLS/mbedtls.git
+PackageComment: <text>Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols</text>
+## Relationships
+Relationship: SPDXRef-psa_crypto_ecc_secp256r1-v3.6.2 DESCENDANT_OF SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc_secp256r1
 
 ## Package Information
 PackageName: PSA Persistent Storage Support (ITS)
@@ -1412,6 +1491,31 @@ PackageSupplier: Organization: Silicon Laboratories, Inc.
 PackageLicenseConcluded: Zlib
 ## Relationships
 Relationship: SPDXRef-simplicity_sdk-2025.6.2-power_manager_handler_implementation CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+
+## Package Information
+PackageName: ECC
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Apache-2.0
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc ANCESTOR_OF SPDXRef-psa_crypto_ecc-v3.6.2
+
+## Package Information
+PackageName: Mbed TLS
+SPDXID: SPDXRef-psa_crypto_ecc-v3.6.2
+PackageVersion: v3.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Trusted Firmware
+PackageOriginator: Organization: NOASSERTION
+PackageHomePage: https://github.com/Mbed-TLS/mbedtls.git
+PackageComment: <text>Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols</text>
+## Relationships
+Relationship: SPDXRef-psa_crypto_ecc-v3.6.2 DESCENDANT_OF SPDXRef-simplicity_sdk-2025.6.2-psa_crypto_ecc
 
 ## Package Information
 PackageName: Source Code

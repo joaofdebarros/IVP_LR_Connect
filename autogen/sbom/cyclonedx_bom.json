@@ -3,7 +3,7 @@
   "specVersion" : "1.6",
   "version" : 1,
   "metadata" : {
-    "timestamp" : "2026-02-09T14:48:40Z",
+    "timestamp" : "2026-04-17T11:55:27Z",
     "authors" : [ {
       "name" : "Silicon Laboratories, Inc."
     } ],
@@ -321,6 +321,99 @@
       "licenses" : [ {
         "expression" : "MIT"
       } ]
+    }, {
+      "scope" : "required",
+      "type" : "library",
+      "bom-ref" : "simplicity_sdk:2025.6.2:psa_crypto_ecc_curve25519",
+      "name" : "Curve25519",
+      "version" : "2025.6.2",
+      "supplier" : {
+        "name" : "Silicon Laboratories, Inc."
+      },
+      "licenses" : [ {
+        "expression" : "Apache-2.0"
+      } ],
+      "pedigree" : {
+        "ancestors" : [ {
+          "scope" : "required",
+          "type" : "library",
+          "bom-ref" : "psa_crypto_ecc_curve25519:v3.6.2",
+          "name" : "Mbed TLS",
+          "version" : "v3.6.2",
+          "supplier" : {
+            "name" : "Trusted Firmware"
+          },
+          "externalReferences" : [ {
+            "type" : "website",
+            "url" : "https://github.com/Mbed-TLS/mbedtls.git"
+          } ],
+          "pedigree" : {
+            "notes" : "Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols"
+          }
+        } ]
+      }
+    }, {
+      "scope" : "required",
+      "type" : "library",
+      "bom-ref" : "simplicity_sdk:2025.6.2:psa_crypto_ecc_secp192r1",
+      "name" : "secp192r1",
+      "version" : "2025.6.2",
+      "supplier" : {
+        "name" : "Silicon Laboratories, Inc."
+      },
+      "licenses" : [ {
+        "expression" : "Apache-2.0"
+      } ],
+      "pedigree" : {
+        "ancestors" : [ {
+          "scope" : "required",
+          "type" : "library",
+          "bom-ref" : "psa_crypto_ecc_secp192r1:v3.6.2",
+          "name" : "Mbed TLS",
+          "version" : "v3.6.2",
+          "supplier" : {
+            "name" : "Trusted Firmware"
+          },
+          "externalReferences" : [ {
+            "type" : "website",
+            "url" : "https://github.com/Mbed-TLS/mbedtls.git"
+          } ],
+          "pedigree" : {
+            "notes" : "Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols"
+          }
+        } ]
+      }
+    }, {
+      "scope" : "required",
+      "type" : "library",
+      "bom-ref" : "simplicity_sdk:2025.6.2:psa_crypto_ecc_secp256r1",
+      "name" : "secp256r1",
+      "version" : "2025.6.2",
+      "supplier" : {
+        "name" : "Silicon Laboratories, Inc."
+      },
+      "licenses" : [ {
+        "expression" : "Apache-2.0"
+      } ],
+      "pedigree" : {
+        "ancestors" : [ {
+          "scope" : "required",
+          "type" : "library",
+          "bom-ref" : "psa_crypto_ecc_secp256r1:v3.6.2",
+          "name" : "Mbed TLS",
+          "version" : "v3.6.2",
+          "supplier" : {
+            "name" : "Trusted Firmware"
+          },
+          "externalReferences" : [ {
+            "type" : "website",
+            "url" : "https://github.com/Mbed-TLS/mbedtls.git"
+          } ],
+          "pedigree" : {
+            "notes" : "Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols"
+          }
+        } ]
+      }
     }, {
       "scope" : "required",
       "type" : "library",
@@ -1371,6 +1464,37 @@
       "licenses" : [ {
         "expression" : "Zlib"
       } ]
+    }, {
+      "scope" : "required",
+      "type" : "library",
+      "bom-ref" : "simplicity_sdk:2025.6.2:psa_crypto_ecc",
+      "name" : "ECC",
+      "version" : "2025.6.2",
+      "supplier" : {
+        "name" : "Silicon Laboratories, Inc."
+      },
+      "licenses" : [ {
+        "expression" : "Apache-2.0"
+      } ],
+      "pedigree" : {
+        "ancestors" : [ {
+          "scope" : "required",
+          "type" : "library",
+          "bom-ref" : "psa_crypto_ecc:v3.6.2",
+          "name" : "Mbed TLS",
+          "version" : "v3.6.2",
+          "supplier" : {
+            "name" : "Trusted Firmware"
+          },
+          "externalReferences" : [ {
+            "type" : "website",
+            "url" : "https://github.com/Mbed-TLS/mbedtls.git"
+          } ],
+          "pedigree" : {
+            "notes" : "Mbed TLS is a C library implementing the PSA Cryptography API, cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols"
+          }
+        } ]
+      }
     }, {
       "scope" : "required",
       "type" : "library",

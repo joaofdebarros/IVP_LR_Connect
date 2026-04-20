@@ -21,6 +21,9 @@ extern EmberEventControl *radio_control;
 extern EmberEventControl *motionDetected_control;
 //extern EmberEventControl *TimeoutAck_control;
 extern EmberEventControl *report_control;
+extern EmberMessageOptions tx_options;
+
+EmberKeyData connect_network_key;
 
 sl_sleeptimer_timer_handle_t periodic_timer;
 uint8_t blink_count = 0;
@@ -42,10 +45,14 @@ EmberStatus radio_send_packet(packet_void_t *pck, bool retrying){
   for(uint8_t i = 0; i < (pck->len-1); i++){
       buffer_send[i+1] = pck->data[i];
   }
-  buffer_send[pck->len] = application.LR_key;
-  buffer_send[(pck->len)+1] = application.LR_key >> 8;
 
-  status = radioMessageSend(0,(pck->len)+2,buffer_send);
+  if(pck->cmd == LR_REGISTRATION){
+      tx_options = EMBER_OPTIONS_ACK_REQUESTED;
+  }else{
+      tx_options = EMBER_OPTIONS_ACK_REQUESTED | EMBER_OPTIONS_SECURITY_ENABLED;
+  }
+
+  status = radioMessageSend(0,(pck->len),buffer_send,tx_options);
 
   return status;
 }
@@ -254,9 +261,6 @@ void radio_handler(void){
       emberEventControlSetActive(*report_control);
       break;
     case LR_KEY:
-      application.LR_key = (receive->data[1] << 8) | (receive->data[0]);
-
-      memory_write(LR_KEY_MEMORY_KEY, &application.LR_key, sizeof(application.LR_key));
       break;
 
     default:

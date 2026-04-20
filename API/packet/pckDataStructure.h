@@ -22,7 +22,7 @@
  * Enumerates
  */
 typedef enum SensorCmd_e{
-  IVP_REGISTRATION = 21,
+  LR_REGISTRATION = 21,
   MOTION_DETECTED = 22,
   SENSOR_PARTITION = 40,
   SETUP_LR,

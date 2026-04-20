@@ -16,7 +16,7 @@ typedef enum{
   RADIO_ERROR
 }status_radio_t;
 
-status_radio_t radioMessageSend(uint8_t destination, uint8_t messageLength, uint8_t *data);
+status_radio_t radioMessageSend(uint8_t destination, uint8_t messageLength, uint8_t *data, EmberMessageOptions packet_tx_options);
 void privcallback_Radio_Receive(uint8_t *data,uint8_t length);
 
 
